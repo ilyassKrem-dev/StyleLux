@@ -19,7 +19,7 @@ export const useSize = () => {
         window.addEventListener("resize",setWindowSize)
 
         return () => window.removeEventListener("resize",setWindowSize)
-    },[])
+    },[size])
 
     return size
 }

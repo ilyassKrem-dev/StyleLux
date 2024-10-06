@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { useSize } from "../../lib/utils/hooks/hooks";
 import { useState } from "react";
 import { motion,AnimatePresence } from "framer-motion";
+import { MdDarkMode,MdOutlineDarkMode  } from "react-icons/md";
+import DarkMode from "./darkmode/darkMode";
 
 const tabs = [
     {
         name:"Sign in",
-        link:"login"
+        link:"/auth/login"
     },
     {
         name:"New arrivals",
@@ -26,21 +28,24 @@ const tabs = [
 ]
 export default function Nav() {
     const [show,setShow] = useState<boolean>(false)
+
     const {w} = useSize()
+   
+
     return (
         <div className="fixed top-0 left-0 right-0  p-8">
             <div className="flex items-center justify-between">
             
-                <Link to={"/"}  className=" font-volkhov text-4xl font-semibold cursor-pointer">Shop</Link>
+                <Link to={"/"}  className=" font-volkhov text-4xl font-semibold cursor-pointer dark:text-white">Shop</Link>
                 <div className="flex items-center gap-5 flex-row-reverse font-poppins">
                     
-                    <Link to={"/signup"}>
-                        <button className="px-7 p-2 rounded-md text-white bg-black font-normal text-[16px] active:scale-95 transition-all duration-300 hover:bg-black/50">Sign Up</button>
+                    <Link to={"/auth/signup"}>
+                        <button className="px-7 p-2 rounded-md text-white bg-black font-normal text-[16px] active:scale-95 transition-all duration-300 hover:bg-black/50 dark:text-black dark:bg-white dark:hover:bg-white/50">Sign Up</button>
                     </Link>
                     {w>654&&tabs.map((tab,index) => {
                         const {name,link} = tab
                         return (
-                            <Link key={index} to={link} className="text-[16px] hover:opacity-80 transition-all duration-300 active:scale-95">{name}</Link>
+                            <Link key={index} to={link} className="text-[16px] hover:opacity-80 transition-all duration-300 active:scale-95 dark:text-white">{name}</Link>
 
                         )
                     })}
@@ -74,6 +79,7 @@ export default function Nav() {
 
                         </AnimatePresence>
                     </div>}
+                    <DarkMode />
                 </div>
             </div>
         </div>

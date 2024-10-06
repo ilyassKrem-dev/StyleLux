@@ -14,7 +14,7 @@ public class Category {
     @Id
     @GeneratedValue
     private Integer id;
-    private String Uid;
+    private String uid;
     @Column(
         unique=true,
         length=30   
@@ -24,7 +24,7 @@ public class Category {
 
     //Getters
     public Integer getId() {return id;}
-    public String getUid() {return Uid;}
+    public String getUid() {return uid;}
     public String getName() {return name;}
     public String getDescription() {return description;}
 
@@ -35,7 +35,7 @@ public class Category {
 
     @Autowired
     public Category() {
-        this.Uid = UUID.randomUUID().toString();
+        this.uid = UUID.randomUUID().toString();
     }
 
     public Category(Integer id, String name, String description ) {
