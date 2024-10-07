@@ -1,12 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUpType } from "../../../lib/utils/types/authTypes";
 import { validateSignUp } from "../../../lib/utils/validation/validationAuth";
-
+import Auth from "../../../lib/api/auth/Auth";
+import { UseDispatch, useDispatch } from "react-redux";
+import { setSession } from "../../../assets/redux/session/sessionReducer";
 
 
 export default function SignUp() {
-
+    const dispatch = useDispatch()
+    const router = useNavigate()
     const [info,setInfo] = useState<signUpType>({
         firstname:"",lastname:"",email:"",number:"",password:"",con_password:""
     })
@@ -18,12 +21,21 @@ export default function SignUp() {
         setErrors(prev =>({...prev,[name]:""}))
         setInfo(prev =>({...prev,[name]:value}))
     }
-    const handleSignUp = (e:FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const check = validateSignUp(info)
         if(!check.success) return setErrors(check.errors)
-        
-    }
+        const res= await Auth.signUp(info)
+        if(res?.success) {
+    
+            dispatch(setSession(res?.data as any))
+            router("/")
+        }
+        if(!res?.success) {
+            return setErrors(res?.errors as any)
+        }
+
+    }  
     return (
         <form onSubmit={handleSignUp}  className="flex flex-col gap-3 mt-10 justify-center">
             <div className="flex items-center gap-3 max-w-[400px] lg:max-w-[600px] mx-auto">
@@ -55,7 +67,7 @@ export default function SignUp() {
                     <input 
                     type="email"
                     id="email" 
-                    autoComplete="true"
+                    
                     name="email"
                     value={info.email}
                     onChange={handleChange}

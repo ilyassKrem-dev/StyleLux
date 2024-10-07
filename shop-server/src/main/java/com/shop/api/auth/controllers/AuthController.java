@@ -6,13 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.api.auth.JwtService;
+
 import com.shop.api.auth.others.AuthResponse;
 import com.shop.api.auth.others.LoginDto;
 import com.shop.api.auth.others.SignUpDto;
@@ -22,7 +23,7 @@ import com.shop.api.auth.services.AuthenticationService;
 import com.shop.api.users.User;
 
 import jakarta.validation.Valid;
-
+@CrossOrigin(origins = {"http://localhost:5173"})
 @RequestMapping("/api/auth")
 @RestController
 public class AuthController {
@@ -40,6 +41,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> register(
        @Valid @RequestBody SignUpDto dto
     ) {
+       
         try {
             User registered = authenticationService.signup(dto);
 
@@ -48,7 +50,15 @@ public class AuthController {
             return ResponseEntity.ok(authMapping.changeToAuthResponse(registered,token));
 
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, e.getMessage()));
+            String message = e.getMessage();
+            if("Passwords do not match".equals(message)) {
+                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "con_password:"+message));
+
+            } else if("Email is already in use".equals(message)) {
+                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "email:"+message));
+            } else {
+                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, message));
+            }
         }
         
     }       
@@ -62,7 +72,13 @@ public class AuthController {
             return  ResponseEntity.ok(authMapping.changeToAuthResponse(user, token));
             
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, e.getMessage()));
+            String message = e.getMessage();
+            if("Incorrect password.".equals(message)) {
+                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "password:"+message));
+
+            } else {
+                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "email:"+message));
+            }
         }
 
 
@@ -79,6 +95,7 @@ public class AuthController {
                     var errorMessage = ((FieldError) error).getDefaultMessage();
                     errors.put(errorName,errorMessage);
                 });
+        
         return new ResponseEntity<>(errors,HttpStatus.NOT_ACCEPTABLE);
     }
 

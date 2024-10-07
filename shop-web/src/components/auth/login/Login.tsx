@@ -3,30 +3,42 @@ import { Link } from "react-router-dom";
 
 import { loginType } from "../../../lib/utils/types/authTypes";
 import { validateLogin } from "../../../lib/utils/validation/validationAuth";
+import Auth from "../../../lib/api/auth/Auth";
+import { useDispatch } from "react-redux";
+import { setSession } from "../../../assets/redux/session/sessionReducer";
 
 
 
 export default function Login() {
+    const dispatch = useDispatch()
     const [info,setInfo] = useState<loginType>({
         email:"",password:""
     })
-    const [errors,setErros] = useState<loginType>({
+    const [errors,setErrors] = useState<loginType>({
         email:"",password:""
     })
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const {name,value} = e.target
-        if(errors.email) setErros(prev => ({...prev,email:""}))
+        if(errors.email) setErrors(prev => ({...prev,email:""}))
         
-        if(errors.password) setErros(prev => ({...prev,password:""}))
+        if(errors.password) setErrors(prev => ({...prev,password:""}))
         
         setInfo(prev => ({...prev,[name]:value}))
     }
 
-    const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const check = validateLogin(info)
         if(!check.success) {
-            return setErros(check.errors)
+            return setErrors(check.errors)
+        }
+        const res= await Auth.login(info)
+
+        if(res?.success) {
+            dispatch(setSession(res.data as any))
+        }
+        if(!res?.success) {
+            setErrors(res?.errors as any)
         }
 
     }

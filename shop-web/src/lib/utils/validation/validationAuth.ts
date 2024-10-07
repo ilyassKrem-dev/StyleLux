@@ -40,24 +40,24 @@ export const validateSignUp = (info:signUpType) => {
         }    
     }
     const regEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    const regName = /^\d+$/g;
+    const regName = /^[a-zA-Z]+$/;
     const regNumber = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gm;
     if(info.firstname.length===0) {
         data.errors.firstname ="First name is required";
-    } else if(regName.test(info.firstname)) {
+    } else if(!regName.test(info.firstname)) {
         data.errors.firstname ="First name  should have no numbers";
     }
     if(info.lastname.length===0) {
         data.errors.lastname ="Last name is required";
-    } else if(regName.test(info.lastname)) {
+    } else if(!regName.test(info.lastname)) {
         data.errors.lastname ="Last name should have no numbers";
     }
     if(info.email.length===0) {
         data.errors.email ="Email is required";
-    } else if(regEmail.test(info.email)) {
+    } else if(!regEmail.test(info.email)) {
         data.errors.email ="Email is not valid";
     }
-    if(info.number.length>0 && regNumber.test(info.email)) {
+    if(info.number.length>0 && !regNumber.test(info.email)) {
         data.errors.number ="Phone number must be valid";
     } 
     if(info.password.length==0) {

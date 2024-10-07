@@ -15,3 +15,15 @@ export type signUpType = {
     password:string;
     con_password:string
 }
+
+
+export type sessionType = {
+    id:number;
+    firstname:string,
+    lastname:string,
+    email:string,
+    role:string,
+    uid:string,
+    createdAt:string,
+    updatedAt:string
+}
