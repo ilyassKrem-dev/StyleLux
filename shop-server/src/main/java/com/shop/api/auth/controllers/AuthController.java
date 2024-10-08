@@ -43,22 +43,27 @@ public class AuthController {
     ) {
        
         try {
-            User registered = authenticationService.signup(dto);
+            User registered;
+            TokenDto token;
+            if(dto.type().equals("google")) {
+                registered = authenticationService.googleSignin(dto);
+            } else {
+                registered = authenticationService.signup(dto);   
+            }
 
-            TokenDto token = authMapping.authentication(dto.email(),dto.password());
+           token = authMapping.authentication(dto.email(),dto.password());
 
             return ResponseEntity.ok(authMapping.changeToAuthResponse(registered,token));
 
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();
-            if("Passwords do not match".equals(message)) {
-                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "con_password:"+message));
-
-            } else if("Email is already in use".equals(message)) {
-                return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "email:"+message));
-            } else {
+            if(null == message) {
                 return ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, message));
-            }
+            } else return switch (message) {
+                case "Passwords do not match" -> ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "con_password:"+message));
+                case "Email is already in use" -> ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, "email:"+message));
+                default -> ResponseEntity.badRequest().body(new AuthResponse(null,null,null, null, null, null, null, null, null, message));
+            };
         }
         
     }       

@@ -5,6 +5,7 @@ import AuthLayout from "../components/auth/authLayout"
 import Login from "../components/auth/login/Login"
 import SignUp from "../components/auth/signup/signup"
 import Layout from "../app/layout"
+import Shop from "../components/(others)/shop/shop"
 
 
 
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
                     {
                         path:"",
                         element:<Home />,
+                    },{
+                        path:"/deals",
+                        element:(<div>Deals</div>)
+                    },{
+                        path:"/shop",
+                        element:<Shop />
                     }
                 ]
             }

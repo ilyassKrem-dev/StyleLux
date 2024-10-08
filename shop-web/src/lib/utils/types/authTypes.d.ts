@@ -14,6 +14,7 @@ export type signUpType = {
     number:string;
     password:string;
     con_password:string
+    type?:string
 }
 
 

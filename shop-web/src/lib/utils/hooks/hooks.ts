@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { SetStateAction, useEffect, useState } from "react"
 
 
 
@@ -41,4 +41,23 @@ export const useDetectScrolling = () => {
    },[isScrolling])
 
    return isScrolling
+}
+
+export const useOverlayRemove = ({
+    tab,
+    setShow
+    }:{
+        tab:string;
+        setShow:React.Dispatch<SetStateAction<boolean>>
+    }) => {
+    useEffect(() => {
+        const overlayCheck = (e:any) => {
+            const overlay = document.querySelector(`.${tab}`)
+            if(overlay && !overlay.contains(e.target)) {
+                setShow(false)
+            }
+        }
+        document.addEventListener("click",overlayCheck)
+        return () => document.removeEventListener("click",overlayCheck)
+    },[])
 }

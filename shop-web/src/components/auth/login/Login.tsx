@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent,  useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { loginType } from "../../../lib/utils/types/authTypes";
 import { validateLogin } from "../../../lib/utils/validation/validationAuth";
@@ -11,6 +11,8 @@ import { setSession } from "../../../assets/redux/session/sessionReducer";
 
 export default function Login() {
     const dispatch = useDispatch()
+    const router = useNavigate()
+    const [searchParams,setSearchParams] = useSearchParams()
     const [info,setInfo] = useState<loginType>({
         email:"",password:""
     })
@@ -36,13 +38,18 @@ export default function Login() {
 
         if(res?.success) {
             dispatch(setSession(res.data as any))
+            const redirectTo = searchParams.get("to");
+            if(redirectTo) {
+                return router(redirectTo)
+            }
+            router("/")
         }
         if(!res?.success) {
             setErrors(res?.errors as any)
         }
 
     }
-   
+    
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-10">
             <div className="flex flex-col gap-1">

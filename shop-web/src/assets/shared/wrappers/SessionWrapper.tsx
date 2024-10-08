@@ -38,7 +38,7 @@ export const SessionProvider = ({children}:{
         }
         
         if(!session && !pathnames.includes(pathname)) {
-            router("/auth/login")   
+            router("/auth/login?to="+`${encodeURIComponent(pathname)}`)   
             setLoading(false)
         }
         setLoading(false)

@@ -42,7 +42,6 @@ class Auth {
             }
         } catch (error:any) {
             data.success=false
-         
             if(axios.isAxiosError(error)) {
                 const axiosError:AxiosError = error
                 if(axiosError.status === 400) {

@@ -39,7 +39,7 @@ public class AuthenticationService {
             throw new IllegalArgumentException("Passwords do not match");
         }
         Optional<User> existingUser = userRepository.findByEmail(input.email());
-        if (existingUser.isPresent()) {
+        if (existingUser.isPresent() && !input.type().equals("google") ) {
             throw new IllegalArgumentException("Email is already in use");
         }
         
@@ -58,6 +58,21 @@ public class AuthenticationService {
             throw new IllegalArgumentException("No account found with the provided email");
         }
         return userRepository.findByEmail(email).get();
+    }
+    public User googleSignin(SignUpDto info) {
+        User userFound;
+        if(userRepository.findByEmail(info.email()).isPresent()) {
+            userFound = userRepository.findByEmail(info.email()).get();
+            return userFound;
+        }
+        User user = new User();
+        user.setEmail(info.email());
+        user.setLastname(info.lastname());
+        user.setFirstname(info.firstname());
+        user.setPassword(passwordEncoder.encode(info.password()));
+        user.setRole("user");
+        user.setNumber("");
+        return  userRepository.save(user);
     }
     public User authenticate(
         @Valid LoginDto input) {

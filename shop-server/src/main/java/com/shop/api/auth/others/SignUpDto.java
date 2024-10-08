@@ -29,7 +29,8 @@ public record SignUpDto(
         message="Password must be more than 6 characters"
     )
     String password,
-    String con_password
+    String con_password,
+    String type
 ) {
 
 }

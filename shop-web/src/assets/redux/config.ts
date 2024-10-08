@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 import { Storage } from 'redux-persist';
-const SECRET_KEY = import.meta.env.VITE_API_SECRET_KEY
+const SECRET_KEY = import.meta.env.VITE_SECRET_KEY
 
 const encrypt = (data:any) => {
     const stringData = JSON.stringify(data);
