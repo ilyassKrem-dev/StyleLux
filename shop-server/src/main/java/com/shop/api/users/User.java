@@ -3,7 +3,6 @@ package com.shop.api.users;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -64,7 +63,7 @@ public class User implements  UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(() ->"ROLE_" + role);
     }
     
     @Override

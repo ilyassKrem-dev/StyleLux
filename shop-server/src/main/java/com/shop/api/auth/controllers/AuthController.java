@@ -23,7 +23,7 @@ import com.shop.api.auth.services.AuthenticationService;
 import com.shop.api.users.User;
 
 import jakarta.validation.Valid;
-@CrossOrigin(origins = {"http://localhost:5173"})
+@CrossOrigin(origins = {"${cors.allowed.origin}"})
 @RequestMapping("/api/auth")
 @RestController
 public class AuthController {

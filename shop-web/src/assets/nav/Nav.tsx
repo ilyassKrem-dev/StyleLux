@@ -13,7 +13,7 @@ export default function Nav() {
     const scrollDetect = useDetectScrolling()
 
     return (
-        <div className={`fixed top-0 left-0 right-0 p-2 sm:p-8 ${scrollDetect ?"bg-white dark:bg-dark" :""}`}>
+        <div className={`fixed top-0 left-0 right-0 p-2 sm:p-8 ${scrollDetect ?"bg-white dark:bg-dark" :""} z-50`}>
             <div className="flex items-center justify-between gap-3 ">
                 <div className={`flex items-center gap-2 ${session ?"flex-1" :""}`}>
                     <Link to={"/"}  className={` font-volkhov text-4xl font-semibold cursor-pointer dark:text-white `}>Shop</Link>
