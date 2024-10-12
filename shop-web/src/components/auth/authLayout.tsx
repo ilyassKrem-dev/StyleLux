@@ -19,7 +19,7 @@ export default function AuthLayout() {
     } 
     return (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-            <div className="h-screen flex items-center justify-center font-poppins dark:bg-dark">
+            <div className="min-h-screen flex items-center justify-center font-poppins dark:bg-dark">
                 <div className="flex items-center  gap-3 flex-1 p-4 sm:p-6 max-w-[1000px] mx-auto">
                     {w>654&&<div className="border rounded-md sm:w-[300px] md:w-[400px]  w-[500px] h-[700px] bg-gray-300 dark:bg-gray-100">
                         <img src="/images/image1.png" alt="" className=" w-full h-full object-contain" />
@@ -34,7 +34,7 @@ export default function AuthLayout() {
                         {!session
                         ?
                         <>
-                            <div className="mt-10 flex flex-col gap-10">
+                            {pathname!=="/auth/restore"&&<div className="mt-10 flex flex-col gap-10">
                                 <AuthOtherWay path={pathname}/>
                                 <div className="flex items-center justify-center">
                                     <div className="flex gap-3 items-center">
@@ -43,7 +43,7 @@ export default function AuthLayout() {
                                         <div className="h-[6px] bg-gray-500 w-[50px] dark:bg-gray-100"/>
                                     </div>
                                 </div>
-                            </div>
+                            </div>}
                             <Outlet />
                         </>
                         :

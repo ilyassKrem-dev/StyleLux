@@ -12,7 +12,7 @@ type ContextType = {
 }
 
 const sessionContext = createContext<ContextType|null>(null)
-const pathnames = ["/","/auth/login","/auth/signup"]
+const pathnames = ["/","/auth/login","/auth/signup","/auth/restore"]
 export const useSession = () => {
     const context = useContext(sessionContext)
     if(!context) {

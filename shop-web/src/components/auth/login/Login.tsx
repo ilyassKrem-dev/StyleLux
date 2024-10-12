@@ -78,7 +78,7 @@ export default function Login() {
                 <Link to={"/auth/signup"}>
                     <button className="bg-white border-blue-400 text-blue-400 rounded-lg py-2 w-full border font-semibold text-sm hover:bg-blue-200/60 transition-all duration-300 active:scale-95">Register Now</button>
                 </Link>
-                <Link to={"/auth/signup"} className="text-sm text-blue-500 font-bold self-end active:scale-95">Forget Password?</Link>
+                <Link to={"/auth/restore"} className="text-sm text-blue-500 font-bold self-end active:scale-95">Forget Password?</Link>
             </div>
         </form>
     )

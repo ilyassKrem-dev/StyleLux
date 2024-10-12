@@ -69,6 +69,8 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
+    private int sold = 0;
+
     @ManyToOne
     @JoinColumn(
         name="category_id"
@@ -97,9 +99,10 @@ public class Product {
     public double getPrice() {return price;}
     public double getRating() {return rating;}
     public int getQuantity() {return quantity;}
+    public int getSold() {return sold;}
     public List<Size> getSizes() {return sizes;}
     public GenderEnum getGender() {return gender;}
-
+    public Category getCategory() {return category;}
     // Setters
     public void setId(Integer value) { this.id = value;}
     public void setName(String value) { this.name = value;}
@@ -109,12 +112,15 @@ public class Product {
     public void setRating(double value) { this.rating = value;}
     public void setSizes(List<Size> valueList) { this.sizes = valueList;}
     public void setGender(GenderEnum value) {this.gender = value;}
-    
+    public void setSold(int value) { this.sold = value;}
+
+
+
     public Product() {
         this.uid = UUID.randomUUID().toString();
     }
 
-    public Product(Integer id, String uid, String name, double price, int quantity,GenderEnum gender) {
+    public Product(Integer id, String uid, String name, double price, int quantity,GenderEnum gender,int sold) {
         this.id = id;
         this.uid = uid;
         this.name = name;
@@ -122,6 +128,7 @@ public class Product {
         this.quantity = quantity;
         this.gender = gender;
         this.uid = UUID.randomUUID().toString();
+        this.sold = sold;
     }
 
     public void addMedia(Media media) {
@@ -134,5 +141,8 @@ public class Product {
         sizes.add(size);
     }
 
+    public void addSold(int value) {
+        this.sold += value;
+    }
     
 }

@@ -17,6 +17,16 @@ public class Size {
     @Enumerated(EnumType.STRING)
     private SizeEnum size;
 
+
+    // Getters
+    public Integer getId() {return id;}
+    public SizeEnum getSize() {return size;}
+
+    // Setters
+    public void setId(Integer value) { this.id = value;}
+    public void setSize(SizeEnum value) { this.size = value;}
+
+
     public Size() {
 
     }

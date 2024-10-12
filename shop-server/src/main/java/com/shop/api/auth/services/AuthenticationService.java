@@ -1,5 +1,6 @@
 package com.shop.api.auth.services;
 import com.shop.api.auth.others.LoginDto;
+import com.shop.api.auth.others.ResetDto;
 import com.shop.api.auth.others.SignUpDto;
 import com.shop.api.users.User;
 import com.shop.api.users.others.UserRepository;
@@ -91,4 +92,25 @@ public class AuthenticationService {
         return userRepository.findByEmail(input.email())
                 .orElseThrow();
     }
+    public String checkEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return  user.isPresent() ? user.get().getUid() : "";
+    }
+
+    public boolean resetPassword(ResetDto request) {
+        Optional<User> user = userRepository.findByEmail(request.email());
+        User userFound = user.isPresent() ? user.get() : new User();
+        if(!request.password().equals(request.con_password())) {
+            return  false;
+        }
+        if(userFound.getEmail().isEmpty()) {
+            return  false;
+        }
+        if(!userFound.getUid().equals(request.uid())) {
+            return  false;
+        }
+        userFound.setPassword(passwordEncoder.encode(request.password()));
+        userRepository.save(userFound);
+        return true;
+    }   
 }

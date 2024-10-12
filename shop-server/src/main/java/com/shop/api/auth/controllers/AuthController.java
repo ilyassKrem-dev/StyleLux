@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.shop.api.auth.email.EmailServers;
 import com.shop.api.auth.others.AuthResponse;
 import com.shop.api.auth.others.LoginDto;
+import com.shop.api.auth.others.ResetDto;
+import com.shop.api.auth.others.RestoreDto;
 import com.shop.api.auth.others.SignUpDto;
 import com.shop.api.auth.others.TokenDto;
 import com.shop.api.auth.services.AuthMapping;
@@ -31,10 +33,11 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     private final AuthMapping authMapping;
-
-    public AuthController( AuthenticationService authenticationService,AuthMapping authMapping) {
+    private final EmailServers emailServers;
+    public AuthController( AuthenticationService authenticationService,AuthMapping authMapping,EmailServers emailServers) {
         this.authenticationService = authenticationService;
         this.authMapping = authMapping;
+        this.emailServers = emailServers;
     }
 
     @PostMapping("/signup")
@@ -88,7 +91,40 @@ public class AuthController {
 
 
     }
-    
+    @PostMapping("/restore")
+    public ResponseEntity<String> restorePassword(
+        @RequestBody RestoreDto request) {
+        String email = request.email();
+        String code = request.code();
+        String check = authenticationService.checkEmail(email);
+        try {
+            if(check.isEmpty()) {
+                return new ResponseEntity<>("Email not found",HttpStatus.NOT_FOUND);
+            } else {
+                emailServers.sendVerifivatioEmail(email, code);
+                return new ResponseEntity<>(check,HttpStatus.OK);
+            }
+            
+        } catch (Exception e) {
+            return new ResponseEntity<>("Something happened!",HttpStatus.BAD_GATEWAY);
+        }
+        
+        
+        
+    }
+    @PostMapping("/restore/pass")
+    public ResponseEntity<String> changePassword(
+        @RequestBody ResetDto request) {
+        boolean isUpdated = authenticationService.resetPassword(request);
+        if(!isUpdated) {
+            return new ResponseEntity<>("Error updating password",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Updated",HttpStatus.OK);
+    }
+      
+
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> validationError(
         MethodArgumentNotValidException e

@@ -8,8 +8,23 @@ spring:
     hibernate:
       ddl-auto: "{if you dont have database(create) after set it to (update)}"
     show-sql: true
-    propertiens:
+    properties:
       hibernate:
         format_sql: true
-  
-
+  mail:
+      host: smtp.gmail.com
+      port: 587
+      username: "email google"
+      password: "app password"
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.starttls.enable: true
+            
+security:
+  jwt:
+    secret-key: "jwt-secret key"
+    expiration-time: 'expire time in millisecond'
+host:  "front-end url"
+cors:
+  allowed:
+    origin: "front-end url"

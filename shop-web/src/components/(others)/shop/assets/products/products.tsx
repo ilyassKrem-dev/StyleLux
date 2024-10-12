@@ -1,22 +1,46 @@
-import { useState } from "react"
-import { IoIosArrowDown } from "react-icons/io"
-
+import { useEffect, useState } from "react"
+import FilterShowen from "./assets/fllterShowen"
+import Product from "../../../../../lib/api/product/Product"
 
 
 export default function Products() {
-    const [show,setShow] = useState<boolean>(false)
-    return (
-        <div className="flex flex-col gap-2 self-start">
-            <div className="flex justify-between items-center">
-                <div className="flex items-center gap-1 cursor-pointer font-medium" onClick={() => setShow(prev => !prev)}>
-                    <p className=" font-volkhov text-base cursor-pointer">Best selling</p>
-                    <div className="">
-                        <IoIosArrowDown />
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-wrap gap-3">
+    const [filterBy,setFitlerBy] = useState<string>(""
+    )
 
+    const [products,setProducts] = useState<any[]>([])
+    const [loading,setLoading] = useState<boolean>(true)
+    
+    useEffect(() => {
+        const getProducts = async() => {
+            const res = await Product.getAllProduct()
+            if(res?.success) {
+                setProducts(res.data)
+            } else {
+                setProducts([])
+            }
+        }
+        getProducts()
+    },[])
+    console.log(products)
+    useEffect(() => {
+        if(!loading) return
+        const id = setTimeout(() => {
+            setLoading(false)
+        },300)
+
+        return () => clearTimeout(id)
+    },[loading])
+    return (
+        <div className="flex flex-col gap-5 self-start">
+            <FilterShowen />
+            <div className="flex flex-wrap gap-3">
+                {!loading&&products.map((product,index) => {
+                    return (
+                        <div key={index}>
+                            {product.name} + {product.price}
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

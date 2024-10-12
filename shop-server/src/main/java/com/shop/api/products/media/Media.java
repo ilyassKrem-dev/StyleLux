@@ -28,12 +28,17 @@ public class Media {
         nullable = false
     )
 
+
     @Enumerated(EnumType.STRING)
     private MediaEnum type; 
     @Column(
         nullable = false
     )
     private String url;
+    @Column(
+        name="is_default"
+    )
+    private boolean isDefault = false;
     @ManyToOne
     @JoinColumn(
         name="product_id"
@@ -46,13 +51,13 @@ public class Media {
     public String getUid() {return  this.uid;}
     public MediaEnum getType() {return  this.type;}
     public String getUrl() {return  this.url;}
-
+    public boolean getIsDefault() {return  this.isDefault;}
     // Setters
     public void setId(Integer value) {this.id = value;}
     public void setUid(String value) {this.uid = value;}
     public void setType(MediaEnum value) { this.type = value;}
     public void setUrl(String value) {this.url = value;}
-
+    public void setIsDefault(boolean value) {this.isDefault = value;}
 
 
     public Media() {
@@ -60,11 +65,12 @@ public class Media {
     }
 
     
-    public Media(Integer id, MediaEnum type, String url,Product product) {
+    public Media(Integer id, MediaEnum type, String url,Product product,boolean isDefault) {
         this.id = id;
         this.type = type;
         this.product = product;
         this.url = url;
+        this.isDefault = isDefault;
     }
 
 

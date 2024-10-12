@@ -8,7 +8,7 @@ export default function Filters() {
     const [searchParams,setSearchParams] = useSearchParams()
     const sizeParams = searchParams.get("size")
     const genderParams = searchParams.get("gender")
-    const categorieParams = searchParams.get("categorie")
+    const categorieParams = searchParams.get("category")
     const handleSizeClick = (size:string) => {
         const params = Object.fromEntries(searchParams)
         if(sizeParams === size) {
@@ -30,9 +30,9 @@ export default function Filters() {
     const handleCategorieClick = (cat:string) => {
         const params = Object.fromEntries(searchParams)
         if(categorieParams === cat) {
-            delete params.categorie
+            delete params.category
         } else{
-            params.categorie = cat
+            params.category = cat
         }
         setSearchParams({...params})
     }

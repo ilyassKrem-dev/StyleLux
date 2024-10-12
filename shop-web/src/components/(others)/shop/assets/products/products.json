@@ -1,0 +1,195 @@
+[
+    {
+        "id": 7,
+        "uid": "cc2F5EbA-ee47-634D-32Bb-5CCF336Cbf64",
+        "name": "tdrv gmpr",
+        "media": {
+            "id": null,
+            "uid": "b20ab1c3-7475-41f2-a0bc-39a97422551a",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 31.45,
+        "gender": "f",
+        "sizes": [
+            "m"
+        ],
+        "category": {
+            "uid": "1c17d6b9-00cb-4890-a914-a498de3925bf",
+            "name": "trousers"
+        }
+    },
+    {
+        "id": 8,
+        "uid": "f3A99A97-9ADC-4BFa-5ccc-C89632A2bCd7",
+        "name": "tuf qztnelw",
+        "media": {
+            "id": null,
+            "uid": "f63baf60-4b03-453a-9fa9-096f5701bc15",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 38.81,
+        "gender": "f",
+        "sizes": [
+            "m",
+            "m"
+        ],
+        "category": {
+            "uid": "5b877a98-8017-4395-9076-119b363efdfd",
+            "name": "shoes"
+        }
+    },
+    {
+        "id": 12,
+        "uid": "2BFC1dED-bfEf-4D28-b1Bf-ab42Ab0c263b",
+        "name": "prnlcmndve jnjgnwbf",
+        "media": {
+            "id": null,
+            "uid": "481269a7-9b1f-4ca4-9bc2-3a417e4fe221",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 33.28,
+        "gender": "m",
+        "sizes": [
+            "xl"
+        ],
+        "category": {
+            "uid": "1c17d6b9-00cb-4890-a914-a498de3925bf",
+            "name": "trousers"
+        }
+    },
+    {
+        "id": 26,
+        "uid": "A67dd7fd-9515-bAcD-DA6D-6Ecfbf6dD19E",
+        "name": "riqam jxsqgfy",
+        "media": {
+            "id": null,
+            "uid": "a68f46ac-f436-43a5-b420-19cadfcbaaab",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 87.18,
+        "gender": "f",
+        "sizes": [
+            "s"
+        ],
+        "category": {
+            "uid": "1c17d6b9-00cb-4890-a914-a498de3925bf",
+            "name": "trousers"
+        }
+    },
+    {
+        "id": 29,
+        "uid": "1eCb86E9-77BD-5BF8-FA6c-A4A437abcCC3",
+        "name": "lfit rxbrhbu",
+        "media": {
+            "id": null,
+            "uid": "e0cb1987-7ac4-4a10-a4ad-1f71b4432eb3",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 95.83,
+        "gender": "m",
+        "sizes": [
+            "m"
+        ],
+        "category": {
+            "uid": "53095fc3-93b5-49e8-835b-839cb47f957e",
+            "name": "hats"
+        }
+    },
+    {
+        "id": 13,
+        "uid": "33B0Ded7-E6DD-EC43-bd82-FAD38dC7baB4",
+        "name": "bqbnmaytb ubve",
+        "media": {
+            "id": 15,
+            "uid": "C5E15DB9-AD1F-6726-DdB5-6bEDd1F76290",
+            "type": "video",
+            "url": "http://dummyimage.com/200x200/000/fff&text=Product Image",
+            "isDefault": true
+        },
+        "price": 12.36,
+        "gender": "f",
+        "sizes": [
+            "m"
+        ],
+        "category": {
+            "uid": "48e568ef-113e-4bcd-990b-ad213d089630",
+            "name": "accessories"
+        }
+    },
+    {
+        "id": 27,
+        "uid": "42A2B3E6-FCf1-6EA0-bDd7-FCc21406aBd8",
+        "name": "dyjxx htdybbdmr",
+        "media": {
+            "id": null,
+            "uid": "6afd9731-5aeb-45e3-80e7-5a82147eb803",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 94.63,
+        "gender": "m",
+        "sizes": [
+            "l",
+            "xl",
+            "xl"
+        ],
+        "category": {
+            "uid": "eafff5c1-0cc4-4542-b317-3339d850e098",
+            "name": "clothes"
+        }
+    },
+    {
+        "id": 2,
+        "uid": "8ECACf17-e4fE-d4c2-1688-E6a4D4E6EC7d",
+        "name": "eaoorseg mcpnwtnxf",
+        "media": {
+            "id": null,
+            "uid": "ccfc0cd1-af5a-4d5d-bb8c-7a3b1790a3fc",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 93.58,
+        "gender": "m",
+        "sizes": [
+            "l"
+        ],
+        "category": {
+            "uid": "48e568ef-113e-4bcd-990b-ad213d089630",
+            "name": "accessories"
+        }
+    },
+    {
+        "id": 30,
+        "uid": "ccfdc4dA-5C1f-5FDf-d46B-687BBc6C76Fc",
+        "name": "hwrujkmc mqgfqfxn",
+        "media": {
+            "id": null,
+            "uid": "774bbce1-e0e5-4f1e-b26d-97bd69d2609e",
+            "type": null,
+            "url": null,
+            "isDefault": false
+        },
+        "price": 31.43,
+        "gender": "m",
+        "sizes": [
+            "m",
+            "m"
+        ],
+        "category": {
+            "uid": "48e568ef-113e-4bcd-990b-ad213d089630",
+            "name": "accessories"
+        }
+    }
+]

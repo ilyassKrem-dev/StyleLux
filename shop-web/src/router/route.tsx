@@ -6,6 +6,7 @@ import Login from "../components/auth/login/Login"
 import SignUp from "../components/auth/signup/signup"
 import Layout from "../app/layout"
 import Shop from "../components/(others)/shop/shop"
+import Restore from "../components/auth/restore/restore"
 
 
 
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
                     },{
                         path:"signup",
                         element:<SignUp />
+                    },{
+                        path:"restore",
+                        element:<Restore />
                     }
                 ]
             }
