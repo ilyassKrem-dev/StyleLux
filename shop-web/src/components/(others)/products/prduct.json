@@ -1,0 +1,26 @@
+{
+    "id": 2,
+    "uid": "8ECACf17-e4fE-d4c2-1688-E6a4D4E6EC7d",
+    "name": "eaoorseg mcpnwtnxf",
+    "media": [
+        {
+            "id": 31,
+            "uid": "T4BE202B-88fC-bF6f-4E8c-c96BcC3258A7",
+            "type": "image",
+            "url": "http://dummyimage.com/200x200/000/fff&text=Product Image",
+            "isDefault": true
+        }
+    ],
+    "price": 93.58,
+    "gender": "m",
+    "sizes": [
+        "l"
+    ],
+    "category": {
+        "uid": "48e568ef-113e-4bcd-990b-ad213d089630",
+        "name": "accessories"
+    },
+    "quantity": 30,
+    "rating": 0.0,
+    "numRatings": 0
+}

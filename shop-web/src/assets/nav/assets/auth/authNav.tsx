@@ -13,7 +13,7 @@ import { tabsDeafaultAuth,tabsPages,tabsDeafaultAuthMobile } from "../tabs";
 export default function AuthNav() {
     const [show,setShow] = useState<boolean>(false)
     const [next,setNext] = useState<boolean>(false)
-    const pathname = useLocation().pathname
+    const pathname = "/" + useLocation().pathname.split("/")[1]
     const {w} = useSize()
     
     useEffect(() => {
@@ -34,6 +34,7 @@ export default function AuthNav() {
                 <>
                     {tabsDeafaultAuth.map((tab,index) => {
                         const {name,link} = tab
+                    
                         return (
                             
                             <Link key={index} to={link} className="text-[16px] hover:opacity-80 transition-all duration-300 active:scale-95 dark:text-white relative group">

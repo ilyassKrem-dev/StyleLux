@@ -65,7 +65,11 @@ public class Product {
     private int quantity;
     
     private double rating = 0.0;
-
+    @Column(
+        name="num_ratings",
+        nullable=false
+    )
+    private int numRatings = 0;
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
@@ -98,6 +102,7 @@ public class Product {
     public List<Media> getMedias() {return medias;}
     public double getPrice() {return price;}
     public double getRating() {return rating;}
+    public int getNumRatings() {return numRatings;}
     public int getQuantity() {return quantity;}
     public int getSold() {return sold;}
     public List<Size> getSizes() {return sizes;}
@@ -109,18 +114,16 @@ public class Product {
     public void setMedias(List<Media> valueList) { this.medias = valueList;}
     public void setQuantity(int value) {this.quantity = value;}
     public void setPrice(double value) { this.price = value;}
-    public void setRating(double value) { this.rating = value;}
     public void setSizes(List<Size> valueList) { this.sizes = valueList;}
     public void setGender(GenderEnum value) {this.gender = value;}
     public void setSold(int value) { this.sold = value;}
-
 
 
     public Product() {
         this.uid = UUID.randomUUID().toString();
     }
 
-    public Product(Integer id, String uid, String name, double price, int quantity,GenderEnum gender,int sold) {
+    public Product(Integer id, String uid, String name, double price, int quantity,GenderEnum gender) {
         this.id = id;
         this.uid = uid;
         this.name = name;
@@ -128,7 +131,9 @@ public class Product {
         this.quantity = quantity;
         this.gender = gender;
         this.uid = UUID.randomUUID().toString();
-        this.sold = sold;
+        this.rating = 0;
+        this.numRatings = 0;
+        this.sold = 0;
     }
 
     public void addMedia(Media media) {
@@ -144,5 +149,17 @@ public class Product {
     public void addSold(int value) {
         this.sold += value;
     }
+
     
-}
+    public void increaseRatings(int value,String type) {
+        if(type == "decrease") {
+            this.rating -= value;
+            this.numRatings -= 1;
+        } else {
+            this.rating += value;
+            this.numRatings += 1;
+        }
+
+    }
+    
+ }

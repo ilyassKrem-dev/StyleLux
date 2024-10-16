@@ -11,7 +11,7 @@ export const tabsDeafaultAuth = [
     },
     {
         name:"Products",
-        link:"/arrivals"
+        link:"/products"
     },
     
 ]

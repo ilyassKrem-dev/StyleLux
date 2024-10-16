@@ -7,6 +7,7 @@ import SignUp from "../components/auth/signup/signup"
 import Layout from "../app/layout"
 import Shop from "../components/(others)/shop/shop"
 import Restore from "../components/auth/restore/restore"
+import ProductPage from "../components/(others)/products/product"
 
 
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
                     },{
                         path:"/shop",
                         element:<Shop />
+                    },{
+                        path:"/products/:id",
+                        element:<ProductPage />
+                        
                     }
                 ]
             }

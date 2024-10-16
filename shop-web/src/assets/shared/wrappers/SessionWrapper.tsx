@@ -12,7 +12,9 @@ type ContextType = {
 }
 
 const sessionContext = createContext<ContextType|null>(null)
-const pathnames = ["/","/auth/login","/auth/signup","/auth/restore"]
+const pathnames = ["/","/shop","/products"]
+const dynamicPathsProducts = [/^\/(products|auth)\/[^\/]+$/];
+
 export const useSession = () => {
     const context = useContext(sessionContext)
     if(!context) {
@@ -21,6 +23,9 @@ export const useSession = () => {
     return context
 }
 
+const matchesDynamicPath = (path: string) => {
+    return dynamicPathsProducts.some(pattern => pattern.test(path));
+};
 
 export const SessionProvider = ({children}:{
     children:React.ReactNode
@@ -37,7 +42,7 @@ export const SessionProvider = ({children}:{
             dispatch(removeSession())
         }
         
-        if(!session && !pathnames.includes(pathname)) {
+        if(!session && !pathnames.includes(pathname) && !matchesDynamicPath(pathname)) {
             router("/auth/login?to="+`${encodeURIComponent(pathname)}`)   
             setLoading(false)
         }

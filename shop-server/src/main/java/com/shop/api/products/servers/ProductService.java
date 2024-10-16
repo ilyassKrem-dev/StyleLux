@@ -2,14 +2,16 @@ package com.shop.api.products.servers;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.shop.api.products.Product;
 import com.shop.api.products.others.GenderEnum;
+import com.shop.api.products.records.AllProdcutsDto;
 import com.shop.api.products.records.ProductDto;
+import com.shop.api.products.records.SingleProductDto;
 import com.shop.api.products.repository.ProductRepository;
 
 @Service
@@ -24,7 +26,7 @@ public class ProductService {
     }
 
     
-    public List<ProductDto> getAllProducts(
+    public AllProdcutsDto getAllProducts(
         String sizes,
         String genderStr,
         String category,
@@ -38,18 +40,18 @@ public class ProductService {
         if(genderStr != null) {
             gender = GenderEnum.valueOf(genderStr.toLowerCase());
         }
-        System.out.println("Sizes: " + sizeList);
-        System.out.println("Gender: " + gender);
-        System.out.println("Category: " + category);
-        System.out.println("Min Price: " + minPrice);
-        System.out.println("Max Price: " + maxPrice);
-        
-       
-        return productRepository
-                .findFilterdProducts(sizeList, gender, category, minPrice, maxPrice, pageable)
-                .stream()
-                .map(productMapping::changeToProductDto)
-                .collect(Collectors.toList());
+
+        Page<ProductDto> products = productRepository
+                                .findFilterdProducts(sizeList, gender, category, minPrice, maxPrice, pageable)
+                                .map(productMapping::changeToProductDto);
+
+        AllProdcutsDto dto = productMapping.changeToAllProductsDto(products);
+        return dto;
     }
 
+
+    public SingleProductDto getSingleProduct(String uid) {
+        Product product = productRepository.findByUid(uid);
+        return productMapping.changeToSingleProductDto(product);
+    }
 }

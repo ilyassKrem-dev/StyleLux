@@ -2,6 +2,7 @@ package com.shop.api.products.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shop.api.products.servers.ProductService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shop.api.products.Product;
-import com.shop.api.products.records.ProductDto;
+import com.shop.api.products.records.AllProdcutsDto;
+import com.shop.api.products.records.SingleProductDto;
+
 
 
 @CrossOrigin(origins = {"${cors.allowed.origin}"})
@@ -32,17 +35,24 @@ public class ProductContoller {
     
 
     @GetMapping("/products")
-    public List<ProductDto> getAllProducts(
+    public AllProdcutsDto getAllProducts(
         @RequestParam(required = false) String sizes,
         @RequestParam(required = false) String gender,
         @RequestParam(required = false) String category,
         @RequestParam(required = false) Double minPrice,
-        @RequestParam(required = false) Double maxPrice
-       
+        @RequestParam(required = false) Double maxPrice,
+        @RequestParam(required = false,defaultValue="0") int page
         ) {
-        Pageable pageable = PageRequest.of(0, 9);
-        
+        Pageable pageable = PageRequest.of(page, 9); 
         return productService.getAllProducts(sizes, gender, category, minPrice, maxPrice, pageable);
+    }
+    
+    @GetMapping("/products/{id}")
+    public SingleProductDto getMethodName(
+        @PathVariable(name = "id") String uid
+        ) {
+
+        return productService.getSingleProduct(uid);
     }
     
     

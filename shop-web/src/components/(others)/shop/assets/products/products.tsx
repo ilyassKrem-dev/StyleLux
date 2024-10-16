@@ -1,27 +1,49 @@
 import { useEffect, useState } from "react"
-import FilterShowen from "./assets/fllterShowen"
+import FilterShowen from "./assets/topOfProducts"
 import Product from "../../../../../lib/api/product/Product"
-
-
+import productsJson from "./products.json"
+import { ProductType } from "../../../../../lib/utils/types/productTypes"
+import { useSize } from "../../../../../lib/utils/hooks/hooks"
+import { Link, useSearchParams } from "react-router-dom"
+import Pagination from "./assets/pagination/pagination"
 export default function Products() {
-    const [filterBy,setFitlerBy] = useState<string>(""
-    )
+    const [filterBy,setFitlerBy] = useState<string>("")
+    const [maxPages,setMaxPages] = useState<number>(0)
+    
+    const [products,setProducts] = useState<ProductType[]>([])
 
-    const [products,setProducts] = useState<any[]>([])
     const [loading,setLoading] = useState<boolean>(true)
     
+    const [searchParams,setSearchParams] = useSearchParams()
+    const sizeParams = searchParams.get("size")
+    const categoryParams = searchParams.get("category")
+    const pageParams = searchParams.get("page")
+    const genderParam = searchParams.get('gender')
     useEffect(() => {
         const getProducts = async() => {
-            const res = await Product.getAllProduct()
+            const parms = Object.fromEntries(searchParams)
+            const res = await Product.getAllProduct({
+                sizeParams,
+                categoryParams,
+                pageParams,
+                genderParam
+            })
             if(res?.success) {
-                setProducts(res.data)
+                if(res.data.pages < Number(pageParams)) {
+                    delete parms.page 
+                    setSearchParams({...parms})
+                }
+                
+                
+                setProducts(res.data.products)
+                setMaxPages(res.data.products.length === 0 ?0 :res.data.pages)
             } else {
                 setProducts([])
             }
         }
         getProducts()
-    },[])
-    console.log(products)
+    },[sizeParams,categoryParams,pageParams,genderParam])
+    
     useEffect(() => {
         if(!loading) return
         const id = setTimeout(() => {
@@ -30,18 +52,32 @@ export default function Products() {
 
         return () => clearTimeout(id)
     },[loading])
+    const {w} = useSize()
     return (
-        <div className="flex flex-col gap-5 self-start">
+        <div className={`flex flex-col gap-5 self-start font-poppins ${w<1100 ?"flex-1" :""}`}>
             <FilterShowen />
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 gap-y-10 ">
                 {!loading&&products.map((product,index) => {
+                    const {media} = product
                     return (
-                        <div key={index}>
-                            {product.name} + {product.price}
-                        </div>
+                        <Link to={`/products/${product.uid}`} key={index} className="flex flex-col gap-3 hover:bg-black/5 group/link rounded-sm cursor-pointer">
+                            <div className={`
+                                h-[350px] ${w>1250 ?"w-[300px] h-[400px]" :""}
+                            `}>
+                                <img 
+                                src={media.url as string} 
+                                alt=""
+                                className=" object-cover h-full w-full rounded-sm group-hover/link:opacity-90" />
+                            </div>
+                            <div className="flex gap-2 flex-col p-1">
+                                <p className="font-volkhov font-medium capitalize  cursor-pointer dark:text-white">{product.name}</p>
+                                <p className=" cursor-pointer dark:text-white">${product.price}</p>
+                            </div>
+                        </Link>
                     )
                 })}
             </div>
+            {maxPages>0&&<Pagination maxPages={maxPages}/>}
         </div>
     )
 }
