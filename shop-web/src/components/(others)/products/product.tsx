@@ -18,9 +18,10 @@ export default function ProductPage() {
                 setProduct(res.data as any)
             }
         }
+        getProduct()
     },[id])
     return (
-        <div className="py-28 px-4">
+        <div className="py-10 md:py-28 ">
             {product&&
            <ProductById product={product}/>}
             

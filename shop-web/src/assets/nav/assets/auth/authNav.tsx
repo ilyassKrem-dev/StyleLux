@@ -48,7 +48,7 @@ export default function AuthNav() {
                     })}
                     <div className="relative cursor-pointer group flex items-center justify-center tabs">
                         <div className="relative flex items-center justify-center" onClick={() => setShow(prev => !prev)}>
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 dark:text-white">
                                 <span>Pages</span>
                                 <IoIosArrowDown />
                             </div>

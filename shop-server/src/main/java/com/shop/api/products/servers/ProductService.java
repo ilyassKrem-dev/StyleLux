@@ -2,6 +2,7 @@ package com.shop.api.products.servers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import com.shop.api.products.others.GenderEnum;
 import com.shop.api.products.records.AllProdcutsDto;
 import com.shop.api.products.records.ProductDto;
 import com.shop.api.products.records.SingleProductDto;
+import com.shop.api.products.records.cart.ProductCart;
 import com.shop.api.products.repository.ProductRepository;
 
 @Service
@@ -53,5 +55,13 @@ public class ProductService {
     public SingleProductDto getSingleProduct(String uid) {
         Product product = productRepository.findByUid(uid);
         return productMapping.changeToSingleProductDto(product);
+    }
+
+    public List<ProductCart> getProductCarts(List<String> ids) {
+
+        return productRepository.findProductsById(ids)
+                                .stream()
+                                .map(productMapping::changeToProductCart)
+                                .collect(Collectors.toList());
     }
 }

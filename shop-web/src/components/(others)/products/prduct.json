@@ -22,5 +22,6 @@
     },
     "quantity": 30,
     "rating": 0.0,
-    "numRatings": 0
+    "numRatings": 0,
+    "sold":0
 }

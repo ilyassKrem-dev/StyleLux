@@ -8,6 +8,7 @@ import Layout from "../app/layout"
 import Shop from "../components/(others)/shop/shop"
 import Restore from "../components/auth/restore/restore"
 import ProductPage from "../components/(others)/products/product"
+import CartPage from "../components/(others)/cart/Cart"
 
 
 
@@ -33,6 +34,9 @@ const router = createBrowserRouter([
                         path:"/products/:id",
                         element:<ProductPage />
                         
+                    },{
+                        path:"/cart",
+                        element:<CartPage />
                     }
                 ]
             }

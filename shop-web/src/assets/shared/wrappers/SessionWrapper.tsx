@@ -12,7 +12,7 @@ type ContextType = {
 }
 
 const sessionContext = createContext<ContextType|null>(null)
-const pathnames = ["/","/shop","/products"]
+const pathnames = ["/","/shop","/products","/cart"]
 const dynamicPathsProducts = [/^\/(products|auth)\/[^\/]+$/];
 
 export const useSession = () => {

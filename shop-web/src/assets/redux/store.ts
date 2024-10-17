@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./session/sessionReducer";
-import storage from "redux-persist/lib/storage";
 import { sessionType } from "../../lib/utils/types/authTypes"
 import { localStorageWrapper } from "./config";
+import cartReducer, { CartType } from "./cart/cartReducer";
 
 const presistConfig = {
     key:"root",
@@ -13,7 +13,8 @@ const presistConfig = {
 
 
 const rootReducer = combineReducers({
-    session:userReducer
+    session:userReducer,
+    cart:cartReducer
 })
 
 
@@ -31,6 +32,7 @@ export const store = configureStore({
 
 export const persistor = persistStore(store)
 export type RootState = {
-    session:sessionType
+    session:sessionType,
+    cart:CartType[]
 }
 export type AppDispatch = typeof store.dispatch
