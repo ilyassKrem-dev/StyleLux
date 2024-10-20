@@ -1,4 +1,8 @@
 import { SetStateAction, useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../assets/redux/store"
+import { CartItemsType } from "../types/cartType"
+import Cart from "../../api/product/cart/Cart"
 
 
 
@@ -60,4 +64,18 @@ export const useOverlayRemove = ({
         document.addEventListener("click",overlayCheck)
         return () => document.removeEventListener("click",overlayCheck)
     },[])
+}
+
+
+export const useCartItems = () : [CartItemsType[],React.Dispatch<SetStateAction<CartItemsType[]>>] => {
+    const itemsId = useSelector((state:RootState) => state.cart)
+    const [items,setItems] = useState<CartItemsType[]>([])
+    useEffect(() => {
+        const getItems = async() => {
+            const res= await Cart.getCartProducts(itemsId)
+            if(res?.success) return setItems(res.data)
+        }
+        getItems()
+    },[])
+    return [items,setItems];
 }

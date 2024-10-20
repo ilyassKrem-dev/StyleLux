@@ -2,7 +2,7 @@
 import axios from "axios";
 import Servers from "../../servers/Servers";
 import { CartItemsType,CartItem } from "../../../utils/types/cartType";
-
+import Cookies from "js-cookie";
 
 const baseUrl = Servers.springUrl
 
@@ -11,6 +11,23 @@ type ItemsType = {
     quantity:number;
 }
 
+type CheckOutType = {
+    email:string;
+    fullname:string;
+    amount:number;
+    userId:number;
+    items:{
+        productId:number,
+        quantity:number
+    }[]
+    fullAddress:{
+        address:string,
+        city:string,
+        region:string | null,
+        postalCode:string
+    },
+    paymentId:string
+}
 class Cart {
 
     static async getCartProducts(items:ItemsType[]) {
@@ -45,6 +62,34 @@ class Cart {
             return data
         }
     }
+    static async createCheckout(info:CheckOutType) {
+        let data = {
+            success:true,
+            data:{
+                customerId:"",
+                paymentId:""
+            },
+            error:""
+        }
+        try {
+            const res = await axios.post(`${baseUrl}/checkout/create`,info,{
+                headers:{
+                    "Authorization": `Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error:any) {
+           
+            data.success = false;
+            data.error = "Interal server error"
+            return data
+        }
+    }
+
 }
 
 

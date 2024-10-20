@@ -28,3 +28,5 @@ host:  "front-end url"
 cors:
   allowed:
     origin: "front-end url"
+stripe:
+  key: "stripe key"

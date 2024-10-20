@@ -66,9 +66,9 @@ export default function CartPage() {
                     <div className="p-2 border rounded-md border-[#8A8A8A] flex-1 min-h-[200px] max-h-[500px] overflow-y-auto custom-scrollbar">
                         {items.length==0&&
                         <div className="flex justify-center items-center h-full">
-                            <h3 className="font-bold text-lg">No items in cart</h3>
+                            <h3 className="font-bold text-lg dark:text-white">No items in cart</h3>
                         </div>}
-                        {<CartPageItems items={items} 
+                        {items.length>0&&<CartPageItems items={items} 
                         handleQuantity={handleQuantity} 
                         removeItem={removeItem}/> }      
                     </div>}
@@ -83,9 +83,12 @@ export default function CartPage() {
                                 <p className=" font-semibold text-lg">Subtotal</p>
                                 <p className="text-lg font-semibold">${TotalPrice}</p>
                             </div>
+                            {items.length>0?
                             <Link to={"/cart/checkout"}>
-                                <button className=" py-[0.7rem] w-full rounded-md bg-black text-white active:scale-95 hover:bg-black/40 dark:hover:bg-white/40 transition-all duration-300 font-medium">Checkout</button>
+                                <button className=" py-[0.7rem] w-full rounded-md bg-black text-white active:scale-95 hover:bg-black/40 dark:hover:bg-white/40 transition-all duration-300 font-medium dark:bg-white dark:text-black">Checkout</button>
                             </Link>
+                            :
+                            <button className=" py-[0.7rem] w-full rounded-md bg-black/60 text-white active:scale-95 hover:bg-black/40 dark:hover:bg-white/40 transition-all duration-300 font-medium cursor-default dark:bg-white/60"  disabled>Checkout</button>}
                         </div>
                     </div>
                 </div>}

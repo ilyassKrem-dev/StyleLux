@@ -9,6 +9,7 @@ import Shop from "../components/(others)/shop/shop"
 import Restore from "../components/auth/restore/restore"
 import ProductPage from "../components/(others)/products/product"
 import CartPage from "../components/(others)/cart/Cart"
+import CheckOut from "../components/(others)/checkout/checkout"
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
                     },{
                         path:"/cart",
                         element:<CartPage />
+                        
+                    },{
+                        path:"/cart/checkout",
+                        element:<CheckOut />
                     }
                 ]
             }

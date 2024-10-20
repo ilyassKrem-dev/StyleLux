@@ -73,7 +73,7 @@ export default function CartPageTable({items,handleQuantity,removeItem}:{
                     )
                 })}
                 {items.length === 0&&<tr >
-                    <td colSpan={4} className=" col-span-4 text-center font-bold lg h-[100px]">
+                    <td colSpan={4} className=" col-span-4 text-center font-bold lg h-[100px] dark:text-white">
                         No items in cart
                     </td>
                     

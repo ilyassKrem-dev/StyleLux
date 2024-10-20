@@ -1,27 +1,26 @@
 package com.shop.api.products;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.shop.api.categories.Category;
-import com.shop.api.products.media.Media;
-import com.shop.api.products.size.Size;
-
 import java.util.ArrayList;
 import java.util.Date;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-
 import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.shop.api.categories.Category;
+import com.shop.api.payement.order_item.OrderItem;
+import com.shop.api.products.media.Media;
 import com.shop.api.products.others.GenderEnum;
+import com.shop.api.products.size.Size;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -88,6 +87,10 @@ public class Product {
         updatable=false
     )
     private Date createdAt;
+
+    @OneToMany(mappedBy="product")
+    @JsonManagedReference
+    private List<OrderItem> orderItems;
 
     @UpdateTimestamp()
     @Column(

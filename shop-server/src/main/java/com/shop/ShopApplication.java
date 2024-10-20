@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 
 public class ShopApplication {
@@ -17,5 +18,6 @@ public class ShopApplication {
 
 		System.out.print("\n\n Running on localhost:8080");
 	}
+	
 
 }

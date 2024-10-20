@@ -46,15 +46,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         String path = request.getRequestURI();
+    
         if (path.startsWith("/api/categories") || path.startsWith("/api/products") || path.startsWith("/api/auth")) {
             filterChain.doFilter(request, response);
             return;
         }
+        
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
-
+        
         try {
             final String jwt = authHeader.substring(7);
             final String userEmail = jwtService.extractUsername(jwt);
