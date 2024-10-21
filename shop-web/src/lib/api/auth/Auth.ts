@@ -39,7 +39,7 @@ class Auth {
                     createdAt:res.data.createdAt,
                     updatedAt:res.data.updatedAt
                 }
-                Cookies.set("authToken",token.token,{expires:60})
+                Cookies.set("authToken",token.token,{expires:30})
                 data.data = neededData as any
                 return data
             }
@@ -90,7 +90,7 @@ class Auth {
                     createdAt:res.data.createdAt,
                     updatedAt:res.data.updatedAt
                 }
-                Cookies.set("authToken",token.token,{expires:60})
+                Cookies.set("authToken",token.token,{expires:30})
                 data.data = neededData as any
                 return data
             }

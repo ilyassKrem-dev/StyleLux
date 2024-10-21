@@ -30,6 +30,8 @@ public class OrderItemService {
         orderItem.setPrice(product.getPrice());
         orderItem.setQuantity(quantity);
         orderItem.setProduct(product);
+        product.addSold(quantity);
+        productRepository.save(product);
         return  orderItemReposotiry.save(orderItem);
         
     }

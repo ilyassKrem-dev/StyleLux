@@ -9,16 +9,12 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.shop.api.payement.order.Order;
 import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.payement.records.ItemDto;
+import com.shop.api.payement.records.OrderDto;
 import com.shop.api.payement.records.PaymentCreationDto;
-import com.shop.api.payement.user_pay_info.UserPayInfo;
 import com.shop.api.users.User;
-import com.shop.api.users.others.UserRepository;
 import com.shop.api.users.services.UserService;
-import com.stripe.Stripe;
 
 @Service
 public class PaymentService {
@@ -42,15 +38,13 @@ public class PaymentService {
     ) {
         try {
             String customerId = stripeService.createStipeCustomer(data.email(), data.fullname());
-            String paymentId = stripeService.createPaymentIntent(customerId, data.amount(),data.paymentId());
-            User user = userService.getUser(data.userId());
-            UserPayInfo userPayInfo = userPayInfoService.createUserPayInfoService(user, data.fullAddress(), customerId);
 
-            List<OrderItem> items = new ArrayList<>();
-            for(ItemDto item : data.items()) {
-                items.add(orderItemService.createItem(item.productId(), item.quantity()));
+            String paymentId = stripeService.createPaymentIntent(customerId, data.amount(),data.paymentId());
+
+            User user = userService.getUser(data.userId());
+            if(data.fullAddress().save()) {
+                userPayInfoService.createUserPayInfoService(user, data.fullAddress(), customerId);
             }
-            Order order = orderService.createOrder(data.amount(), paymentId, user, items);
 
             Map<String,String> res = new HashMap<>();
             res.put("customerId", customerId);
@@ -66,4 +60,22 @@ public class PaymentService {
         }
     }
     
+
+    public ResponseEntity<String> createOrder(OrderDto data) {
+        try {
+            List<OrderItem> items = new ArrayList<>();
+                for(ItemDto item : data.items()) {
+                    items.add(orderItemService.createItem(item.productId(), item.quantity()));
+                }
+            User user = userService.getUser(data.userId());
+            
+            orderService.createOrder(data.amount(), data.paymentId(), user, items);
+
+            
+            return  ResponseEntity.ok("Order has been created");
+        } catch (Exception e) {
+
+            return new ResponseEntity<>("Failed to create order",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

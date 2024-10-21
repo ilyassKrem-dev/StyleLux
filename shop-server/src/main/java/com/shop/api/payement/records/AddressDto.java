@@ -4,7 +4,8 @@ public record AddressDto(
     String address,
     String city,
     String region,
-    String postalCode
+    String postalCode,
+    boolean save   
 
 ) {
 

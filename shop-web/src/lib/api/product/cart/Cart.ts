@@ -16,17 +16,24 @@ type CheckOutType = {
     fullname:string;
     amount:number;
     userId:number;
-    items:{
-        productId:number,
-        quantity:number
-    }[]
     fullAddress:{
         address:string,
         city:string,
         region:string | null,
-        postalCode:string
+        postalCode:string,
+        save:boolean
     },
     paymentId:string
+}
+type orderType = {
+    items:{
+        productId:number,
+        quantity:number
+    }[];
+    amount:number;
+    userId:number;
+    paymentId:string;
+
 }
 class Cart {
 
@@ -72,7 +79,7 @@ class Cart {
             error:""
         }
         try {
-            const res = await axios.post(`${baseUrl}/checkout/create`,info,{
+            const res = await axios.post(`${baseUrl}/checkout/create_payment`,info,{
                 headers:{
                     "Authorization": `Bearer ${Cookies.get("authToken")}`
                 }
@@ -83,11 +90,33 @@ class Cart {
                 return data
             }
         } catch (error:any) {
-           
             data.success = false;
             data.error = "Interal server error"
             return data
         }
+    }
+    static async createOrder(info:orderType) {
+        let data = {
+            success:true,
+            error:""
+        }
+        try {
+            const res = await axios.post(`${baseUrl}/checkout/create_order`,info,{
+                headers:{
+                    "Authorization": `Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            
+            if(res.data) {
+            
+                return data
+            }
+        } catch (error:any) {
+            data.success = false;
+            data.error = "Interal server error"
+            return data
+        }
+
     }
 
 }

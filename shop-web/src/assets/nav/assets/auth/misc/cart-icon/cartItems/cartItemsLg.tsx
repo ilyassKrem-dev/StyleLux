@@ -74,7 +74,8 @@ export default function CartItemsLg({items,setShow,removeItem,handleQuantity,Tot
                         <p className=" font-semibold text-lg">Subtotal</p>
                         <p className="text-lg font-semibold">${TotalPrice}</p>
                     </div>
-                    <Link to={"/cart/checkout"}>
+                    
+                    <Link to={"/cart/checkout"} onClick={() => setShow(false)} >
                         <button className=" py-[0.7rem] w-full rounded-md bg-black text-white active:scale-95 hover:bg-black/40 dark:hover:bg-white/40 transition-all duration-300 font-medium dark:bg-white dark:text-black">Checkout</button>
                     </Link>
                     <Link to={"/cart"} onClick={() => setShow(false)}  className="text-center font-bold underline  hover-opacity active:scale-95">View Cart</Link>

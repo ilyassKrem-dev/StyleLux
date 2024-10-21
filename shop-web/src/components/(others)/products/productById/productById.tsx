@@ -41,7 +41,7 @@ export default function ProductById({product}:{
                         <div className="flex flex-col gap-2">
                             <p className="text-sm text-[#666666] dark:text-light">
                             {quantity < 10 ?"Only" :""}
-                            <span  className="font-bold ">{quantity}</span> item&#40;s&#41; left in stock!</p>
+                            <span  className="font-bold ">{quantity-sold}</span> item&#40;s&#41; left in stock!</p>
                             <div className="rounded-full p-[0.15rem] bg-gray-300 relative flex items-center justify-start">
                                 <div className="absolute w-full h-full bg-[#EF2D2D] rounded-full left-0" style={{width:`${widthPercentage}%`}}>
 

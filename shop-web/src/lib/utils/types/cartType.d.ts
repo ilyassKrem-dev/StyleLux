@@ -29,7 +29,21 @@ export type Deliverytype = {
 }
 
 
-export type PaymentType = {
-    type:"Visa"|"MasterCard";
-    save:boolean
+
+
+export type CheckoutErrorsCheck = {
+    email:boolean
+    delivery:{
+        country:boolean,
+        firstname:boolean,
+        lastname:boolean,
+        city:boolean,
+        postalcode:boolean,
+        address:boolean
+    };
+    payment:{
+        cardNumber:boolean;
+        cardCvc:boolean;
+        cardExpiry:boolean;
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shop.api.payement.records.OrderDto;
 import com.shop.api.payement.records.PaymentCreationDto;
 import com.shop.api.payement.service.PaymentService;
 
@@ -24,10 +25,17 @@ public class PaymentContoller {
 
     
 
-    @PostMapping("/checkout/create")
+    @PostMapping("/checkout/create_payment")
     public ResponseEntity<Map<String,String>> createPayment(
         @RequestBody PaymentCreationDto data
     ) {
         return paymentService.createPayment(data);
+    }
+    @PostMapping("/checkout/create_order")
+    public ResponseEntity<String> createOrder(
+        @RequestBody OrderDto data
+    ) {
+        
+        return paymentService.createOrder(data);
     }
 }

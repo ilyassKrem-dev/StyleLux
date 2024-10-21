@@ -1,39 +1,42 @@
-import { SetStateAction } from "react";
-import { PaymentType } from "../../../../../lib/utils/types/cartType"
+import { SetStateAction, useState } from "react";
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
+import { CheckoutErrorsCheck } from "../../../../../lib/utils/types/cartType";
+import { FaRegCreditCard } from "react-icons/fa";
 
+type cardErrorsType = {
+    cardNumber:string,cardCvc:string,cardExpiry:string
+}
 
-export default function PaymentInfo({paymentInfo,setPaymentInfo,errors,setErrors}:{
-    paymentInfo:PaymentType;
-    setPaymentInfo:React.Dispatch<SetStateAction<PaymentType>>;
-    errors:{
-        cardNumber:"",cardCvc:"",cardExpiry:""
-    },
-    setErrors:React.Dispatch<SetStateAction<{
-        cardNumber:"",cardCvc:"",cardExpiry:""
-    }>>
+export default function PaymentInfo({setErrorsCheck}:{
+    setErrorsCheck:React.Dispatch<SetStateAction<CheckoutErrorsCheck>>
 }) {
-    const {type,save} = paymentInfo
+    const [errors,setErrors] = useState<cardErrorsType>({
+        cardNumber:"",cardCvc:"",cardExpiry:""
+    })
+
     const isDark = localStorage.getItem("darkMode") ? true : false
     
     const handleCardChange = (e:any) => {
+        
         if (!e.complete) {
             if(e.error) {
-                if(e.elementType == "cardExpiry") {
-                    e.error.message = "Invalid date"
-                }
+                setErrorsCheck(prev => ({...prev,
+                    payment:{...prev.payment,
+                    [e.elementType]:true}}))
+                if(e.elementType == "cardExpiry") e.error.message = "card is expired"
+                
                 setErrors((prev) => ({...prev,[e.elementType]:e.error.message}))
             }
         }
         if(e.complete) {
-            setErrors({
-                cardNumber:"",
-                cardCvc:"",
-                cardExpiry:""
-            })
-        }
-        setPaymentInfo(prev => ({...prev,type:e.brand == "visa" ? "Visa" : "MasterCard"}))
+            setErrors(prev => ({...prev,[e.elementType]:""}))
+            setErrorsCheck(prev => ({...prev,
+                payment:{...prev.payment,
+                [e.elementType]:false}}))
+        } 
     }
+        
+    
     return (
         <div className="flex flex-col gap-3">
             <div className="flex justify-between items-center dark:text-white">
@@ -42,10 +45,8 @@ export default function PaymentInfo({paymentInfo,setPaymentInfo,errors,setErrors
             <div className="flex flex-col gap-3 bg-lighter dark:bg-darker !max-w-[300px] sm:!max-w-full max-[340px]:!max-w-[280px]">
                 <div className="p-3 border-2 bg-white border-[#8A8A8A] flex justify-between items-center dark:bg-dark ">
                     <p className="font-semibold dark:text-white">Credit Card</p>
-                    <div className="relative">
-                        <div className="w-[40px] h-[40px]">
-                            <img src={`/cards/${type==="Visa"?"visa.svg":"mastercard.svg"}`} alt="" className={`${type=="Visa" ?" align-top" :"w-full h-full bg-blue-900 px-1 rounded-md "}`} />
-                        </div>
+                    <div className="text-2xl dark:text-white">
+                        <FaRegCreditCard />
                     </div>
                 </div>
                 <div className="flex flex-col p-2 pt-0 dark:text-white">
@@ -98,17 +99,6 @@ export default function PaymentInfo({paymentInfo,setPaymentInfo,errors,setErrors
                             onChange={handleCardChange} />
                             <p className="h-[10px] text-accent text-sm font-semibold">{errors.cardCvc}</p>
                         </div>
-                    </div>
-
-                    <div className="flex items-center px-3 gap-2 pt-2">
-                        <input 
-                        type="checkbox" 
-                        name="save" 
-                        id="save" 
-                        className="scale-150 accent-black dark:accent-white"
-                        checked={save}
-                        onChange={(e) => setPaymentInfo(prev => ({...prev,save:e.target.checked}))} />
-                        <label htmlFor="save" className="text-sm text-[#8A8A8A] dark:text-white">Save this info for future</label>
                     </div>
                 </div>
             </div>
