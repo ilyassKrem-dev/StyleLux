@@ -3,7 +3,6 @@ package com.shop.api.payement;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,7 @@ import com.shop.api.payement.records.OrderDto;
 import com.shop.api.payement.records.PaymentCreationDto;
 import com.shop.api.payement.service.PaymentService;
 
-@CrossOrigin(origins = {"${cors.allowed.origin}"})
+
 @RequestMapping("/api")
 @RestController
 public class PaymentContoller {

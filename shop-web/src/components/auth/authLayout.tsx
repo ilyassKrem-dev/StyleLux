@@ -17,6 +17,7 @@ export default function AuthLayout() {
         dispatch(removeSession())
         Cookies.remove("authToken")
     } 
+
     return (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
             <div className="min-h-screen flex items-center justify-center font-poppins dark:bg-dark">
@@ -57,7 +58,5 @@ export default function AuthLayout() {
                 </div>
             </div>
         </GoogleOAuthProvider>
-
-      
     )
 }

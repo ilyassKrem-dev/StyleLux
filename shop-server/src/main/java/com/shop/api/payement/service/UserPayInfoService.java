@@ -38,4 +38,14 @@ public class UserPayInfoService {
             return userPayReposotiry.save(userPayInfo);
     }
     
+    public AddressDto getUserAddress(User user) {
+        UserPayInfo userPay = userPayReposotiry.findByUser(user)
+                                        .orElse(new UserPayInfo());
+        return new AddressDto(
+            userPay.getAddress(), 
+            userPay.getCity(), 
+            userPay.getRegion(), 
+            userPay.getPostalCode(), 
+            true);
+    }
 }

@@ -4,6 +4,7 @@ import Iprofile from "./misc/profileIcon";
 import { IoIosSearch } from "react-icons/io";
 import { useSize } from "../../../../lib/utils/hooks/hooks";
 import CartIcon from "./misc/cart-icon/cartIcon";
+import { Link } from "react-router-dom";
 
 
 
@@ -16,9 +17,13 @@ export default function UserNav() {
             <div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:text-white">
                 <GoStar />
             </div>
-            {w>360&&<div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:fill-white">
-                <Iprofile />
-            </div>}
+            {w>360&&
+            <Link to="/profile">
+                <div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:fill-white">
+                    <Iprofile />
+                </div>
+            </Link>
+            }
             <div className="text-[1.3rem] active:scale-95 cursor-pointer hover-opacity dark:text-white">
                 <IoIosSearch />
             </div>

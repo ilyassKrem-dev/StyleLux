@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { CartItemsType } from "../../../lib/utils/types/cartType";
 import Cart from "../../../lib/api/product/cart/Cart";
 import CartPageItems from "./assets/cartPageItems";
-import { useSize } from "../../../lib/utils/hooks/hooks";
+import { useSize, useTitle } from "../../../lib/utils/hooks/hooks";
 import CartPageTable from "./assets/cartPageTable";
 import { addQuantity, changeMaxQuatity, removeFromCart } from "../../../assets/redux/cart/cartReducer";
 import { Link } from "react-router-dom";
@@ -56,6 +56,8 @@ export default function CartPage() {
         setItems((prev:any) => prev.filter((item:CartItemsType) => item.product.uid !== uid))
     }
     const TotalPrice = items ? items.reduce((t,c) => t+(c.quantity * c.product.price),0).toFixed(2) : 0
+
+    useTitle("Cart")
     return (
         <div className="py-12 md:py-24">
             <div className="max-w-[1100px] mx-auto">

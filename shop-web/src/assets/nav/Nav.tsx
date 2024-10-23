@@ -1,7 +1,7 @@
 
 
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDetectScrolling } from "../../lib/utils/hooks/hooks";
 import { useSession } from "../shared/wrappers/SessionWrapper";
 import NoAuthNav from "./assets/noAuthNav";
@@ -11,7 +11,7 @@ import DarkMode from "../shared/darkmode/darkMode";
 export default function Nav() {
     const {session} = useSession()
     const scrollDetect = useDetectScrolling()
-
+    const pathname = useLocation().pathname;
     return (
         <div className={`fixed top-0 left-0 right-0 p-2 sm:p-8 ${scrollDetect ?"bg-white dark:bg-dark" :""} z-50`}>
             <div className="flex items-center justify-between gap-3 ">
@@ -22,7 +22,7 @@ export default function Nav() {
                 {!session&&<div className="flex items-center gap-8 sm:gap-12  font-poppins">
                     <NoAuthNav />
                 </div>}
-                {session&&<AuthNav />}
+                {session&&!pathname.startsWith("/profile")&&<AuthNav />}
                 {session&&<UserNav />}
             </div>
         </div>

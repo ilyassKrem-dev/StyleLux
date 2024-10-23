@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ import com.shop.api.products.servers.ProductService;
 
 
 
-@CrossOrigin(origins = {"${cors.allowed.origin}"})
 @RequestMapping("/api")
 @RestController
 public class ProductContoller {

@@ -1,11 +1,9 @@
 
 import {  SingleProductType } from "../../../../lib/utils/types/productTypes"
-
 import AddToCart from "./assets/addTo/AddToCart";
 import ProductMedia from "./assets/productMedia"
 import { GoStar } from "react-icons/go";
-
-
+import { useEffect } from "react";
 
 export default function ProductById({product}:{
     product:SingleProductType
@@ -13,7 +11,12 @@ export default function ProductById({product}:{
     const {media,category,quantity,sold} = product
     const remainingQuantity = quantity - sold;
     const widthPercentage = (remainingQuantity / quantity) * 100;
+    const name = (product as any)?.name.charAt(0).toUpperCase() + product?.name.substring(1) as string
 
+    useEffect(() => {
+        const name = (product as any)?.name.charAt(0).toUpperCase() + product?.name.substring(1) as string
+        document.title = name;
+    }, [product]);
     return (
         <section className="flex justify-center items-center font-poppins max-w-[1100px] mx-auto">
             <div className="flex gap-12 items-center lg:items-start w-full lg:flex-row flex-col md:flex-row">
@@ -65,5 +68,6 @@ export default function ProductById({product}:{
                 </div>
             </div>
         </section>
+    
     )
 }

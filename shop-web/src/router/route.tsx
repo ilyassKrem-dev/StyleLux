@@ -10,6 +10,9 @@ import Restore from "../components/auth/restore/restore"
 import ProductPage from "../components/(others)/products/product"
 import CartPage from "../components/(others)/cart/Cart"
 import CheckOut from "../components/(others)/checkout/checkout"
+import ProfileLayout from "../components/(others)/profile/profileLayout"
+import ProfileHome from "../components/(others)/profile/home/profileHome"
+import ProfileInfo from "../components/(others)/profile/info/profileInfo"
 
 
 
@@ -42,6 +45,27 @@ const router = createBrowserRouter([
                     },{
                         path:"/cart/checkout",
                         element:<CheckOut />
+                    },{
+                        path:"/profile",
+                        element:<ProfileLayout />,
+                        children:[
+                            {
+                                path:"",
+                                element:<ProfileHome />
+                            },
+                            {
+                                path:"info",
+                                element:<ProfileInfo />
+                            },
+                            {
+                                path:"orders",
+                                element:<div>Orders</div>
+                            },
+                            {
+                                path:"favorites",
+                                element:<div>favorites</div>
+                            }
+                        ]
                     }
                 ]
             }

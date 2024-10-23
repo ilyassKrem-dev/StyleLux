@@ -8,15 +8,17 @@ import { Link, useLocation } from "react-router-dom";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../assets/redux/store";
-
+import { useTitle } from "../../../lib/utils/hooks/hooks";
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLIC_STRIPE_KEY)
-
 export default function CheckOut() {
     const {session} = useSession()
     const items = useSelector((state:RootState) => state.cart)
     const [completed,setCompleted] = useState<boolean>(false)
     const pathname = useLocation().pathname
+
+    useTitle("Checkout")
     return (
+       
         <div className="py-10 md:py-24  mt-5 ">
             <div className="flex flex-col max-w-[1100px] mx-auto ">
                 <div className="flex justify-center items-center">
@@ -77,5 +79,6 @@ export default function CheckOut() {
                 </>
             </div>
         </div>
+     
     )
 }

@@ -5,6 +5,7 @@ import { SingleProductType } from "../../../lib/utils/types/productTypes";
 import productJson from "./prduct.json"
 import Product from "../../../lib/api/product/Product";
 import ProductById from "./productById/productById";
+import { useTitle } from "../../../lib/utils/hooks/hooks";
 
 
 export default function ProductPage() {
@@ -20,10 +21,12 @@ export default function ProductPage() {
         }
         getProduct()
     },[id])
-    return (
+
+    useTitle("Products")
+    return ( 
         <div className="py-10 md:py-28 ">
             {product&&
-           <ProductById product={product}/>}
+        <ProductById product={product}/>}
             
         </div>
     )

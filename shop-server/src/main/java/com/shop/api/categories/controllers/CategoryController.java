@@ -21,7 +21,6 @@ import com.shop.api.categories.records.CategoryDto;
 import com.shop.api.categories.services.CategoryService;
 
 import jakarta.validation.Valid;
-@CrossOrigin(origins = {"${cors.allowed.origin}"})
 @RequestMapping("/api")
 @RestController
 public class CategoryController {

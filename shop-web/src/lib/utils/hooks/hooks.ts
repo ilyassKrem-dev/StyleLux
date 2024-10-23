@@ -79,3 +79,10 @@ export const useCartItems = () : [CartItemsType[],React.Dispatch<SetStateAction<
     },[])
     return [items,setItems];
 }
+
+
+export const useTitle = (title:string) : void => {
+    useEffect(() => {
+        document.title = title
+    },[title])
+}
