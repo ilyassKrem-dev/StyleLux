@@ -37,7 +37,7 @@ export default function profileNav() {
                             const isPath = pathname === path.link
                             return (
                                 <Link to={path.link} key={index} className="p-2  relative cursor-pointer group ">
-                                    <p className={`font-semibold text-black/80 dark:text-white/80  cursor-pointer group-hover:text-black transition-all duration-300 ${isPath ? "":"text-black/50"} w-fit text-nowrap `}>{path.path}</p>
+                                    <p className={`font-semibold    cursor-pointer group-hover:text-black dark:group-hover:text-white transition-all duration-300 ${isPath ? "dark:text-white":"text-black/50 dark:text-white/50"} w-fit text-nowrap `}>{path.path}</p>
                                     {isPath &&<div className="absolute bottom-0 right-0 left-0 bg-black h-[5px] rounded-t dark:bg-white " />}
                                     
                                 </Link>

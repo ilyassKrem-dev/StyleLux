@@ -11,3 +11,14 @@ export function generateSecureRandomCode() {
 
     return randomCode;
 }
+
+
+export function changeDateFormat(placedAt:string) {
+    const date = new Date(placedAt)
+    const day = date.getDate()
+    const month = date.toLocaleString(undefined,{month:"long"})
+    const year = date.getFullYear()
+
+    return `${month} ${day},${year}`
+
+}

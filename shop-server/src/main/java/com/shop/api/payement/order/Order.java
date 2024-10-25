@@ -1,8 +1,16 @@
 package com.shop.api.payement.order;
 
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shop.api.payement.order.misc.StatusEnum;
+import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.users.User;
 
 import jakarta.persistence.CascadeType;
@@ -16,15 +24,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import java.util.Date;
-import java.util.UUID;
-import java.util.List;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import com.shop.api.payement.order_item.OrderItem;
 
 @Entity
 @Table(name = "`order`")
@@ -54,7 +53,24 @@ public class Order {
     )
     @Enumerated(EnumType.STRING)
     private StatusEnum status; 
+    @Column(
+        nullable=false
+    )
+    private String address;
+    @Column(
+        nullable=false
+    )
+    private String country;
 
+    @Column(
+        nullable=false
+    )
+    private String city;
+    @Column(
+        nullable=false,
+        name="postal_code"
+    )
+    private String postalCode;
     @Column(
         name="payment_id",
         nullable=false
@@ -89,8 +105,10 @@ public class Order {
     public Date getUpdatedAt() {return updatedAt;}
     public List<OrderItem> getOrderItems() {return orderItems;}
     public User getUser() {return  user;}
-
-
+    public String getAddress() {return address;}
+    public String getCity() {return city;}
+    public String getCountry() {return country;}
+    public String getPostalCode() {return postalCode;}
     // Setters
     public void setId(Integer  value) { id = value;}
     public void setTotalAmount(double  value ) { totalAmount = value;}
@@ -99,6 +117,10 @@ public class Order {
     public void setUpdatedAt(Date value) { updatedAt = value;}
     public void setUser(User value) { user = value;}
     public void setOrderItems(List<OrderItem> value) { orderItems = value;}
+    public void setAddress(String value) {address = value;}
+    public void setCity(String value) { city  = value;}
+    public void setCountry(String value) { country  = value;}
+    public void setPostalCode(String value) { postalCode  = value;}
 
 
     public Order() {

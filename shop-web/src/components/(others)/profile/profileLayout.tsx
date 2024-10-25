@@ -6,7 +6,7 @@ export default function ProfileLayout() {
     
     return (
         
-        <div className="md:py-8  lg:flex">
+        <div className="sm:py-8  lg:flex flex-1">
             <ProfileNav />
             <Outlet />
         </div>

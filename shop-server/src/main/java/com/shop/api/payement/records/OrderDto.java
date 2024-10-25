@@ -6,7 +6,8 @@ public record OrderDto(
     List<ItemDto> items,
     double amount,
     Integer userId,
-    String paymentId
+    String paymentId,
+    AddressDto location
 
 ) 
 {

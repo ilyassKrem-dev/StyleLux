@@ -13,6 +13,7 @@ import CheckOut from "../components/(others)/checkout/checkout"
 import ProfileLayout from "../components/(others)/profile/profileLayout"
 import ProfileHome from "../components/(others)/profile/home/profileHome"
 import ProfileInfo from "../components/(others)/profile/info/profileInfo"
+import ProfileOrders from "../components/(others)/profile/orders/profileOrders"
 
 
 
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
                             },
                             {
                                 path:"orders",
-                                element:<div>Orders</div>
+                                element:<ProfileOrders />
                             },
                             {
                                 path:"favorites",

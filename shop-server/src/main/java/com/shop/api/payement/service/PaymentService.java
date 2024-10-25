@@ -69,7 +69,12 @@ public class PaymentService {
                 }
             User user = userService.getUser(data.userId());
             
-            orderService.createOrder(data.amount(), data.paymentId(), user, items);
+            orderService.createOrder(
+                data.amount(), 
+                data.paymentId(), 
+                user, 
+                items,
+                data.location());
 
             
             return  ResponseEntity.ok("Order has been created");

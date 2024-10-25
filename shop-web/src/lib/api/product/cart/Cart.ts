@@ -33,6 +33,13 @@ type orderType = {
     amount:number;
     userId:number;
     paymentId:string;
+    location:{
+        address:string,
+        city:string,
+        region:string | null,
+        postalCode:string,
+        save:boolean
+    }
 
 }
 class Cart {

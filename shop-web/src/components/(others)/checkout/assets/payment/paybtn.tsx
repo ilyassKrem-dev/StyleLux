@@ -95,7 +95,14 @@ export default function PayBtn(
                         productId:item.product.id,
                         quantity:item.quantity})),
                     paymentId:res.data.paymentId,
-                    userId:userId
+                    userId:userId,
+                    location:{
+                        address:deliveryInfo.address,
+                        city:deliveryInfo.city,
+                        postalCode:deliveryInfo.postalcode,
+                        region:deliveryInfo.country,
+                        save:deliveryInfo.save
+                    }
                 }
             )
             if(order?.success) {

@@ -1,3 +1,4 @@
+import { CartItem } from "./cartType";
 
 
 export type addressType = {
@@ -14,4 +15,17 @@ export type userType = {
     id:number;
     lastName:string;
     number:string;
+}
+
+
+export type userOrderType = {
+    
+    id: number,
+    uid: string,
+    product: CartItem[],
+    total: number,
+    placedAt: string,
+    address: string,
+    status:  "pending"|"completed"|"refunded"|"shipping"
+    
 }

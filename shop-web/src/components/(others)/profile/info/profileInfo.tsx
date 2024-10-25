@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import User from "../../../../lib/api/user/User";
 import { useTitle } from "../../../../lib/utils/hooks/hooks";
 import { userType } from "../../../../lib/utils/types/userTypes";
+import ProfileAddresses from "./addresses/profileAddresses";
 
 
 
@@ -25,7 +26,7 @@ export default function ProfileInfo() {
     
     useTitle("Personal info")
     return (
-        <div className="max-w-[1100px] mx-auto pt-8">
+        <div className="max-w-[900px] mx-auto pt-8 flex-1">
             <div className="flex justify-center items-center dark:text-white">
                 <div className="flex flex-col gap-1 items-center">
                     <h1 className="font-semibold text-2xl capitalize">Personal info</h1>
@@ -33,12 +34,14 @@ export default function ProfileInfo() {
                 </div>
             </div>
             {userInfo&&<div className="mt-4">
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-7">
                     <BasicInfo 
                     firstName={userInfo.firstName}
                     lastName={userInfo.lastName}
                     email={userInfo.email}
                     number={userInfo.number}/>
+                    <ProfileAddresses 
+                    addresses={userInfo.addresses}/>
                 </div>
             </div>}
         </div>
