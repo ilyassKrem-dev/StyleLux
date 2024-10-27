@@ -1,6 +1,8 @@
 package com.shop.api.payement.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,7 @@ public class StripeService {
                                         
     }
 
-    public String createPaymentIntent(String customerId,double amount,String paymentId) throws  StripeException {
+    public Map<String,String> createPaymentIntent(String customerId,double amount,String paymentId) throws  StripeException {
         PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
                                                 .setCustomer(customerId)
                                                 .setAmount((long) (amount*100))
@@ -56,7 +58,11 @@ public class StripeService {
                                                 .setAllowRedirects(PaymentIntentCreateParams.AutomaticPaymentMethods.AllowRedirects.NEVER)
                                                 .build())  
                                                 .build();
+        
         PaymentIntent paymentIntent = PaymentIntent.create(params);
-        return paymentIntent.getClientSecret();
+        var paymentsIds = new HashMap<String,String>();
+        paymentsIds.put("clientId",paymentIntent.getClientSecret());
+        paymentsIds.put("paymentId",paymentIntent.getId());
+        return paymentsIds;
     }
 }

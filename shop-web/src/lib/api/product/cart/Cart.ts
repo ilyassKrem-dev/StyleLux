@@ -81,7 +81,8 @@ class Cart {
             success:true,
             data:{
                 customerId:"",
-                paymentId:""
+                paymentId:"",
+                clientId:""
             },
             error:""
         }
@@ -125,7 +126,34 @@ class Cart {
         }
 
     }
+    static async refundOrder(orderId:number) {
+        let data = {
+            success:true,
+            data:{
+                amount:0,
+                status:"",
+                currency:"",
+                id:""
+            },
+            error:''
+        }
 
+        try {
+            const res = await axios.post(`${baseUrl}/orders/${orderId}/refund`,undefined,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error:any) {
+            data.success = false
+            data.error = "Error refunding the order,try again later.."
+            return data
+        }
+    }
 }
 
 

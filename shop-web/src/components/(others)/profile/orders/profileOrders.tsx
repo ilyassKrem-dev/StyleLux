@@ -65,7 +65,10 @@ export default function ProfileOrders() {
                     <div className="flex flex-col gap-4">
                         {orders.map((order,index) => {
                             return (
-                                <OrderMemo key={index} order={order}/>
+                                <OrderMemo 
+                                key={index} 
+                                order={order} 
+                                setOrders={setOrders}/>
                             )
                         })}
                     </div>}

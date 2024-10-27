@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.payement.records.ItemDto;
 import com.shop.api.payement.records.OrderDto;
@@ -39,7 +40,7 @@ public class PaymentService {
         try {
             String customerId = stripeService.createStipeCustomer(data.email(), data.fullname());
 
-            String paymentId = stripeService.createPaymentIntent(customerId, data.amount(),data.paymentId());
+            Map<String,String> paymentsId = stripeService.createPaymentIntent(customerId, data.amount(),data.paymentId());
 
             User user = userService.getUser(data.userId());
             if(data.fullAddress().save()) {
@@ -48,7 +49,8 @@ public class PaymentService {
 
             Map<String,String> res = new HashMap<>();
             res.put("customerId", customerId);
-            res.put("paymentId",paymentId);
+            res.put("paymentId",paymentsId.get("paymentId"));
+            res.put("clientId",paymentsId.get("clientId"));
 
             return ResponseEntity.ok(res);
 
@@ -83,4 +85,6 @@ public class PaymentService {
             return new ResponseEntity<>("Failed to create order",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+   
 }

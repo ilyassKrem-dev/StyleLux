@@ -81,7 +81,8 @@ export default function PayBtn(
         )
         if(res?.success) {
             const paymentId = res.data.paymentId
-            const result = await stripe.confirmCardPayment(paymentId,{
+            const clientId = res.data.clientId
+            const result = await stripe.confirmCardPayment(clientId,{
                 payment_method:paymentMethod.id
             })
             if(result.error) {
@@ -94,7 +95,7 @@ export default function PayBtn(
                     items:items.map(item => ({
                         productId:item.product.id,
                         quantity:item.quantity})),
-                    paymentId:res.data.paymentId,
+                    paymentId:paymentId,
                     userId:userId,
                     location:{
                         address:deliveryInfo.address,

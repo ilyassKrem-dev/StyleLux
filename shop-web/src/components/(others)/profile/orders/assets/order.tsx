@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { LuRedo2 } from "react-icons/lu";
 import { userOrderType } from "../../../../../lib/utils/types/userTypes";
 import countries from "../../../checkout/assets/delivery/countriesList.json"
 import { Link } from "react-router-dom";
 import { changeDateFormat } from "../../../../../lib/utils/random/random";
+import { FaCircleInfo } from "react-icons/fa6";
+import OrderSInfo from "./orderSinfo";
 
 
-export default function Order({order}:{
-    order:userOrderType
+export default function Order({order,setOrders}:{
+    order:userOrderType;
+    setOrders:React.Dispatch<SetStateAction<userOrderType[]|null>>
 }) {
     const [show,setShow] = useState<boolean>(false)
     const {product,total,address,placedAt} = order
-    const country = countries.find(country => country.code == address.split('|')[0]) 
+    const country = countries.find(country => country.code == address.split('|')[0])
+
     return (
         <div className="flex flex-col border  border-black/20 rounded-md dark:text-white dark:border-white/20 gap-3">
             <div className={`p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300  ${show?" bg-black/5 dark:bg-white/5 border-b border-black/10 dark:border-white/10":""} cursor-pointer`} onClick={() => setShow(prev => !prev)}>
-                <div className="flex items-start px-4 py-2 dark:text-white ">
+                <div className="flex gap-4 sm:gap-0 flex-col sm:flex-row items-start px-4 py-2 dark:text-white ">
                     <div className="flex gap-1 flex-col flex-1">
                         <p className="text-sm text-black/70 dark:text-white/70  cursor-pointer">Order placed</p>
                         <p className="text-base font-semibold  cursor-pointer">{changeDateFormat(placedAt)}</p>
@@ -32,9 +36,15 @@ export default function Order({order}:{
                         </div>
                     </div>
                     <div className="flex gap-1 flex-col flex-1">
-                        <p className="text-sm  font-semibold  cursor-pointer break-words  max-[450px]:max-w-[150px]  max-[450px]:truncate">
+                        <p className="text-sm  font-semibold  cursor-pointer break-words  max-[450px]:max-w-[200px]  max-[450px]:truncate">
                             Order # {order.uid}
                         </p>
+                        <OrderSInfo 
+                        status={order.status}
+                        orderId={order.id}
+                        orderUid={order.uid}
+                        itemsLength={order.product.length}
+                        setOrders={setOrders}/>
                     </div>
                 </div>
             </div>
