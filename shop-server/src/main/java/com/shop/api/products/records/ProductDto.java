@@ -18,7 +18,8 @@ public record ProductDto(
     GenderEnum gender,
     List<SizeEnum> sizes,
     CategoryDto category,
-    int quantity
+    int quantity,
+    int sold
 ) {
 
 }

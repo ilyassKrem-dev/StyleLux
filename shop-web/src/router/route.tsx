@@ -14,6 +14,7 @@ import ProfileLayout from "../components/(others)/profile/profileLayout"
 import ProfileHome from "../components/(others)/profile/home/profileHome"
 import ProfileInfo from "../components/(others)/profile/info/profileInfo"
 import ProfileOrders from "../components/(others)/profile/orders/profileOrders"
+import ProfileFavorites from "../components/(others)/profile/favorites/profileFavorites"
 
 
 
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
                             },
                             {
                                 path:"favorites",
-                                element:<div>favorites</div>
+                                element:<ProfileFavorites />
                             }
                         ]
                     }

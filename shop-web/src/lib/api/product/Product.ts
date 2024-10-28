@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import Servers from "../servers/Servers"
-
+import Cookies from "js-cookie";
 
 const baseUrl = Servers.springUrl
 
@@ -56,7 +56,11 @@ class Product {
             error:""
         }
         try {
-            const res = await axios.get(`${baseUrl}/products/${id}`)
+            const res = await axios.get(`${baseUrl}/products/${id}`,{
+                headers:{
+                    "Authorization":`Bearer ${Cookies.get("authToken") ?? ""}`
+                }
+            })
            
             if(res.data) {
                 data.data = res.data

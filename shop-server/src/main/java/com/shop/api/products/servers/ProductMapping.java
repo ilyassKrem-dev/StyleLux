@@ -44,7 +44,8 @@ public class ProductMapping {
             product.getGender(), 
             sizes, 
             dtoCat,
-            product.getQuantity());
+            product.getQuantity(),
+            product.getSold());
 
         return  dto;
     }
@@ -55,7 +56,7 @@ public class ProductMapping {
 
         return new AllProdcutsDto(products.toList(), numberPages);
     }
-    public SingleProductDto changeToSingleProductDto(Product product) {
+    public SingleProductDto changeToSingleProductDto(Product product,boolean isFavorite) {
         
         List<SizeEnum> sizes = product.getSizes()
                                 .stream()
@@ -76,7 +77,8 @@ public class ProductMapping {
             product.getQuantity(), 
             product.getRating(), 
             product.getNumRatings(),
-            product.getSold());
+            product.getSold(),
+            isFavorite);
 
     }
     

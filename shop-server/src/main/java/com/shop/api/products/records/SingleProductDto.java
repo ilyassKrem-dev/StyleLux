@@ -20,7 +20,8 @@ public record SingleProductDto(
     int quantity,
     double rating,
     int numRatings,
-    int sold
+    int sold,
+    boolean isFavorite
 
 )
 {

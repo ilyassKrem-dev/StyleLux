@@ -14,9 +14,11 @@ export default function UserNav() {
     return (
         <div className={`flex items-center gap-4 sm:gap-7  flex-row-reverse  ${w<=699 ?"" :"flex-1 "}`}>
             <CartIcon />
-            <div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:text-white">
-                <GoStar />
-            </div>
+            <Link to={"/profile/favorites"}>
+                <div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:text-white">
+                    <GoStar />
+                </div>
+            </Link>
             {w>360&&
             <Link to="/profile">
                 <div className="text-xl active:scale-95 cursor-pointer hover-opacity dark:fill-white">

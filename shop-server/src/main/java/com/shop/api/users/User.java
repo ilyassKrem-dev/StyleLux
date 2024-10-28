@@ -1,5 +1,6 @@
 package com.shop.api.users;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,12 +14,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shop.api.payement.order.Order;
 import com.shop.api.payement.user_pay_info.UserPayInfo;
+import com.shop.api.products.Product;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -68,6 +73,16 @@ public class User implements  UserDetails {
     )
     private Date updatedAt;
     
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name="user_favorites",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    ) 
+    private List<Product> favorites = new ArrayList<>();
+
+
     @OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     @JsonManagedReference
     private UserPayInfo userPayInfo;
@@ -118,6 +133,7 @@ public class User implements  UserDetails {
     public String getRole() {return this.role;}
     public Date getCreatedAt() {return this.createdAt;}
     public Date getUpdatedAt() {return this.updatedAt;}
+    public List<Product> getFavorites() {return favorites;}
     // Setters
     public void setId(Integer value) { this.id = value;}
     public void setFirstname(String value) {  this.firstname = value;}
@@ -128,7 +144,6 @@ public class User implements  UserDetails {
     public void setRole(String value) {  this.role = value;}
     public void getCreatedAt(Date value) { this.createdAt = value;}
     public void getUpdatedAt(Date value) { this.updatedAt = value;}
-
    
     
     public User() {
@@ -144,5 +159,12 @@ public class User implements  UserDetails {
         this.email = email;
     }
     
+    public void addFavorite(Product product) {
+        if(favorites.contains(product)) return;
+        favorites.add(product);
+    }
     
+    public void removeFavorite(Product product) {
+        favorites.remove(product);
+    }
 }

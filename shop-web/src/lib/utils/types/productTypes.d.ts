@@ -14,7 +14,8 @@ export type ProductType = {
     price:number;
     sizes:string[];
     uid:string;
-    quantity:number
+    quantity:number;
+    sold:number
 }
 
 export type MediaType = {
@@ -40,7 +41,8 @@ export type SingleProductType = {
     quantity:number;
     rating:number;
     numRating:number;
-    sold:number
+    sold:number;
+    isFavorite:boolean
 
 }
 

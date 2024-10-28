@@ -4,19 +4,21 @@ import AddToCart from "./assets/addTo/AddToCart";
 import ProductMedia from "./assets/productMedia"
 import { GoStar } from "react-icons/go";
 import { useEffect } from "react";
+import { useSession } from "../../../../assets/shared/wrappers/SessionWrapper";
+import ProductFavorite from "./assets/favorites&stars/productFavorite";
 
 export default function ProductById({product}:{
     product:SingleProductType
 }) {
-    const {media,category,quantity,sold} = product
+    const {media,quantity,sold} = product
     const remainingQuantity = quantity - sold;
+    const {session} = useSession()
     const widthPercentage = (remainingQuantity / quantity) * 100;
-    const name = (product as any)?.name.charAt(0).toUpperCase() + product?.name.substring(1) as string
-
     useEffect(() => {
         const name = (product as any)?.name.charAt(0).toUpperCase() + product?.name.substring(1) as string
         document.title = name;
     }, [product]);
+
     return (
         <section className="flex justify-center items-center font-poppins max-w-[1100px] mx-auto">
             <div className="flex gap-12 items-center lg:items-start w-full lg:flex-row flex-col md:flex-row">
@@ -27,9 +29,11 @@ export default function ProductById({product}:{
                         <div className="flex flex-col">
                             <div className="flex justify-between items-center">
                                 <h1 className=" capitalize font-bold font-volkhov md:text-2xl dark:text-white text-xl">{product.name}</h1>
-                                <div className=" rounded-full text-xl text-black dark:text-white border border-black/20 dark:border-white active:scale-95 hover:bg-dark/30 dark:hover:bg-white/30 transition-all duration-300 p-1 cursor-pointer">
-                                    <GoStar />
-                                </div>
+                                {session&&<ProductFavorite 
+                                userId={session.uid}
+                                productId={product.uid}
+                                isFavorite={product.isFavorite}
+                                />}
                             </div>
                             <div className="text-base dark:text-white">
                                 {/**ratings later */}

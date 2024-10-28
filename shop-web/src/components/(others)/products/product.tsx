@@ -11,7 +11,7 @@ import { useTitle } from "../../../lib/utils/hooks/hooks";
 export default function ProductPage() {
     const {id} = useParams();
     const [product,setProduct] = useState<SingleProductType|null>(productJson as any)
-   
+    const [show,setShow] = useState<boolean>(false)
     useEffect(() => {
         const getProduct = async () => {
             const res = await Product.getProduct(id as string)
@@ -21,11 +21,17 @@ export default function ProductPage() {
         }
         getProduct()
     },[id])
-
+    useEffect(() => {
+        if(show) return
+        const id = setTimeout(() => {
+            setShow(true)
+        },300)
+        return () => clearTimeout(id)
+    },[show])
     useTitle("Products")
     return ( 
         <div className="py-10 md:py-28 ">
-            {product&&
+        {show&&product&&
         <ProductById product={product}/>}
             
         </div>

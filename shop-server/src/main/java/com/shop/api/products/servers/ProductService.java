@@ -2,12 +2,14 @@ package com.shop.api.products.servers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.shop.api.auth.JwtService;
 import com.shop.api.products.Product;
 import com.shop.api.products.others.GenderEnum;
 import com.shop.api.products.records.AllProdcutsDto;
@@ -15,19 +17,28 @@ import com.shop.api.products.records.ProductDto;
 import com.shop.api.products.records.SingleProductDto;
 import com.shop.api.products.records.cart.ProductCart;
 import com.shop.api.products.repository.ProductRepository;
+import com.shop.api.users.User;
+import com.shop.api.users.others.UserRepository;
+
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapping productMapping;
-
-    public ProductService(ProductRepository productRepository, ProductMapping productMapping) {
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
+    public ProductService(ProductRepository productRepository, ProductMapping productMapping,JwtService jwtService,UserRepository userRepository) {
         this.productRepository = productRepository;
         this.productMapping = productMapping;
+        this.jwtService = jwtService;
+        this.userRepository = userRepository;
     }
 
     
+    public Product getProductByUid(String uid) {
+        return productRepository.findByUid(uid);
+    }
     public AllProdcutsDto getAllProducts(
         String sizes,
         String genderStr,
@@ -36,6 +47,7 @@ public class ProductService {
         Double maxPrice,
         Pageable pageable
     ) {
+        
         List<String> sizeList = sizes != null ? Arrays.asList(sizes.split(",")) : null;
             
         GenderEnum gender = null;
@@ -52,9 +64,20 @@ public class ProductService {
     }
 
 
-    public SingleProductDto getSingleProduct(String uid) {
+    public SingleProductDto getSingleProduct(String uid,String authHeader) {
+        boolean isFavorite = false;
         Product product = productRepository.findByUid(uid);
-        return productMapping.changeToSingleProductDto(product);
+
+        
+        if(authHeader != null && authHeader.startsWith("Bearer ") && authHeader.substring(7).length() > 2) {
+            String token = authHeader.substring(7);
+            String userFromToken = jwtService.extractUsername(token);
+            Optional<User> user = userRepository.findByEmail(userFromToken);
+            if(user.isPresent() && user.get().getFavorites().contains(product)) {
+                isFavorite = true;
+            }
+        }
+        return productMapping.changeToSingleProductDto(product,isFavorite);
     }
 
     public List<ProductCart> getProductCarts(List<String> ids) {

@@ -2,13 +2,9 @@ import { SetStateAction, useState } from "react"
 import { FaCircleInfo } from "react-icons/fa6"
 import { useOverlayRemove } from "../../../../../lib/utils/hooks/hooks"
 import ReactDOM from "react-dom"
-import { RxCross2 } from "react-icons/rx"
 import Cart from "../../../../../lib/api/product/cart/Cart"
 import { userOrderType } from "../../../../../lib/utils/types/userTypes"
 import LoadingAnimation from "../../../../../assets/shared/loadingAnmation"
-import Cookies from "js-cookie"
-
-
 
 export default function OrderSInfo({status,orderId,orderUid,itemsLength,setOrders}:{
     status:"pending" | "completed" | "refunded" | "shipping";
@@ -20,6 +16,7 @@ export default function OrderSInfo({status,orderId,orderUid,itemsLength,setOrder
     const [showInfo,setShowInfo] = useState<boolean>(false)
     const [show,setShow] = useState<boolean>(false)
     const [loading,setLoading] = useState<boolean>(false)
+
     const [data,setData] = useState<{
         show:boolean
         amount:number,
@@ -29,6 +26,7 @@ export default function OrderSInfo({status,orderId,orderUid,itemsLength,setOrder
         amount:0,
         status:""
     })
+
     useOverlayRemove(
         {
             tab:"info_tab",

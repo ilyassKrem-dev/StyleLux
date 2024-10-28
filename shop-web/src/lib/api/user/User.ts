@@ -60,6 +60,53 @@ class User {
             return data
         }
     }
+
+
+    async changeFavorites(productId:string) {
+        let data = {
+            success:true,
+            error:""
+        }
+        try {
+            const res =await axios.patch(`${baseUrl}/users/${this.uid}/favorites/${productId}`,undefined,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            data.error ="Internal server error"
+            return data
+        }
+    }
+
+    async getAllFavorites() {
+        let data = {
+            success:true,
+            data:[],
+            error:""
+        }
+        try {
+            const res =await axios.get(`${baseUrl}/users/${this.uid}/favorites`,
+            {
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            data.error ="Internal server error"
+            return data
+        }
+
+    }
 }
 
 
