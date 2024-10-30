@@ -19,11 +19,15 @@ export const userReducer:any = createSlice({
         },
         removeSession:(state) => {
             return state = null
+        },
+         //@ts-ignore
+        updateSession:(state,action:PayloadAction<sessionType>) => {
+            return action.payload
         }
     }
 })
 
 
-export const {setSession,removeSession} = userReducer.actions
+export const {setSession,removeSession,updateSession} = userReducer.actions
 
 export default userReducer.reducer

@@ -26,7 +26,7 @@ export default function ProfileInfo() {
     
     useTitle("Personal info")
     return (
-        <div className="max-w-[900px] mx-auto pt-8 flex-1">
+        <>
             <div className="flex justify-center items-center dark:text-white">
                 <div className="flex flex-col gap-1 items-center">
                     <h1 className="font-semibold text-2xl capitalize">Personal info</h1>
@@ -44,6 +44,6 @@ export default function ProfileInfo() {
                     addresses={userInfo.addresses}/>
                 </div>
             </div>}
-        </div>
+        </>
     )
 }

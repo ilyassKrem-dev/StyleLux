@@ -27,14 +27,14 @@ const paths = [
 export default function profileNav() {
     const pathname = useLocation().pathname
     const {w} = useSize()
-
+    const actualPath = pathname.split("/").splice(0,3).join("/")
     return (
         <>
             {w<=1024&&<div className="flex gap-10 items-center justify-center  h-[41px]">
                 <div className="fixed  left-0 right-0 flex justify-center items-center border-b bg-white dark:bg-dark z-40">
                     <div className="flex gap-10 items-center overflow-x-scroll scrollbar-none max-[450px]:pl-1 ">
                         {paths.map((path,index) => {
-                            const isPath = pathname === path.link
+                            const isPath = actualPath === path.link
                             return (
                                 <Link to={path.link} key={index} className="p-2  relative cursor-pointer group ">
                                     <p className={`font-semibold    cursor-pointer group-hover:text-black dark:group-hover:text-white transition-all duration-300 ${isPath ? "dark:text-white":"text-black/50 dark:text-white/50"} w-fit text-nowrap `}>{path.path}</p>
@@ -51,7 +51,7 @@ export default function profileNav() {
             <div className="w-[300px]">
                 <div className="flex flex-col pt-8 fixed top-20 left-0 w-[300px]">
                     {paths.map((path,index) => {
-                        const isPath = pathname == path.link
+                        const isPath = actualPath == path.link
                         return (
                             <Link to={path.link} key={index} className={`flex gap-2 rounded-r-full p-[0.6rem] items-center font-semibold px-6 ${isPath ?"bg-dark text-white dark:bg-white dark:text-black" :" dark:text-white"} cursor-pointer`}>
                                 

@@ -1,11 +1,11 @@
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Servers from "../servers/Servers"
 import Cookies from "js-cookie";
 
 const baseUrl = Servers.springUrl
 class User {
-    private uid:string;
+    protected uid:string;
 
     constructor(uid:string) {
         this.uid = uid
@@ -107,6 +107,9 @@ class User {
         }
 
     }
+
+    
+    
 }
 
 

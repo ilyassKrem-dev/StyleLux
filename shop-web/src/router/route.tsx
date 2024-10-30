@@ -15,6 +15,9 @@ import ProfileHome from "../components/(others)/profile/home/profileHome"
 import ProfileInfo from "../components/(others)/profile/info/profileInfo"
 import ProfileOrders from "../components/(others)/profile/orders/profileOrders"
 import ProfileFavorites from "../components/(others)/profile/favorites/profileFavorites"
+import ProfileInfoLayout from "../components/(others)/profile/info/profileInfoLayout"
+import ProfileName from "../components/(others)/profile/info/basic_info/name/profileName"
+import ProfileNumber from "../components/(others)/profile/info/basic_info/number/profileNumber"
 
 
 
@@ -31,24 +34,24 @@ const router = createBrowserRouter([
                         path:"",
                         element:<Home />,
                     },{
-                        path:"/deals",
+                        path:"deals",
                         element:(<div>Deals</div>)
                     },{
-                        path:"/shop",
+                        path:"shop",
                         element:<Shop />
                     },{
-                        path:"/products/:id",
+                        path:"products/:id",
                         element:<ProductPage />
                         
                     },{
-                        path:"/cart",
+                        path:"cart",
                         element:<CartPage />
                         
                     },{
-                        path:"/cart/checkout",
+                        path:"cart/checkout",
                         element:<CheckOut />
                     },{
-                        path:"/profile",
+                        path:"profile",
                         element:<ProfileLayout />,
                         children:[
                             {
@@ -57,7 +60,21 @@ const router = createBrowserRouter([
                             },
                             {
                                 path:"info",
-                                element:<ProfileInfo />
+                                element:<ProfileInfoLayout />,
+                                children:[
+                                    {
+                                        path:"",
+                                        element:<ProfileInfo />
+                                    },
+                                    {
+                                        path:"name",
+                                        element:<ProfileName/>
+
+                                    },{
+                                        path:"number",
+                                        element:<ProfileNumber />
+                                    }
+                                ]
                             },
                             {
                                 path:"orders",

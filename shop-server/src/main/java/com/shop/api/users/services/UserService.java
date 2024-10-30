@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.shop.api.others.NotFoundException;
 import com.shop.api.payement.order.Order;
 import com.shop.api.payement.service.OrderService;
+import com.shop.api.payement.user_pay_info.UserPayInfo;
 import com.shop.api.products.Product;
 import com.shop.api.products.records.ProductDto;
 import com.shop.api.products.repository.ProductRepository;
@@ -16,6 +18,7 @@ import com.shop.api.users.User;
 import com.shop.api.users.others.UserRepository;
 import com.shop.api.users.records.GetUserOrdersDto;
 import com.shop.api.users.records.GetUserReponseDto;
+import com.shop.api.users.records.UpdateNameDto;
 
 @Service
 public class UserService {
@@ -81,5 +84,33 @@ public class UserService {
                     .stream()
                     .map(productMapping::changeToProductDto)
                     .collect(Collectors.toList());
+    }
+
+
+    public String updateFullName(UpdateNameDto fullname,String uid) {
+        User user = userRepository.findByUid(uid);
+        if(user==null) {
+            throw new NotFoundException("User not found");
+        }
+        if(user.getFirstname().equals(fullname.fname()) && user.getLastname().equals(fullname.lname())) {
+            throw new IllegalArgumentException("The First name and last name are the same as before");
+        }
+        user.setFirstname(fullname.fname());
+        user.setLastname(fullname.lname());
+
+        userRepository.save(user);
+        return "Success";
+    }
+    public String updateNumber(String number,String uid) {
+        User user = userRepository.findByUid(uid);
+        if(user==null) {
+            throw new NotFoundException("User not found");
+        }
+        if(user.getNumber().equals(number)) {
+            throw new IllegalArgumentException("Phone number matches the old one");
+        }
+        user.setNumber(number);
+        userRepository.save(user);
+        return "Success";
     }
 }
