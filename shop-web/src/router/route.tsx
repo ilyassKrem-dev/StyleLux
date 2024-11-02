@@ -18,6 +18,7 @@ import ProfileFavorites from "../components/(others)/profile/favorites/profileFa
 import ProfileInfoLayout from "../components/(others)/profile/info/profileInfoLayout"
 import ProfileName from "../components/(others)/profile/info/basic_info/name/profileName"
 import ProfileNumber from "../components/(others)/profile/info/basic_info/number/profileNumber"
+import ProfileEditAddress from "../components/(others)/profile/info/addresses/addressInfo/profileEditAddress"
 
 
 
@@ -73,6 +74,9 @@ const router = createBrowserRouter([
                                     },{
                                         path:"number",
                                         element:<ProfileNumber />
+                                    },{
+                                        path:"address",
+                                        element:<ProfileEditAddress/>
                                     }
                                 ]
                             },

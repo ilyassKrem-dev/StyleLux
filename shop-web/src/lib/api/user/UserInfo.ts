@@ -104,6 +104,63 @@ class UserInfo extends User {
             return data
         }
     }
+
+    async updateAddress(addressInfo:{
+        address:string;
+        city:string;
+        country:string;
+        postalCode:string
+    }) {
+        let data = {
+            success:true,
+            errors:{
+                address:"",
+                city:"",
+                country:"",
+                postalCode:""
+            }
+        }
+        try {
+            const res =await axios.patch(`${baseUrl}/users/${this.uid}/address/update`,
+            addressInfo,
+            {
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                return data
+            }
+        } catch (error:any) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error
+                if(axiosError.status === 404) {
+
+                }
+                if(axiosError.status === 400) {
+                    const addressError = (axiosError?.response?.data as any).address ?? ""
+                    const cityError = (axiosError?.response?.data as any).city ?? ""
+                    const postalError = (axiosError?.response?.data as any).postalCode ?? ""
+
+                    data.errors.address = addressError
+                    data.errors.city = cityError
+                    data.errors.postalCode=postalError
+                    return data
+                }
+                if(axiosError.status == 406) {
+                    const error = axiosError?.response?.data as string
+                    data.errors.address = error
+                    return data
+                } else {
+
+                    data.errors.address = "Something happened,try again later!"
+                    return data
+                }
+            }
+            return data
+        }
+    }
 }
 
 

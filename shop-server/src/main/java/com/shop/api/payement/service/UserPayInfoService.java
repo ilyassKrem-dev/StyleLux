@@ -25,10 +25,12 @@ public class UserPayInfoService {
         String customerId) 
         {
             Optional<UserPayInfo> findUser = userPayReposotiry.findByUser(user);
+            UserPayInfo userPayInfo;
             if(findUser.isPresent()) {
-                return findUser.get();
+                userPayInfo = findUser.get();
+            } else {
+                userPayInfo = new UserPayInfo();
             }
-            UserPayInfo userPayInfo = new UserPayInfo();
             userPayInfo.setUser(user);
             userPayInfo.setAddress(fullAddress.address());
             userPayInfo.setCity(fullAddress.city());

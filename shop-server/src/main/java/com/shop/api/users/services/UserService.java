@@ -18,6 +18,7 @@ import com.shop.api.users.User;
 import com.shop.api.users.others.UserRepository;
 import com.shop.api.users.records.GetUserOrdersDto;
 import com.shop.api.users.records.GetUserReponseDto;
+import com.shop.api.users.records.UpdateAddressesDto;
 import com.shop.api.users.records.UpdateNameDto;
 
 @Service
@@ -112,5 +113,20 @@ public class UserService {
         user.setNumber(number);
         userRepository.save(user);
         return "Success";
+    }
+
+    public String updateAddresses(UpdateAddressesDto addressesDto,String uid) {
+        User user = userRepository.findByUid(uid);
+        if(user ==null) {
+            throw new NotFoundException("User not found");
+        }
+        UserPayInfo userPayinfo = user.getUserPayInfo();
+        userPayinfo.setAddress(addressesDto.address());
+        userPayinfo.setCity(addressesDto.city());
+        userPayinfo.setRegion(addressesDto.country());
+        userPayinfo.setPostalCode(addressesDto.postalCode());
+        userRepository.save(user);
+        return "Success";
+
     }
 }

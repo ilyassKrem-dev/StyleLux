@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import User from "../../../../lib/api/user/User";
 import { useTitle } from "../../../../lib/utils/hooks/hooks";
 import { userType } from "../../../../lib/utils/types/userTypes";
-import ProfileAddresses from "./addresses/profileAddresses";
+import Addresses from "./addresses/addresses";
 
 
 
@@ -40,7 +40,7 @@ export default function ProfileInfo() {
                     lastName={userInfo.lastName}
                     email={userInfo.email}
                     number={userInfo.number}/>
-                    <ProfileAddresses 
+                    <Addresses 
                     addresses={userInfo.addresses}/>
                 </div>
             </div>}

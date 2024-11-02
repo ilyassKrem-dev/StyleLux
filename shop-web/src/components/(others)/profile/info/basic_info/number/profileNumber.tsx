@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import User from "../../../../../../lib/api/user/User";
 import LoadingAnimation from "../../../../../../assets/shared/loadingAnmation";
 import UserInfo from "../../../../../../lib/api/user/UserInfo";
+import NewInput from "../../shared/newInput";
 
 
 export default function ProfileNumber() {
@@ -71,34 +72,13 @@ export default function ProfileNumber() {
                 <div className="md:p-4 md:border rounded-lg md:border-black/20 md:dark:border-white/20 md:shadow-md md:px-8">
                     <p className=" text-black/80 dark:text-white/80">Here you can change your phone number</p>
                     <div className="flex flex-col gap-10 mt-6">
-                        <div className="flex flex-col gap-1">
-                            <div className="flex items-center">
-                               
-                                <div className="relative flex  items-center group number flex-1" onClick={() => setClicked(true)}>
-                                    <input 
-                                    type="text" 
-                                    name="number" 
-                                    id="number"
-                                    ref={inputRef}
-                                    value={number}
-                                    onChange={handleChange} 
-                                    className={`w-full border-[1.5px]  rounded-md border-black/60 group-hover:shadow-md group-hover:border-black/80 dark:group-hover:border-white/80  transition-all duration-300 px-4 ${clicked?" ring-black ring-1 dark:ring-white dark:ring-2":""} ${error ? "!ring-accent !border-accent":""}`}/>
-                                    <motion.div
-                                    onClick={() => {
-                                        inputRef.current?.focus()
-                                    }}
-                                    initial={{y:number.length==0 ?0 :-24}} 
-                                    animate={{y:(number.length==0 && !clicked) ?0 :-24}}
-                                    transition={{duration:0.01,type:"spring"}}
-                                    className={`absolute bg-white left-4 h-fit w-fit text-sm px-1 text-black/60 dark:bg-dark dark:text-white/60 dark:group-hover:text-white group-hover:text-black/80 transition-all duration-300 ${clicked?"!text-black dark:!text-white":""} ${error ? "!text-accent  dark:!text-accent":""}`}>
-                                    Phone number
-                                    </motion.div>
-                                </div>
-
-                            </div>
-                            <p className="text-sm text-accent">{error}</p>
-                        </div>
-                        
+                        <NewInput 
+                        value={number}
+                        name="number"
+                        handleChange={handleChange}
+                        placeHolder="Phone number"
+                        error={error}
+                        />
                     </div>
                     <div className="mt-10 flex flex-row justify-end items-center gap-4">
                         <button onClick={() => router("/profile/info")} className=" font-semibold dark:text-white active:scale-95 rounded-full px-3 py-2 hover:bg-black/70 hover:text-white transition-all duration-300 dark:hover:text-black dark:hover:bg-white/70">
