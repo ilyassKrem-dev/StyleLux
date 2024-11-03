@@ -4,8 +4,8 @@ import User from "../../../../../../lib/api/user/User"
 import NewInput from "../../shared/newInput"
 import countriesList from "../../../../checkout/assets/delivery/countriesList.json"
 import { useNavigate } from "react-router-dom"
-import LoadingAnimation from "../../../../../../assets/shared/loadingAnmation"
 import UserInfo from "../../../../../../lib/api/user/UserInfo"
+import SaveAndCancel from "../../shared/saveCancel"
 type AllAddressType = {
     address:string,
     country:string,
@@ -71,9 +71,13 @@ export default function ProfileEditAddress() {
         if(address.length==0||city.length==0||postalCode.length==0) {
             setLoading(false)
         }
+        
         if(address.length==0) return setErrors(prev => ({...prev,address:"Address is required"}))
+
         if(city.length==0) return setErrors(prev => ({...prev,city:"City is required"}))
+
         if(postalCode.length==0) return setErrors(prev => ({...prev,postalCode:"Postal Code is required"}))
+
         const res= await new UserInfo(session.uid).updateAddress(allAddress)
         if(res?.success) {
             setLoading(false)
@@ -138,18 +142,10 @@ export default function ProfileEditAddress() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-10 flex flex-row justify-end items-center gap-4">
-                        <button onClick={() => router("/profile/info")} className=" font-semibold dark:text-white active:scale-95 rounded-full px-3 py-2 hover:bg-black/70 hover:text-white transition-all duration-300 dark:hover:text-black dark:hover:bg-white/70">
-                            Cancel
-                        </button>
-                        <button className="rounded-full text-white bg-black px-8 py-2 font-semibold active:scale-95 dark:bg-white dark:text-black hover:bg-black/70 dark:hover:bg-white/70 transition-all duration-300 disabled:cursor-default disabled:bg-black/50 dark:disabled:bg-white/50 disabled:active:scale-100"
-                        disabled={disabled}
-                        onClick={handleSave} 
-                        >
-                            {loading?<LoadingAnimation className="!p-2"/>:"Save"}
-                        
-                        </button>
-                    </div>
+                    <SaveAndCancel 
+                    loading={loading}
+                    handleSave={handleSave}
+                    disabled={disabled}/>
                 </div>
                 
             </div>

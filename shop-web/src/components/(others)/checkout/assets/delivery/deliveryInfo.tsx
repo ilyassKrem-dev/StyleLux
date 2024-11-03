@@ -1,4 +1,4 @@
-import { ChangeEvent, SetStateAction, useEffect } from "react";
+import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { CheckoutErrorsCheck, Deliverytype } from "../../../../../lib/utils/types/cartType"
 import countriesList from "./countriesList.json"
 
@@ -13,18 +13,25 @@ export default function DeliveryInfo({deliveryInfo,setDeliveryInfo,errorsCheck,s
 }) {
     const {country,firstname,lastname,city,postalcode,address,save} =deliveryInfo
     const {delivery} = errorsCheck
-
+    const [waitTime,setWaitTime] = useState<boolean>(false)
     useEffect(() => {
-        if(country) return
+        if(country || !waitTime) return
         const token = import.meta.env.VITE_IP_TOKEN
         fetch(`https://ipinfo.io/json?token=${token}`)
-            .then(res => res.json())
-                .then(data => setDeliveryInfo(prev => (
-                    {...prev,
-                        country:data.country,
-                        postalcode:data.postal,
-                        city:data.city})))
-                    .catch(() => setDeliveryInfo(prev => ({...prev,country:""}))) 
+                .then(res => res.json())
+                    .then(data => setDeliveryInfo(prev => (
+                        {...prev,
+                            country:data.country,
+                            postalcode:data.postal,
+                            city:data.city})))
+                        .catch(() => setDeliveryInfo(prev => ({...prev,country:""}))) 
+    },[country])
+    useEffect(() => {
+        if(waitTime) return
+        const id = setTimeout(() => {
+            setWaitTime(true)
+        },1000)
+        return () => clearTimeout(id)
     },[])
     
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {

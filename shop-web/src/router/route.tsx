@@ -19,6 +19,7 @@ import ProfileInfoLayout from "../components/(others)/profile/info/profileInfoLa
 import ProfileName from "../components/(others)/profile/info/basic_info/name/profileName"
 import ProfileNumber from "../components/(others)/profile/info/basic_info/number/profileNumber"
 import ProfileEditAddress from "../components/(others)/profile/info/addresses/addressInfo/profileEditAddress"
+import AllProducts from "../components/(others)/products/allProducts"
 
 
 
@@ -40,6 +41,9 @@ const router = createBrowserRouter([
                     },{
                         path:"shop",
                         element:<Shop />
+                    },{
+                        path:"/products",
+                        element:<AllProducts />
                     },{
                         path:"products/:id",
                         element:<ProductPage />
