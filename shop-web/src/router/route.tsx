@@ -20,6 +20,10 @@ import ProfileName from "../components/(others)/profile/info/basic_info/name/pro
 import ProfileNumber from "../components/(others)/profile/info/basic_info/number/profileNumber"
 import ProfileEditAddress from "../components/(others)/profile/info/addresses/addressInfo/profileEditAddress"
 import AllProducts from "../components/(others)/products/allProducts"
+import AdminPage from "../components/admin/adminPage"
+import NotFound from "../assets/shared/errors/404"
+import InternalServer from "../assets/shared/errors/500"
+import Dashboard from "../components/admin/dashboard/dashboard"
 
 
 
@@ -27,6 +31,7 @@ const router = createBrowserRouter([
     {
         path:"/",
         element:<Layout />,
+        errorElement:<InternalServer/>,
         children:[
             {
                 path:"",
@@ -112,10 +117,26 @@ const router = createBrowserRouter([
                         element:<Restore />
                     }
                 ]
+            },{
+                path:"admin",
+                element:<AdminPage />,
+                children:[
+                    {
+                        path:"",
+                        element:<Dashboard />
+                    }
+                    ,{
+                        path:"orders",
+                        element:<>Orders</>
+                    }
+                ]
             }
         ]
 
-    },
+    },{
+        path:"*",
+        element:<NotFound />
+    }
     
 ])
 
