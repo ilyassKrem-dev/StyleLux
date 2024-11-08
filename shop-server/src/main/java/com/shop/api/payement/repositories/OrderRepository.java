@@ -27,4 +27,7 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
             +"AND YEAR(o.updatedAt) = YEAR(now())"
             + "AND o.status = completed")
     List<Order> findAllByMonth(int month);
+
+    @Query("SELECT o FROM Order o Order by o.id desc")
+    List<Order> findAllPaginate(Pageable pageable);
 }

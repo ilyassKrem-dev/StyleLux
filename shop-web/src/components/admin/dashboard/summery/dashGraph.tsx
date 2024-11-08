@@ -129,7 +129,7 @@ export default function DashGraph({session}:{
                 <p className="text-sm text-black/50 dark:text-white/50">graph shows sales in this month and last month</p>
             </div>
             <div className='mt-6 flex justify-center items-center flex-col'>
-                <div className='max-h-[300px] w-full flex justify-center items-center'>
+                <div className='max-h-[300px] w-full flex justify-center items-center max-[350px]:w-[280px]'>
                     <Line data={data} options={options}/>
                 </div>
                 <div className='flex items-center  text-sm font-semibold px-6 gap-3 text-dark dark:text-white'>

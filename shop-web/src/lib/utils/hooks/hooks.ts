@@ -86,3 +86,34 @@ export const useTitle = (title:string) : void => {
         document.title = title
     },[title])
 }
+
+
+
+export const useInfiniteScroll = ({
+    setFetching,
+    setPage,
+    all,
+    fetching
+}:{
+    setFetching:React.Dispatch<SetStateAction<boolean>>;
+    setPage:React.Dispatch<SetStateAction<number>>;
+    all:boolean;
+    fetching:boolean
+}):void => {
+    useEffect(() => {
+        const handleInfiniteScroll = () => {
+            if(fetching || all) return
+            const scrollY = window.scrollY
+            const doc = document.documentElement.scrollHeight
+            const windowScroll = window.innerHeight
+            const bottom = doc - (scrollY + windowScroll)
+            if(bottom === 0) {
+                setFetching(true)
+                setPage(prev => prev+1)
+            }
+            
+        }   
+        window.addEventListener("scroll",handleInfiniteScroll)
+        return () => window.removeEventListener("scroll",handleInfiniteScroll)
+    },[])
+}

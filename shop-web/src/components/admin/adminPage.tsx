@@ -6,6 +6,7 @@ import Admin from "../../lib/api/admin/Admin"
 import { useSize } from "../../lib/utils/hooks/hooks"
 import AdminNav from "./assets/nav/adminNav"
 import { Outlet } from "react-router-dom"
+import AdminNavSm from "./assets/nav/adminNavSm"
 
 
 
@@ -41,11 +42,16 @@ export default function AdminPage() {
     }
     return (
         <div className="min-h-screen dark:bg-darker bg-lighter">
-            <div className="flex gap-3">
-                {w>670&&
+            <div className="flex gap-3 max-[750px]:flex-col">
+                {w>1000?
                 <div className="w-[280px]">
                     <AdminNav />
+                </div>
+                :
+                <div className="">
+                    <AdminNavSm />
                 </div>}
+                
                 <Outlet />
             </div>
         </div>

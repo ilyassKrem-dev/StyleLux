@@ -9,7 +9,7 @@ import DashTopProducts from "./summery/dashTopProfucts";
 export default function Dashboard() {
     const {session} = useSession()
     return (
-        <div className="flex flex-col gap-4 pt-12 flex-1 px-4 max-w-[1200px] mx-auto">
+        <div className="flex flex-col gap-4 pt-32 lg:pt-12 flex-1 px-4 max-w-[1200px] mx-auto">
             <TopDashboard />
             <DashSummery session={session}/>
             <div className="flex gap-4 lg:flex-row flex-col lg:gap-2">

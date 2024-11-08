@@ -24,6 +24,7 @@ import AdminPage from "../components/admin/adminPage"
 import NotFound from "../assets/shared/errors/404"
 import InternalServer from "../assets/shared/errors/500"
 import Dashboard from "../components/admin/dashboard/dashboard"
+import DashOrders from "../components/admin/orders/dashOrders"
 
 
 
@@ -127,7 +128,7 @@ const router = createBrowserRouter([
                     }
                     ,{
                         path:"orders",
-                        element:<>Orders</>
+                        element:<DashOrders />
                     }
                 ]
             }

@@ -1,35 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DarkMode from "../../../../assets/shared/darkmode/darkMode";
-import { useSession } from "../../../../assets/shared/wrappers/SessionWrapper";
-import { MdDashboard,MdAddShoppingCart,MdDiscount } from "react-icons/md";
-import { AiFillProduct  } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { removeSession } from "../../../../assets/redux/session/sessionReducer";
+import { navTabs } from "../../shared/navTabs";
 
-
-const tabs = [
-    {
-        name:"Dashboard",
-        icon:<MdDashboard />,
-        path:"" 
-    },{
-        name:"Orders",
-        icon:<MdAddShoppingCart />,
-        path:"orders"
-    },{
-        name:"Products",
-        icon:<AiFillProduct />,
-        path:"products"
-    },{
-        name:"Deals",
-        icon:<MdDiscount />,
-        path:"deals"
-    }
-]
 
 export default function AdminNav() {
-    const {session} = useSession()
     const pathname = useLocation().pathname.split("/")[2] ?? ""
     const router = useNavigate()
     const dispatch = useDispatch()
@@ -40,7 +17,7 @@ export default function AdminNav() {
     return (
         <div className="fixed w-[280px] top-0 bottom-0 left-0 border-r border-black/5 dark:border-white/5 bg-white dark:bg-dark">
             <div className="p-8">
-                <div className={`flex items-center gap-2 ${session ?"flex-1" :""}`}>
+                <div className={`flex items-center gap-2`}>
                     <div  className={` font-volkhov text-4xl font-semibold cursor-pointer dark:text-white `}>Shop</div>
                     <DarkMode />
                 </div>
@@ -48,7 +25,7 @@ export default function AdminNav() {
 
             <div className=" mt-1 overflow-y-auto custom-scrollbar p-6">
                 <div className="flex flex-col gap-3">
-                    {tabs.map((tab,index) => {
+                    {navTabs.map((tab,index) => {
                         const {icon,name,path} = tab
                         const checkPath = path === pathname
                         return (
