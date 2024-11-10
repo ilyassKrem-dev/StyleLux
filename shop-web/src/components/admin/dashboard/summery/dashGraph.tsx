@@ -44,14 +44,14 @@ export default function DashGraph({session}:{
         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // X-axis labels
         datasets: [
           {
-            label: 'This month', // Label for the first line
+            label: 'This week', // Label for the first line
             data: graphData.currentMonth, // Y-axis data points for Dataset 1
             fill: false, // Don't fill the area under the line
             borderColor: 'rgb(75, 192, 192)', // Color of the line
             tension: 0.1, // Smoothness of the line
           },
           {
-            label: 'Last month', // Label for the second line
+            label: 'Last week', // Label for the second line
             data: graphData.lastMonth, // Y-axis data points for Dataset 2
             fill: false, // Don't fill the area under the line
             borderColor: 'rgb(255, 99, 132)', // Color of the line

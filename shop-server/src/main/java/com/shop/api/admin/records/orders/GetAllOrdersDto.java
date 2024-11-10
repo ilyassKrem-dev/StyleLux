@@ -1,7 +1,6 @@
 package com.shop.api.admin.records.orders;
 
-
-
+import com.shop.api.payement.order.misc.StatusEnum;
 
 public record GetAllOrdersDto(
     Integer id,
@@ -9,7 +8,7 @@ public record GetAllOrdersDto(
     String userName,
     Integer userId,
     double total,
-    int items
+    StatusEnum status
 ) {
     
 }

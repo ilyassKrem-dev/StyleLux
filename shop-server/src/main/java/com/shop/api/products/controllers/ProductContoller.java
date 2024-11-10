@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,13 +47,20 @@ public class ProductContoller {
     }
     
     @GetMapping("/products/{id}")
-    public SingleProductDto getMethodName(
+    public ResponseEntity<SingleProductDto> getMethodName(
         @PathVariable(name = "id") String uid,
         @RequestHeader(required=false,name = "Authorization") String authHeader
         ) {
-
-        return productService.getSingleProduct(uid,authHeader);
+        try {
+            return ResponseEntity.ok(productService.getSingleProduct(uid,authHeader));
+        }
+        catch (NullPointerException e) {
+            return ResponseEntity.status(404).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
+        
     
     @PostMapping("/products/cart")
     public List<ProductCart> getCartProducts(

@@ -1,5 +1,6 @@
 
 import { useSession } from "../../../assets/shared/wrappers/SessionWrapper";
+import { useTitle } from "../../../lib/utils/hooks/hooks";
 import TopDashboard from "./assets/topDashboard";
 import DashGraph from "./summery/dashGraph";
 import DashSummery from "./summery/dashSummery";
@@ -8,6 +9,7 @@ import DashTopProducts from "./summery/dashTopProfucts";
 
 export default function Dashboard() {
     const {session} = useSession()
+    useTitle("Admin | Dashboard")
     return (
         <div className="flex flex-col gap-4 pt-32 lg:pt-12 flex-1 px-4 max-w-[1200px] mx-auto">
             <TopDashboard />

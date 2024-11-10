@@ -18,7 +18,7 @@ export default function AdminNav() {
         <div className="fixed w-[280px] top-0 bottom-0 left-0 border-r border-black/5 dark:border-white/5 bg-white dark:bg-dark">
             <div className="p-8">
                 <div className={`flex items-center gap-2`}>
-                    <div  className={` font-volkhov text-4xl font-semibold cursor-pointer dark:text-white `}>Shop</div>
+                    <Link to={"/"} className={` font-volkhov text-4xl font-semibold cursor-pointer dark:text-white `}>Shop</Link>
                     <DarkMode />
                 </div>
             </div>

@@ -30,4 +30,13 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
 
     @Query("SELECT o FROM Order o Order by o.id desc")
     List<Order> findAllPaginate(Pageable pageable);
+
+
+    @Query("SELECT o FROM Order o "
+            +"WHERE CAST(o.id AS string) like %:params% "
+            +"or o.user.firstname like %:params% "
+            +"or o.user.lastname like %:params% "
+            +"or CAST(o.user.id AS string) like  %:params% "
+            + "or CAST(o.totalAmount AS string) like %:params% ")
+    List<Order> findAllContaining(String params,Pageable pageable);
 }

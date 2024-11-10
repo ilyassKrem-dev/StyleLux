@@ -25,6 +25,8 @@ import NotFound from "../assets/shared/errors/404"
 import InternalServer from "../assets/shared/errors/500"
 import Dashboard from "../components/admin/dashboard/dashboard"
 import DashOrders from "../components/admin/orders/dashOrders"
+import HomeOrders from "../components/admin/orders/homeOrder/HomeOrders"
+import OrdersById from "../components/admin/orders/ordersById/ordersById"
 
 
 
@@ -128,7 +130,17 @@ const router = createBrowserRouter([
                     }
                     ,{
                         path:"orders",
-                        element:<DashOrders />
+                        element:<DashOrders />,
+                        children:[
+                            {
+                                path:"",
+                                element:<HomeOrders />
+                            },
+                            {
+                                path:":id",
+                                element:<OrdersById />
+                            }
+                        ]
                     }
                 ]
             }

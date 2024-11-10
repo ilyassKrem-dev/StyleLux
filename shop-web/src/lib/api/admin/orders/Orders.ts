@@ -2,7 +2,7 @@
 import Admin from "../Admin";
 import Servers from "../../servers/Servers"
 import Cookies from "js-cookie"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 
 
 const baseUrl = Servers.springUrl
@@ -30,14 +30,14 @@ class Orders extends Admin {
            return data 
         }
     }
-    static async getSimpleUser(id:number) {
+    async getOrderDetails(id:string |undefined) {
         let data = {
             success:true,
             data:undefined,
             error:""
         }
         try {
-            const res =await axios.get(`${baseUrl}/admin/users/${id}/simple`,{
+            const res =await axios.get(`${baseUrl}/admin/orders/${id}`,{
                 headers:{
                     Authorization:`Bearer ${Cookies.get("authToken")}`
                 }
@@ -47,10 +47,62 @@ class Orders extends Admin {
                 return data
             }
         } catch (error) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error;
+                if(axiosError.status == 404) {
+                    data.error ="Not found"
+                    return data 
+                } else {
+                    data.error ="Something happened! "
+                    return data 
+                }
+            }
+            data.error ="Something happened! "
+            return data 
+          
+        }
+    }
 
-           data.success = false
-           data.error ="Something happened! "
-           return data 
+    static async getSearchResults(params:string) {
+        let data = {
+            success:true,
+            data:[],
+            error:""
+        }
+        
+        if(params.length === 0) {
+            data.data = []
+            return data
+        }
+        try {
+            const res =await axios.get(`${baseUrl}/admin/orders/search`,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                },
+                params:{
+                    value:params
+                }
+            })
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error;
+                if(axiosError.status == 404) {
+                    data.error ="Not found"
+                    return data 
+                } else {
+                    data.error ="Something happened! "
+                    return data 
+                }
+            }
+            data.error ="Something happened! "
+            return data 
+          
         }
     }
 }

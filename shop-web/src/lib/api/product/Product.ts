@@ -61,12 +61,13 @@ class Product {
                     "Authorization":`Bearer ${Cookies.get("authToken") ?? ""}`
                 }
             })
-           
+            console.log(res)
             if(res.data) {
                 data.data = res.data
                 return data
             }
         } catch (error:any) {
+            console.log(error)
             data.success = false;
             data.error = "Internal server error,try again later"
             return data

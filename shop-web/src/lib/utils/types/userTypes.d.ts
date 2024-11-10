@@ -29,3 +29,13 @@ export type userOrderType = {
     status:  "pending"|"completed"|"refunded"|"shipping"
     
 }
+
+
+export type clientOrderType = {
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    number: string,
+    addresses: addressType | null
+}

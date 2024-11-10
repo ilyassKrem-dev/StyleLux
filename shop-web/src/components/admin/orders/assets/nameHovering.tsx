@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import Orders from "../../../../lib/api/admin/orders/Orders";
 import { Link } from "react-router-dom";
+import AdminUsers from "../../../../lib/api/admin/users/AdminUsers";
 
 
 type SimpleUserType = {
@@ -19,7 +19,7 @@ export default function NameHovering({userId}:{
     const [user,setUser] = useState<SimpleUserType|undefined>(undefined)
     useEffect(() => {
             const getSimpleInfo = async() => {
-                const res= await Orders.getSimpleUser(userId)
+                const res= await AdminUsers.getSimpleUser(userId)
                 if(res?.success) {
                     setUser(res.data)
                 }
