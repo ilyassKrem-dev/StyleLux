@@ -34,7 +34,8 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
         List<Product> findProductsById(
                 List<String> ids
         );
-
+        @Query("select p from Product p") 
+        Page<Product> findAllPage(Pageable pageable);
 
 
 }
