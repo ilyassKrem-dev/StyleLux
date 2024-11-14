@@ -114,7 +114,6 @@ class AdminProducts extends Admin {
             return data
         }
     } catch (error:any) {
-
         if(axios.isAxiosError(error)) {
             const axionError:AxiosError = error
             if(axionError.status == 404){
