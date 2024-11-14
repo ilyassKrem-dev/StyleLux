@@ -74,6 +74,10 @@ public class OrderService {
                             .build();
         Refund refund = Refund.create(params);
         order.setStatus(StatusEnum.refunded);
+        List<OrderItem> orderItems = order.getOrderItems();
+        for(OrderItem item : orderItems) {
+            item.getProduct().minusSold(item.getQuantity());
+        }
         orderRepository.save(order);
         RefundDto refundDto = new RefundDto(refund.getId(), refund.getAmount(), refund.getCurrency(), refund.getStatus());
         return ResponseEntity.ok(refundDto);

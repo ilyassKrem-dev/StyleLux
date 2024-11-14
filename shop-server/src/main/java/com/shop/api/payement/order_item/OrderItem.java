@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -68,7 +69,7 @@ public class OrderItem {
     public Product getProduct() {return product;}
     public Integer getQuantity() {return quantity;}
     public Double getPrice() {return price;}
-
+    public Date getCreatedAt() {return createdAt;}
 
     // Setters
     public void setId(Integer id) {this.id = id;}
@@ -87,6 +88,10 @@ public class OrderItem {
         this.quantity = quantity;
         this.price = price;
     }
-
+    
+    public String getMonthYear() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        return sdf.format(createdAt);
+    }
 
 }

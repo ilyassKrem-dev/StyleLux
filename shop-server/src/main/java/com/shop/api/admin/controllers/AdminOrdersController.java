@@ -32,7 +32,7 @@ public class AdminOrdersController {
     
 
 
-    @GetMapping("")
+    @GetMapping({"","/"})
     public ResponseEntity<List<GetAllOrdersDto>> getAllOrders(
         @RequestParam(required=false,defaultValue = "0") int page
     ) {

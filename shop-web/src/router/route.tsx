@@ -27,6 +27,10 @@ import Dashboard from "../components/admin/dashboard/dashboard"
 import DashOrders from "../components/admin/orders/dashOrders"
 import HomeOrders from "../components/admin/orders/homeOrder/HomeOrders"
 import OrdersById from "../components/admin/orders/ordersById/ordersById"
+import AdminProductsTop from "../components/admin/products/assets/adminProductsTop"
+import AdminProducts from "../components/admin/products/adminProducts"
+import AdminProductHome from "../components/admin/products/home/adminProductsHome"
+import AdminProductById from "../components/admin/products/id/adminProductById"
 
 
 
@@ -139,6 +143,19 @@ const router = createBrowserRouter([
                             {
                                 path:":id",
                                 element:<OrdersById />
+                            }
+                        ]
+                    },{
+                        path:"products",
+                        element:<AdminProducts />,
+                        children:[
+                            {
+                                path:"",
+                                element:<AdminProductHome />
+                            },
+                            {
+                                path:":id",
+                                element:<AdminProductById />
                             }
                         ]
                     }

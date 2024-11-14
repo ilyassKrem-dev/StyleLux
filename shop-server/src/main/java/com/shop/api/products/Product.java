@@ -111,6 +111,9 @@ public class Product {
     public List<Size> getSizes() {return sizes;}
     public GenderEnum getGender() {return gender;}
     public Category getCategory() {return category;}
+    public List<OrderItem> getOrderItems() {return orderItems;}
+    public Date getCreatedAt() {return createdAt;}
+    public Date getUpdatedAt() {return updatedAt;}
     // Setters
     public void setId(Integer value) { this.id = value;}
     public void setName(String value) { this.name = value;}
@@ -152,10 +155,15 @@ public class Product {
     public void addSold(int value) {
         this.sold += value;
     }
-
+    public void minusSold(int value) {
+        this.sold -= value;
+    }
+    public void addQuantity(int value) {
+        this.quantity += quantity;
+    }
     
     public void increaseRatings(int value,String type) {
-        if(type == "decrease") {
+        if(type.equals("decrease")) {
             this.rating -= value;
             this.numRatings -= 1;
         } else {

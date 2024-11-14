@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react"
+import React, { SetStateAction, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../assets/redux/store"
 import { CartItemsType } from "../types/cartType"
@@ -116,4 +116,31 @@ export const useInfiniteScroll = ({
         window.addEventListener("scroll",handleInfiniteScroll)
         return () => window.removeEventListener("scroll",handleInfiniteScroll)
     },[])
+}
+
+
+export const useShow = ():[boolean,React.Dispatch<SetStateAction<boolean>>] => {
+    const [show,setshow] = useState<boolean>(false)
+
+    useEffect(() => {
+        if(show)return
+        const id = setTimeout(() => setshow(true),300)
+        return () => clearTimeout(id)
+    },[show])
+
+
+    return [show,setshow]
+}
+
+export const useRefresh = ():[boolean,React.Dispatch<SetStateAction<boolean>>] => {
+    const [refresh,setRefresh] = useState<boolean>(false)
+
+    useEffect(() => {
+        if(!refresh)return
+        const id = setTimeout(() => setRefresh(false),5000)
+        return () => clearTimeout(id)
+    },[refresh])
+
+
+    return [refresh,setRefresh]
 }
