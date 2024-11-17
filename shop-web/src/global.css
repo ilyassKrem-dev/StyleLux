@@ -54,7 +54,11 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #17171784;
   }
- 
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsla(0, 0%, 100%, 0.518);
+    border-radius: 50px;
+
+  }
   .hover-opacity {
     @apply hover:opacity-70 transition-all duration-300 active:opacity-50
   }

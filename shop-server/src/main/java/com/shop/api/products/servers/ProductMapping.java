@@ -1,5 +1,6 @@
 package com.shop.api.products.servers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,15 +32,13 @@ public class ProductMapping {
         Media getMedia = media.isPresent() ? media.get() : new Media();
         
         CategoryDto dtoCat = new CategoryDto(product.getCategory().getUid(), product.getCategory().getName());
-        List<SizeEnum> sizes = product.getSizes()
-                                .stream()
-                                .map(size -> size.getSize())
-                                .collect(Collectors.toList());
+        List<SizeEnum> sizes = new ArrayList<>();
+        sizes.add(SizeEnum.xl);
         ProductDto dto = new ProductDto(
             product.getId(), 
             product.getuid(), 
             product.getName(), 
-            getMedia , 
+            getMedia, 
             product.getPrice(), 
             product.getGender(), 
             sizes, 

@@ -58,6 +58,7 @@ public class Media {
     public void setType(MediaEnum value) { this.type = value;}
     public void setUrl(String value) {this.url = value;}
     public void setIsDefault(boolean value) {this.isDefault = value;}
+    public void setProduct(Product value) {this.product = value;}
 
 
     public Media() {

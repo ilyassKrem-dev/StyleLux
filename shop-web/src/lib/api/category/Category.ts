@@ -1,6 +1,7 @@
 
 import axios from "axios"
 import Servers from "../servers/Servers"
+import { CategoryType } from "../../utils/types/categoryTypes"
 
 const baseUrl = Servers.springUrl
 
@@ -10,7 +11,7 @@ class Category {
     static async getAllCategories() {
         let data = {
             success:true,
-            data:[],
+            data:[] as CategoryType[],
             error:""
         }
         try {

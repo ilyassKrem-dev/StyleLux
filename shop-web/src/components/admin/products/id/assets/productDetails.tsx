@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import Product from "../../../../../lib/api/product/Product"
 import { MediaType, SingleProductType } from "../../../../../lib/utils/types/productTypes"
-import { IoIosRefresh } from "react-icons/io";
 import { useRefresh, useShow } from "../../../../../lib/utils/hooks/hooks";
 import Refresh from "../../../shared/refresh";
 
@@ -29,11 +28,11 @@ export default function ProductDetails({id}:{
     
 
     return (
-        <div className="bg-white rounded-md flex flex-col  border border-black/5 dark:border-white/5 w-[300px] dark:text-white dark:bg-dark text-black/80 min-h-[390px]" >
+        <div className="bg-white rounded-md flex sm:flex-col  border border-black/5 dark:border-white/5 sm:w-[300px] dark:text-white dark:bg-dark text-black/80 min-h-[390px]" >
             {show&&product&&(
-                <div className="p-2 flex flex-col justify-center items-center gap-3">
+                <div className="p-2 flex flex-col justify-center items-center gap-3 flex-1 sm:flex-grow-0">
                     <h4 className=" text-center font-semibold  text-lg border-b border-black/30 w-fit capitalize break-words">{product.name}</h4>
-                    <div className="flex flex-col gap-3 max-w-[200px]">
+                    <div className="flex flex-col gap-3 sm:max-w-[200px]">
                         <div className="w-full h-[250px] rounded-lg">
                             <img 
                             src={defaultPicture?.url ?? ""} 

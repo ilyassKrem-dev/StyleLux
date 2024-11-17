@@ -3,6 +3,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from "../../redux/store";
 import { SessionProvider } from "./SessionWrapper";
 import LoadingFullScreen from "../loadingFullScreen";
+import { ToastWrapper } from "./ToastWrapper";
 
 
 export const ReduxAndSessionProvider = ({children}:{
@@ -10,12 +11,14 @@ export const ReduxAndSessionProvider = ({children}:{
     }) => {
 
         return (
-            <Provider store={store}>
-                <PersistGate loading={<LoadingFullScreen />} persistor={persistor}>
-                    <SessionProvider >
-                        {children}
-                    </SessionProvider>
-                </PersistGate>
-            </Provider>
+            <ToastWrapper>
+                <Provider store={store}>
+                    <PersistGate loading={<LoadingFullScreen />} persistor={persistor}>
+                        <SessionProvider >
+                            {children}
+                        </SessionProvider>
+                    </PersistGate>
+                </Provider>
+            </ToastWrapper>
         )
 }

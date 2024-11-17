@@ -35,7 +35,6 @@ public class ProductContoller {
 
     @GetMapping("/products")
     public AllProdcutsDto getAllProducts(
-        @RequestParam(required = false) String sizes,
         @RequestParam(required = false) String gender,
         @RequestParam(required = false) String category,
         @RequestParam(required = false) Double minPrice,
@@ -43,7 +42,7 @@ public class ProductContoller {
         @RequestParam(required = false,defaultValue="0") int page
         ) {
         Pageable pageable = PageRequest.of(page, 9); 
-        return productService.getAllProducts(sizes, gender, category, minPrice, maxPrice, pageable);
+        return productService.getAllProducts(gender, category, minPrice, maxPrice, pageable);
     }
     
     @GetMapping("/products/{id}")

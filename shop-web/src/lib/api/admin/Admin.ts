@@ -34,6 +34,29 @@ class Admin {
             return data
         }
     }
+
+    static async uploadFile(file:FormData) {
+        let data = {
+            success:true,
+            data:"",
+            error:""
+        }
+        try {
+            const res = await axios.post(`${baseUrl}/admin/upload`,file,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            }) 
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            data.error = "Failed to upload file"
+            return data
+        }
+    }
  }
 
 export default Admin

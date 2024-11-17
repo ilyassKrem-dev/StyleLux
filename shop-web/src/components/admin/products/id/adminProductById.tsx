@@ -15,7 +15,7 @@ export default function AdminProductById() {
     useTitle(`Admin | P:${id}`)
     return (
         <div className=" mt-5 bg-white/10 dark:bg-dark/10 rounded-md ">
-            <div className="flex gap-6">
+            <div className="flex gap-6 flex-col sm:flex-row">
                 <div className="flex flex-col gap-4 flex-1">
                     <ProductActions/>
                     <ProductChartByMonth id={id}/>

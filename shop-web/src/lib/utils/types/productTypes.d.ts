@@ -23,7 +23,8 @@ export type MediaType = {
     uid:string;
     type:"image"|"video"|null;
     url:string|null;
-    isDefault:boolean
+    isDefault:boolean;
+    file?:File;
 }
 
 export type SingleProductType = {

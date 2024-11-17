@@ -50,7 +50,7 @@ public class Product {
     @JsonManagedReference
     private List<Size> sizes = new ArrayList<>();
 
-    @OneToMany(mappedBy="product",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="product",cascade=CascadeType.ALL,orphanRemoval=true)
     @JsonManagedReference
 
     private List<Media> medias = new ArrayList<>();
@@ -119,6 +119,7 @@ public class Product {
     public void setName(String value) { this.name = value;}
     public void setMedias(List<Media> valueList) { this.medias = valueList;}
     public void setQuantity(int value) {this.quantity = value;}
+    public void setCategory(Category value) {this.category = value;}
     public void setPrice(double value) { this.price = value;}
     public void setSizes(List<Size> valueList) { this.sizes = valueList;}
     public void setGender(GenderEnum value) {this.gender = value;}

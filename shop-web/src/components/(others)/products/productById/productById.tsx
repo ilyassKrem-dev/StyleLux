@@ -55,18 +55,7 @@ export default function ProductById({product}:{
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-1">
-                            <h3 className="  font-semibold text-lg dark:text-white">Sizes</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {product.sizes.map((size,index) => {
-                                    return (
-                                        <div key={index} className={`border border-[#8A8A8A]  text-center py-2 rounded-md text-[#8A8A8A] hover:bg-gray-300/70 transition-all duration-300  dark:text-light dark:hover:bg-white/70 capitalize p-4 text-xl`}>
-                                            {size}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
+                        
                     </div>
                     <AddToCart product={product}/>
                 </div>

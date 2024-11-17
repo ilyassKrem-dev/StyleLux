@@ -26,7 +26,10 @@ export default function AllProducts() {
             )
             if(res?.success) {
                 setMax(res.data.pages)
-                setProducts(prev => ([...prev,...res.data.products]))
+                if(products.length==0) {
+                    setProducts(res.data.products)
+                } else setProducts(prev => ([...prev,...res.data.products]))
+            
                 setLoading(false)
                 setLoadingMore(false)
             }

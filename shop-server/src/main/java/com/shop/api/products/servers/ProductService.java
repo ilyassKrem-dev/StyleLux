@@ -40,7 +40,6 @@ public class ProductService {
         return productRepository.findByUid(uid);
     }
     public AllProdcutsDto getAllProducts(
-        String sizes,
         String genderStr,
         String category,
         Double minPrice,
@@ -48,7 +47,6 @@ public class ProductService {
         Pageable pageable
     ) {
         
-        List<String> sizeList = sizes != null ? Arrays.asList(sizes.split(",")) : null;
             
         GenderEnum gender = null;
         if(genderStr != null) {
@@ -56,7 +54,7 @@ public class ProductService {
         }
 
         Page<ProductDto> products = productRepository
-                                .findFilterdProducts(sizeList, gender, category, minPrice, maxPrice, pageable)
+                                .findFilterdProducts(gender, category, minPrice, maxPrice, pageable)
                                 .map(productMapping::changeToProductDto);
 
         AllProdcutsDto dto = productMapping.changeToAllProductsDto(products);

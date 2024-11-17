@@ -30,3 +30,11 @@ cors:
     origin: "front-end url"
 stripe:
   key: "stripe key"
+
+google:
+  drive:
+    credentials: classpath:"Location of json file for service account key"
+    api-key: "Google api key"               
+    scope: "Google scope"
+path:
+  file: "absolute path of the folder to upload temp media"

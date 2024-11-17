@@ -1,7 +1,6 @@
 
 import { useSearchParams } from "react-router-dom"
 import FilterCategories from "./assets/filterCategories"
-import FilterSize from "./assets/filterSize"
 import FilterGender from "./assets/filterGender"
 
 
@@ -11,9 +10,6 @@ export default function Filters() {
         <>
             <div className="flex flex-col gap-6 max-w-[300px]">
                 <h1 className=" font-volkhov text-2xl mb-2 dark:text-white">Filters</h1>
-                <FilterSize 
-                setSearchParams={setSearchParams} 
-                searchParams={searchParams} />
                 <FilterGender 
                 searchParams={searchParams} 
                 setSearchParams={setSearchParams}/>

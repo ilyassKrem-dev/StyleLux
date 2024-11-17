@@ -31,6 +31,8 @@ import AdminProductsTop from "../components/admin/products/assets/adminProductsT
 import AdminProducts from "../components/admin/products/adminProducts"
 import AdminProductHome from "../components/admin/products/home/adminProductsHome"
 import AdminProductById from "../components/admin/products/id/adminProductById"
+import EditProduct from "../components/admin/products/id/edit/adminEditProduct"
+import ProductAdd from "../components/admin/products/add/productAdd"
 
 
 
@@ -156,6 +158,12 @@ const router = createBrowserRouter([
                             {
                                 path:":id",
                                 element:<AdminProductById />
+                            },{
+                                path:":id/edit",
+                                element:<EditProduct />
+                            },{
+                                path:"add",
+                                element:<ProductAdd />
                             }
                         ]
                     }
