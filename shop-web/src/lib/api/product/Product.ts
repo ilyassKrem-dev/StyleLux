@@ -48,7 +48,28 @@ class Product {
         }
         
     }
-
+    static async getProuctsByQuery(param:string) {
+        let data = {
+            success:true,
+            data:[],
+            error:""
+        }
+        try {
+            const res = await axios.get(`${baseUrl}/products/search`,{params:{
+                v:param ?? ""
+            }})
+            
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error:any) {
+            data.success = false;
+            data.error = "Internal server error,try again later"
+            return data
+        }
+        
+    }
     static async getProduct(id:string) {
         let data = {
             success:true,

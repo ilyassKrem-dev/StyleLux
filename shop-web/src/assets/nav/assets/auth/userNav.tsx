@@ -1,10 +1,10 @@
 
 import { GoStar } from "react-icons/go";
 import Iprofile from "./misc/profileIcon";
-import { IoIosSearch } from "react-icons/io";
 import { useSize } from "../../../../lib/utils/hooks/hooks";
 import CartIcon from "./misc/cart-icon/cartIcon";
 import { Link } from "react-router-dom";
+import ProductsSearch from "./misc/search-icon/products-search";
 
 
 
@@ -26,9 +26,7 @@ export default function UserNav() {
                 </div>
             </Link>
             }
-            <div className="text-[1.3rem] active:scale-95 cursor-pointer hover-opacity dark:text-white">
-                <IoIosSearch />
-            </div>
+            <ProductsSearch />
             
         </div>
     )

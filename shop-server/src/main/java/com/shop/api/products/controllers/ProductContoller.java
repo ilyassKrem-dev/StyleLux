@@ -69,4 +69,17 @@ public class ProductContoller {
         return productService.getProductCarts(Ids);
     }
 
+    @GetMapping("/products/search")
+    public ResponseEntity<?> getProductsByQuery(
+        @RequestParam(required=false,name="v",defaultValue="") String param
+        ) {
+            try {
+                return ResponseEntity.ok(productService.getProductsByQuery(param));
+            } catch (Exception e) {
+                return ResponseEntity.status(500).body(e.getMessage());
+            }
+            
+      
+    }
+    
 }

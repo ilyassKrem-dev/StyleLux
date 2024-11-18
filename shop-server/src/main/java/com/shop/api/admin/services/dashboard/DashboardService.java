@@ -15,7 +15,6 @@ import com.shop.api.admin.records.dashboard.SummeryDto;
 import com.shop.api.admin.records.dashboard.TopProductDto;
 import com.shop.api.payement.order.Order;
 import com.shop.api.payement.order.misc.StatusEnum;
-import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.payement.repositories.OrderItemReposotiry;
 import com.shop.api.payement.repositories.OrderRepository;
 

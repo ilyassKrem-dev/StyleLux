@@ -1,5 +1,6 @@
 package com.shop.api.products.servers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -84,5 +85,20 @@ public class ProductService {
                                 .stream()
                                 .map(productMapping::changeToProductCart)
                                 .collect(Collectors.toList());
+    }
+
+
+
+    public List<ProductDto> getProductsByQuery(String param) {
+        List<ProductDto> products = new ArrayList<>();
+        if(!param.isEmpty()) {
+            products = productRepository.findAllContaining(param)
+            .stream()
+            .limit(6)
+            .map(productMapping::changeToProductDto)
+            .collect(Collectors.toList());
+        }
+        return products;
+
     }
 }

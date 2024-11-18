@@ -36,4 +36,11 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
         Page<Product> findAllPage(Pageable pageable);
 
 
+        @Query(
+                "SELECT p FROM Product p where"
+                + " CAST(p.price AS string) LIKE %:param% OR"
+                + " p.name LIKE %:param%"
+                )
+        List<Product> findAllContaining(String param);
+
 }

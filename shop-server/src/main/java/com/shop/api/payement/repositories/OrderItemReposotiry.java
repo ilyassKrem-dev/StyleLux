@@ -12,10 +12,13 @@ import com.shop.api.products.Product;
 public interface OrderItemReposotiry extends  JpaRepository<OrderItem,Integer> {
 
 
-    @Query("SELECT count(product),product,sum(quantity),sum(price) from OrderItem"
-        + " GROUP BY product"
-        + " ORDER BY count(product) desc"
-        + " LIMIT 4")
+    @Query("SELECT COUNT(oi.product), oi.product, SUM(oi.quantity), SUM(oi.price) " +
+       "FROM OrderItem oi " +
+       "JOIN oi.order o " +
+       "WHERE o.status = 'completed' " +
+       "GROUP BY oi.product " +
+       "ORDER BY COUNT(oi.product) DESC " +
+       "LIMIT 4")
     List<Object[]> getGroupedOrderItems();
 
     List<OrderItem> findAllByProduct(Product product,Pageable pageable);

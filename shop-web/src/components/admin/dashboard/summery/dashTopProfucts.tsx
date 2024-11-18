@@ -53,7 +53,7 @@ export default function DashTopProducts({session}:{
                                         0{index+1}
                                     </td>
                                     <td className="flex-1 truncate max-w-[100px] sm:max-w-[200px] md:max-w-[300px] font-medium capitalize">
-                                        <Link to={`/products/${uid}`}
+                                        <Link to={`/admin/products/${uid}`}
                                         target="_blank" 
                                         className="underline active:scale-95">
                                             {name}

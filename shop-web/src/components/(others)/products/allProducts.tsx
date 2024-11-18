@@ -73,7 +73,9 @@ export default function AllProducts() {
                                 `}>
                                     <img 
                                     src={media.url as string} 
-                                    alt=""
+                                    alt={product.name + " media"}
+                                    loading="lazy"
+
                                     className=" object-cover h-full w-full rounded-sm group-hover/link:opacity-90" />
                                 </div>
                                 <div className="flex gap-2 flex-col p-1">
