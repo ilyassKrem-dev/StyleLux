@@ -35,7 +35,6 @@ export default function AdminDealsHome() {
         }
         getAllDeals()
     },[changeCurrentPageToMax])
-
     useTitle("Admin | deals")
     return (
         <div className="mt-5 bg-white/50 dark:bg-dark/50 overflow-x-auto rounded-md">
@@ -43,7 +42,7 @@ export default function AdminDealsHome() {
                 <table className="w-full min-w-[600px]">
                     <thead>
                         <tr className="flex items-center border-b pb-2 text-black/80 dark:text-white/80">
-                            <th className="font-medium flex-1 ">Id</th>
+                            <th className="font-medium w-[80px] ">Id</th>
                             <th className="font-medium flex-1 ">Name</th>
                             <th className="font-medium flex-1 ">Status</th>
                             <th className="font-medium flex-1 ">Start date</th>
@@ -58,11 +57,11 @@ export default function AdminDealsHome() {
                             const {id,name,status,startDate,endDate} = deal
                             return (
                                 <tr key={index} className={`flex items-center  p-3 text-center text-black/80 dark:text-white/80 ${index != deals.length-1?"border-b" :""}`} >
-                                    <td className="flex-1 capitalize">{name}</td>
-                                    <td className="flex-1">{id}</td>
+                                    <td className="w-[80px] capitalize">{id}</td>
+                                    <td className=" flex-1">{name}</td>
                                     <td className="flex-1 capitalize">{status}</td>
                                     <td className="flex-1">{changeDateFormat(startDate)}</td>
-                                    <td className="flex-1">${changeDateFormat(endDate)}</td>
+                                    <td className="flex-1">{changeDateFormat(endDate)}</td>
                                     <td className="w-[80px]">
                                         <Link to={`/admin/deals/${id}`}>
                                             <button className="border-2 rounded-md w-full border-black text-black font-medium dark:border-white dark:text-white active:scale-95 hover:bg-black/30 dark:hover:bg-white/30 transition-all duration-300 py-[0.2rem]">

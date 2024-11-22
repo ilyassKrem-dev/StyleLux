@@ -44,7 +44,8 @@ public class ProductMapping {
             sizes, 
             dtoCat,
             product.getQuantity(),
-            product.getSold());
+            product.getSold(),
+            product.getCurrentDeal());
 
         return  dto;
     }
@@ -77,6 +78,7 @@ public class ProductMapping {
             product.getRating(), 
             product.getNumRatings(),
             product.getSold(),
+            product.getCurrentDeal(),
             isFavorite);
 
     }
@@ -104,6 +106,7 @@ public class ProductMapping {
             media, 
             product.getPrice(), 
             sizes,
-            product.getQuantity() - product.getSold());
+            product.getQuantity() - product.getSold(),
+            product.getCurrentDeal());
     }
 }

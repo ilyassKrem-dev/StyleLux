@@ -1,11 +1,17 @@
 
 import { useCartItems } from "../../../../lib/utils/hooks/hooks"
+import { calculateDicount } from "../../../../lib/utils/random/random"
 
 
 
 export default function ItemsInfo() {
     const [items] = useCartItems()
-    const totalPrice = items.reduce((t,item) => t+(item.quantity*item.product.price),0)
+    const totalPrice = items.reduce((t,item) => {
+        return  t+(item.quantity*calculateDicount(item.product.price,item.product.discount))
+        
+    
+    },0).toFixed(2)
+  
     return (
         <div className="flex-1 bg-black/10 dark:bg-white/5 w-full p-5 lg:px-10">
             <div className="flex  md:flex-col gap-3 custom-scrollbar max-h-[400px]  md:pt-16 md:pb-10 md:overflow-y-auto md:overflow-x-hidden overflow-x-auto scrollbar-none md:scrollbar-thin custom-scrollbar">
@@ -29,7 +35,12 @@ export default function ItemsInfo() {
                             </div>
                             <div className="flex flex-col gap-1 max-w-[120px] text-center md:max-w-fit md:text-start">
                                 <p className=" capitalize font-semibold dark:text-white">{product.name}</p>
-                                <p className="font-bold text-sm dark:text-white">${(product.price*quantity).toFixed(2)}</p>
+                                <div className="flex gap-2">
+                                    <p className={`font-bold text-sm  ${product.discount>0 ?" line-through text-black/50 dark:text-white/50" :"dark:text-white"}`}>${(product.price*quantity).toFixed(2)}</p>
+                                    {product.discount>0&&
+                                    <p className={`font-bold text-sm  dark:text-white`}>${(calculateDicount(product.price,product.discount)*quantity).toFixed(2)}</p>
+                                    }
+                                </div>
                             </div>
                         </div>
                     )
@@ -47,7 +58,7 @@ export default function ItemsInfo() {
                 </div>
                 <div className="flex justify-between items-center">
                     <p>Total</p>
-                    <p>${totalPrice + 20}</p>
+                    <p>${Number(totalPrice) + 20}</p>
                 </div>
             </div>
         </div>

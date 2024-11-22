@@ -15,7 +15,7 @@ export default function CheckOut() {
     const items = useSelector((state:RootState) => state.cart)
     const [completed,setCompleted] = useState<boolean>(false)
     const pathname = useLocation().pathname
-
+    
     useTitle("Checkout")
     return (
        

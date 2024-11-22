@@ -26,7 +26,7 @@ public class OrderItemService {
         Product product = productRepository.findById(id)
                                 .orElseThrow();
         OrderItem orderItem = new OrderItem();
-        orderItem.setPrice(product.getPrice());
+        orderItem.setPrice(product.getPrice() * (1-(product.getCurrentDeal()/100)));
         orderItem.setQuantity(quantity);
         orderItem.setProduct(product);
         product.addSold(quantity);

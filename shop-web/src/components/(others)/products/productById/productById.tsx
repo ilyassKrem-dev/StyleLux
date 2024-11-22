@@ -6,6 +6,7 @@ import { GoStar } from "react-icons/go";
 import { useEffect } from "react";
 import { useSession } from "../../../../assets/shared/wrappers/SessionWrapper";
 import ProductFavorite from "./assets/favorites&stars/productFavorite";
+import { calculateDicount } from "../../../../lib/utils/random/random";
 
 export default function ProductById({product}:{
     product:SingleProductType
@@ -41,7 +42,15 @@ export default function ProductById({product}:{
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <p className="  text-lg font-bold  dark:text-white">${product.price}</p>
+                            {product.discount==0&&<p className="  text-lg font-bold  dark:text-white">${product.price}</p>}
+                            {product.discount>0&&
+                            <div className="flex items-center gap-3 dark:text-white">
+                                <p className="font-semibold text-2xl ">${calculateDicount(product.price,product.discount).toFixed(2)}</p>
+                                <p className=" line-through text-sm text-black/50 dark:text-white/50">${product.price.toFixed(2)}</p>
+                                <div className="rounded-full p-1 uppercase text-xs bg-red-600 text-white font-semibold">
+                                    Save {product.discount}%
+                                </div>
+                            </div>}
                         </div>
                     </div>
                     <div className="flex flex-col gap-6">

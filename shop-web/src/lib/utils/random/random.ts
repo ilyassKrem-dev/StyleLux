@@ -22,3 +22,8 @@ export function changeDateFormat(placedAt:string) {
     return `${month} ${day},${year}`
 
 }
+
+
+export function calculateDicount(price:number,discount:number) {
+    return price * (1-(discount/100))
+}

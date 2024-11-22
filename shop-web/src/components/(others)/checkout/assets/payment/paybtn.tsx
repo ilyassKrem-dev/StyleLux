@@ -10,6 +10,7 @@ import { ValidatePayInfo, isError } from "../misc/ValidatePayInfo";
 import { useDispatch } from "react-redux";
 import { removeAll } from "../../../../../assets/redux/cart/cartReducer";
 import { FaLock,FaLockOpen  } from "react-icons/fa";
+import { calculateDicount } from "../../../../../lib/utils/random/random";
 
 interface Props{
     email:string;
@@ -75,7 +76,7 @@ export default function PayBtn(
                     region:deliveryInfo.country,
                     save:deliveryInfo.save
                 },
-                amount:items.reduce((t,item) => t+(item.product.price * item.quantity),0),
+                amount:Number(items.reduce((t,item) => t+(calculateDicount(item.product.price,item.product.discount) * item.quantity),0).toFixed(2)),
                 paymentId:paymentMethod.id
             }
         )
@@ -91,7 +92,7 @@ export default function PayBtn(
             }
             const order = await Cart.createOrder(
                 {
-                    amount:items.reduce((t,item) => t+(item.product.price * item.quantity),0),
+                    amount:Number(items.reduce((t,item) => t+(calculateDicount(item.product.price,item.product.discount) * item.quantity),0).toFixed(2)),
                     items:items.map(item => ({
                         productId:item.product.id,
                         quantity:item.quantity})),

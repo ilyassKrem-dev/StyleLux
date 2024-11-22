@@ -21,6 +21,7 @@ public record SingleProductDto(
     double rating,
     int numRatings,
     int sold,
+    int discount,
     boolean isFavorite
 
 )

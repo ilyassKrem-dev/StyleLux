@@ -19,7 +19,8 @@ public record ProductDto(
     List<SizeEnum> sizes,
     CategoryDto category,
     int quantity,
-    int sold
+    int sold,
+    int discount
 ) {
 
 }

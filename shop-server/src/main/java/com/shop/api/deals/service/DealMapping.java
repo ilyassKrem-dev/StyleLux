@@ -21,7 +21,7 @@ public class DealMapping {
             deal.getStartDate(), 
             deal.getEndDate());
     }
-
+    
     public GetDealsDto changeToGetDealsDto(Page<Deal> deals) {
         return new GetDealsDto(
         deals.map(this::changeToDealDto).toList(), 

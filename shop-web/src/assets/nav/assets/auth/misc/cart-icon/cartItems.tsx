@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 import { useCartItems, useSize } from "../../../../../../lib/utils/hooks/hooks"
 import CartItemsLg from "./cartItems/cartItemsLg"
 import CartItemsSm from "./cartItems/cartItemsSm"
+import { calculateDicount } from "../../../../../../lib/utils/random/random"
 
 export default function CartItems({setShow}:{
     setShow:React.Dispatch<SetStateAction<boolean>>
@@ -41,7 +42,7 @@ export default function CartItems({setShow}:{
         dispatch(removeFromCart(uid))
         setItems(prev => prev.filter(item => item.product.uid !== uid))
     }
-    const TotalPrice = items.reduce((t,c) => t+(c.quantity * c.product.price),0).toFixed(2)
+    const TotalPrice = items.reduce((t,c) => t+(c.quantity * calculateDicount(c.product.price,c.product.discount)),0).toFixed(2)
     return (
         <motion.div
         initial={{opacity:0}} 

@@ -14,7 +14,8 @@ export type CartItem = {
     media:MediaType;
     sizes:string[];
     price:number;
-    maxQuantity:number
+    maxQuantity:number;
+    discount:number
 }
 
 

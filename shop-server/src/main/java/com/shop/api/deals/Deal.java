@@ -44,7 +44,7 @@ public class Deal {
     private int discount;
 
     @Enumerated(EnumType.STRING)
-    private DealStatusEnum status;
+    private DealStatusEnum status = DealStatusEnum.awaiting;
     @Column(
         nullable=false,
         name="end_date"

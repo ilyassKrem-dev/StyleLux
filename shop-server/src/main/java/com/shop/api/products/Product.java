@@ -124,6 +124,7 @@ public class Product {
     public GenderEnum getGender() {return gender;}
     public Category getCategory() {return category;}
     public List<OrderItem> getOrderItems() {return orderItems;}
+    public List<Deal> getDeals() {return deals;}
     public Date getCreatedAt() {return createdAt;}
     public Date getUpdatedAt() {return updatedAt;}
     // Setters

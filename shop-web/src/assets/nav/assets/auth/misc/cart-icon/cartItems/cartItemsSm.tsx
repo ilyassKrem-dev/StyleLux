@@ -5,6 +5,7 @@ import QuantityBtn from "../../../../../../shared/misc/quantityButton"
 import { Link } from "react-router-dom"
 import { CartItemsType } from "../../../../../../../lib/utils/types/cartType"
 import { SetStateAction } from "react"
+import { calculateDicount } from "../../../../../../../lib/utils/random/random"
 
 
 interface Props {
@@ -50,7 +51,12 @@ export default function CartItemsSm({items,setShow,removeItem,handleQuantity,Tot
                                     {product.sizes.join(",")}
                                 </div>
                             </div>
-                            <p className=" font-semibold text-base dark:text-lighter">${product.price}</p>
+                            <div className="flex gap-2">
+                                <p className={`font-semibold text-sm  ${product.discount>0 ?" line-through text-black/50 dark:text-white/50" :"dark:text-white"}`}>${(product.price).toFixed(2)}</p>
+                                {product.discount>0&&
+                                <p className={`font-semibold text-sm  dark:text-white`}>${calculateDicount(product.price,product.discount).toFixed(2)}</p>
+                                }
+                                </div>
                             <div className="flex-1 flex flex-col justify-end items-center">
                                 <div className="flex items-center justify-between gap-8">
                                     <div className="w-fit">
@@ -62,7 +68,7 @@ export default function CartItemsSm({items,setShow,removeItem,handleQuantity,Tot
                                     </div>
                                     <div className="flex flex-col font-semibold text-center dark:text-white">
                                         <h3 className="text-lg">Total:</h3>
-                                        <p>${quantity*product.price}</p>
+                                        <p>${(quantity*calculateDicount(product.price,product.discount)).toFixed(2)}</p>
                                     </div>
                                 </div>
                                 <p className="

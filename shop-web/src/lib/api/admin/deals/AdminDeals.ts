@@ -1,10 +1,18 @@
 import Admin from "../Admin";
 import Servers from "../../servers/Servers";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const baseUrl = Servers.springUrl
 
+
+type DataDealType = {
+    productIds:number[],
+    name:string,
+    discount:number,
+    startDate:string,
+    endDate:string
+}
 class AdminDeals extends Admin  {
 
 
@@ -36,6 +44,39 @@ class AdminDeals extends Admin  {
                 data.success = false
                 data.error = "Couldn't get the data"
                 return data
+        }
+    }
+
+    static async AddDeal(dealDate:DataDealType) {
+        let data = {
+            success:true,
+            error:""
+        }
+
+        try {
+            const res =await axios.post(`${baseUrl}/admin/deals/add`,dealDate,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error
+                if(axiosError.status === 404) {
+                    data.error = error.response?.data as string ?? ""
+                    return data
+                }
+                else {
+                    data.error = "Couldn't add the deal"
+                    return data
+                }
+            }
+            data.error = "Couldn't add the deal"
+            return data
         }
     }
 }

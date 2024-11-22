@@ -12,7 +12,8 @@ public record ProductCart(
     Media media,
     double price,
     List<SizeEnum> sizes,
-    int maxQuantity
+    int maxQuantity,
+    int discount
 ) {
 
 }

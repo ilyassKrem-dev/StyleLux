@@ -58,7 +58,8 @@ public class AdminOrdersMapping {
                 orderItem.getProduct().getSizes().stream().map(size -> size.getSize()).collect(Collectors.toList()),
                 new CategoryDto(orderItem.getProduct().getCategory().getUid(), orderItem.getProduct().getCategory().getName()), 
                 orderItem.getQuantity(), 
-                orderItem.getQuantity());
+                orderItem.getQuantity(),
+                orderItem.getProduct().getCurrentDeal());
             products.add(dto);
         }
 

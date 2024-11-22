@@ -4,6 +4,7 @@ import QuantityBtn from "../../../../../../shared/misc/quantityButton"
 import { Link } from "react-router-dom"
 import { CartItemsType } from "../../../../../../../lib/utils/types/cartType"
 import { SetStateAction } from "react"
+import { calculateDicount } from "../../../../../../../lib/utils/random/random"
 
 
 interface Props {
@@ -48,7 +49,12 @@ export default function CartItemsLg({items,setShow,removeItem,handleQuantity,Tot
                                         {product.sizes.join(",")}
                                     </div>
                                 </div>
-                                <p className=" font-semibold text-base dark:text-white">${product.price}</p>
+                                <div className="flex gap-2">
+                                    <p className={`font-semibold text-sm  ${product.discount>0 ?" line-through text-black/50 dark:text-white/50" :"dark:text-white"}`}>${(product.price).toFixed(2)}</p>
+                                    {product.discount>0&&
+                                    <p className={`font-semibold text-sm  dark:text-white`}>${calculateDicount(product.price,product.discount).toFixed(2)}</p>
+                                    }
+                                </div>
                                 <div className="w-fit">
                                     <QuantityBtn 
                                     quantity={quantity} 

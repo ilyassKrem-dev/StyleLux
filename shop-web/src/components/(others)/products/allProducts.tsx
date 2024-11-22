@@ -3,6 +3,7 @@ import { ProductType } from "../../../lib/utils/types/productTypes"
 import Product from "../../../lib/api/product/Product"
 import { Link } from "react-router-dom"
 import { useSize } from "../../../lib/utils/hooks/hooks"
+import { calculateDicount } from "../../../lib/utils/random/random"
 
 
 
@@ -80,7 +81,12 @@ export default function AllProducts() {
                                 </div>
                                 <div className="flex gap-2 flex-col p-1">
                                     <p className="font-volkhov font-medium capitalize  cursor-pointer dark:text-white">{product.name}</p>
-                                    <p className=" cursor-pointer dark:text-white">${product.price}</p>
+                                    <div className="flex gap-2">
+                                        <p className={`font-semibold text-sm  ${product.discount>0 ?" line-through text-black/50 dark:text-white/50" :"dark:text-white"}`}>${(product.price).toFixed(2)}</p>
+                                        {product.discount>0&&
+                                        <p className={`font-semibold text-sm  dark:text-white`}>${calculateDicount(product.price,product.discount).toFixed(2)}</p>
+                                        }
+                                    </div>
                                 </div>
                             </Link>
                         )
