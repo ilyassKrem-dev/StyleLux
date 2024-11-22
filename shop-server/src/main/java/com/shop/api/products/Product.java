@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shop.api.categories.Category;
+import com.shop.api.deals.Deal;
 import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.products.media.Media;
 import com.shop.api.products.others.GenderEnum;
 import com.shop.api.products.size.Size;
+import com.stripe.param.InvoiceCreatePreviewParams;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -81,6 +84,15 @@ public class Product {
     @JsonBackReference
     private Category category;
     
+    @ManyToMany
+    @JoinTable(
+        name="product_deal",
+        joinColumns = @JoinColumn(name="product_id"),
+        inverseJoinColumns = @JoinColumn(name="deal_id")
+    )
+    @JsonBackReference
+    private List<Deal> deals;
+
     @CreationTimestamp
     @Column(
         name="created_at",
@@ -174,4 +186,14 @@ public class Product {
 
     }
     
+    public int getCurrentDeal() {
+        Date currentDate = new Date();
+        int currentDiscount = 0;
+        for(Deal deal:deals) {
+            if(currentDate.after(deal.getStartDate()) && currentDate.before(deal.getEndDate())) {
+                currentDiscount = deal.getDiscount();
+            }
+        }
+        return currentDiscount;
+    }
  }

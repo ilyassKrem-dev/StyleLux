@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import FilterShowen from "./assets/topOfProducts"
 import Product from "../../../../../lib/api/product/Product"
-import productsJson from "./products.json"
 import { ProductType } from "../../../../../lib/utils/types/productTypes"
 import { useSize } from "../../../../../lib/utils/hooks/hooks"
 import { Link, useSearchParams } from "react-router-dom"
