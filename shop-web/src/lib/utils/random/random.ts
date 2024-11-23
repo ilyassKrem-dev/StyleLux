@@ -27,3 +27,9 @@ export function changeDateFormat(placedAt:string) {
 export function calculateDicount(price:number,discount:number) {
     return price * (1-(discount/100))
 }
+
+
+export function changeDateToStringInput(string:string) {
+    const date = new Date(string)
+    return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+}

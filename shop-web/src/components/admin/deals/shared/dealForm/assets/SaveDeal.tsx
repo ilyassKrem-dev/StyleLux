@@ -3,18 +3,21 @@ import { ProductType } from "../../../../../../lib/utils/types/productTypes";
 import { DealInfoType, ErrorsDealType } from "../dealForm";
 import { useToast } from "../../../../../../assets/shared/wrappers/ToastWrapper";
 import AdminDeals from "../../../../../../lib/api/admin/deals/AdminDeals";
+import { useParams } from "react-router-dom";
 
 
 
 
 
-export default function SaveDeal({info,products,errors,setErrors}:{
+export default function SaveDeal({info,products,errors,setErrors,edit}:{
     products:ProductType[]
     info:DealInfoType;
     setInfo:React.Dispatch<SetStateAction<DealInfoType>>;
     errors:ErrorsDealType;
-    setErrors:React.Dispatch<SetStateAction<ErrorsDealType>>
+    setErrors:React.Dispatch<SetStateAction<ErrorsDealType>>;
+    edit?:boolean
 }) {
+    const {id}  = useParams()
     const {toast} = useToast()
     const {name,discount,startDate,endDate} = info
     const disabled = products.length === 0 || Object.values(errors).some(v => v)
@@ -45,15 +48,21 @@ export default function SaveDeal({info,products,errors,setErrors}:{
             startDate:dateStart.toISOString(),
             endDate:dateEnd.toISOString()
         }
-        const res = await AdminDeals.AddDeal(data)
+        let res;
+        if(edit && id) {
+            res = await AdminDeals.updateDeal(data,id ?? "")
+        } else {
+            res = await AdminDeals.AddDeal(data)
+        }
+       
         if(res?.success) {
-            toast({varient:"success",desc:"Deal has been added"})
+            toast({varient:"success",desc:`Deal has been ${edit ? "updated":"added"}`})
         } else {
             toast({varient:"error",desc:res?.error as string})
         }
 
     }       
     return (
-        <button className="flex-1 rounded-md font-medium text-white bg-black dark:bg-white dark:text-black p-2 active:scale-95 hover:bg-black/80 dark:hover:bg-white/80 transition-all duration-300 disabled:bg-black/50 disabled:dark:bg-white/50" onClick={handleSave} disabled={disabled}>Save</button>
+        <button className="flex-1 rounded-md font-medium text-white bg-black dark:bg-white dark:text-black p-2 active:scale-95 hover:bg-black/80 dark:hover:bg-white/80 transition-all duration-300 disabled:bg-black/50 disabled:dark:bg-white/50" onClick={handleSave} disabled={disabled}>{edit?"Save":"Add"}</button>
     )
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.shop.api.deals.records.AddUpdateDealDto;
+import com.shop.api.deals.records.GetDealInfoDto;
 
 
 
@@ -82,7 +83,23 @@ public class AdminDealsController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDealDeatails(
+        @PathVariable(name="id") Integer id
+        )
+         {
+            try {
+                return ResponseEntity.ok(dealService.getDealDeatails(id));
+            }catch(NoSuchElementException  e){
+                return ResponseEntity.status(404).body(e.getMessage());
 
+            } 
+            catch (Exception e) {
+                return ResponseEntity.status(500).body(e.getMessage());
+
+            }
+    }
+    
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationError(

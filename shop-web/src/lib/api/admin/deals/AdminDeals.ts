@@ -79,6 +79,72 @@ class AdminDeals extends Admin  {
             return data
         }
     }
+    static async updateDeal(dealDate:DataDealType,id:string) {
+        let data = {
+            success:true,
+            error:""
+        }
+
+        try {
+            const res =await axios.put(`${baseUrl}/admin/deals/${id}/edit`,dealDate,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error
+                if(axiosError.status === 404) {
+                    data.error = error.response?.data as string ?? ""
+                    return data
+                }
+                else {
+                    data.error = "Couldn't add the deal"
+                    return data
+                }
+            }
+            data.error = "Couldn't add the deal"
+            return data
+        }
+    }
+    static async getDeal(id:string) {
+        let data = {
+            success:true,
+            data:undefined,
+            error:""
+        }
+
+        try {
+            const res =await axios.get(`${baseUrl}/admin/deals/${id}`,{
+                headers:{
+                    Authorization:`Bearer ${Cookies.get("authToken")}`
+                }
+            })
+            if(res.data) {
+                data.data = res.data
+                return data
+            }
+        } catch (error) {
+            data.success = false
+            if(axios.isAxiosError(error)) {
+                const axiosError:AxiosError = error
+                if(axiosError.status === 404) {
+                    data.error = "No deal with this id exists"
+                    return data
+                }
+                else {
+                    data.error = "Something happened!!"
+                    return data
+                }
+            }
+            data.error = "Something happened!!"
+            return data
+        }
+    }
 }
 
 

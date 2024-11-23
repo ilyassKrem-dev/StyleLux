@@ -5,16 +5,17 @@ import { ProductType } from "../../../../../../lib/utils/types/productTypes";
 import SaveDeal from "./SaveDeal";
 
 
-
-
-
-export default function DealInfo({info,setInfo,errors,setErrors,products}:{
+interface Props {
     products:ProductType[]
     info:DealInfoType;
     setInfo:React.Dispatch<SetStateAction<DealInfoType>>;
     errors:ErrorsDealType;
-    setErrors:React.Dispatch<SetStateAction<ErrorsDealType>>
-}) {
+    setErrors:React.Dispatch<SetStateAction<ErrorsDealType>>;
+    edit?:boolean;
+}
+
+
+export default function DealInfo({info,setInfo,errors,setErrors,products,edit}:Props) {
 
     const {name,endDate,startDate,discount} = info
     const router = useNavigate()
@@ -72,11 +73,11 @@ export default function DealInfo({info,setInfo,errors,setErrors,products}:{
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="discount" className=" font-semibold text-lg">Start date</label>
+                    <label htmlFor="startDate" className=" font-semibold text-lg">Start date</label>
                     <div className=" relative flex flex-col gap-1">
                         <input 
                         type="date" 
-                        id="discount" 
+                        id="startDate" 
                         name="startDate"
                         value={startDate}
                         onChange={handleChange}
@@ -88,11 +89,11 @@ export default function DealInfo({info,setInfo,errors,setErrors,products}:{
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="discount" className=" font-semibold text-lg">End date</label>
+                    <label htmlFor="endDate" className=" font-semibold text-lg">End date</label>
                     <div className=" relative flex flex-col gap-1">
                         <input 
                         type="date" 
-                        id="discount" 
+                        id="endDate" 
                         name="endDate"
                         value={endDate}
                         onChange={handleChange}
@@ -114,6 +115,7 @@ export default function DealInfo({info,setInfo,errors,setErrors,products}:{
                 info={info} 
                 setInfo={setInfo}
                 products={products}
+                edit={edit}
                 />
                 
             </div>

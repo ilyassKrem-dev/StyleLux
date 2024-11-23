@@ -36,6 +36,8 @@ import ProductAdd from "../components/admin/products/add/productAdd"
 import AdminDeals from "../components/admin/deals/adminDeals"
 import AdminDealsHome from "../components/admin/deals/assets/home/AdminDealsHome"
 import AdminAddDeal from "../components/admin/deals/add/adminAddDeal"
+import AdminDealById from "../components/admin/deals/id/AdminDealById"
+import AdminDealEdit from "../components/admin/deals/id/edit/AdminDealEdit"
 
 
 
@@ -179,6 +181,13 @@ const router = createBrowserRouter([
                             },{
                                 path:"add",
                                 element:<AdminAddDeal />
+                            },{
+                                path:":id",
+                                element:<AdminDealById />
+                            },
+                            {
+                                path:":id/edit",
+                                element:<AdminDealEdit />
                             }
                         ]
                     }
