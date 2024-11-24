@@ -18,7 +18,7 @@ export  default  function ProductMedia({medias}:{
                             <MediaTypes 
                             type={media.type ? media.type :"image"}
                             url={media.url as string ?? ""}
-                            className="w-full h-full object-cover rounded-md group-hover:opacity-40"
+                            className="w-full h-full object-cover rounded-md group-hover:opacity-40 border border-black/10 dark:border-white/10"
                             />
                         </div>
                     )

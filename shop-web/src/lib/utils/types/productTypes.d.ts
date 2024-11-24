@@ -45,7 +45,8 @@ export type SingleProductType = {
     numRating:number;
     sold:number;
     discount:number;
-    isFavorite:boolean
+    isFavorite:boolean;
+    dealEndDate:string
 
 }
 

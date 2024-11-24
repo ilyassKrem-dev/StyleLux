@@ -79,7 +79,8 @@ public class ProductMapping {
             product.getNumRatings(),
             product.getSold(),
             product.getCurrentDeal(),
-            isFavorite);
+            isFavorite,
+            product.getEndDateDeal());
 
     }
     

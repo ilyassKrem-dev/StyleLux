@@ -62,7 +62,7 @@ export default function AuthNav() {
                             animate={{opacity:1,scale:1}}
                             exit={{opacity:0,scale:0.8}} 
                             transition={{duration:0.3,ease:"easeInOut"}}
-                            className={`absolute bg-white rounded-md p-2 top-8 border border-black/10 shadow-md `}>
+                            className={`absolute bg-white rounded-md p-2 top-8 border border-black/10 shadow-md dark:bg-darker dark:text-white`}>
                                 <div className="flex flex-col gap-1 w-[200px]">
                                     {tabsPages.map((tab,index) => {
                                         const {name,link} = tab

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -93,5 +94,17 @@ public class DealService {
         List<ProductDto> products = deal.getProducts().stream().map(productMapping::changeToProductDto).collect(Collectors.toList());
 
         return dealMapping.changeToGetDealInfoDto(deal, products);
-    }   
+    }  
+    
+    
+    public List<GetDealInfoDto> getHomeDeals() {
+        Pageable pageable = PageRequest.of(0,3);
+        Page<Deal> deals = dealRepository.findAll(pageable);
+        List<GetDealInfoDto> dealsChanged = new ArrayList<>();
+        for(Deal deal : deals) {
+            List<ProductDto> products = deal.getProducts().stream().map(productMapping::changeToProductDto).collect(Collectors.toList());
+            dealsChanged.add(dealMapping.changeToGetDealInfoDto(deal, products));
+        }
+        return dealsChanged;     
+    }
 }   

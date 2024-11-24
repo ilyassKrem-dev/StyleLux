@@ -55,9 +55,6 @@ const router = createBrowserRouter([
                         path:"",
                         element:<Home />,
                     },{
-                        path:"deals",
-                        element:(<div>Deals</div>)
-                    },{
                         path:"shop",
                         element:<Shop />
                     },{

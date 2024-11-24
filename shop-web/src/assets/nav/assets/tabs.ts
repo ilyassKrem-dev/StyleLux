@@ -34,10 +34,6 @@ export const tabsDeafaultAuthMobile = [
 
 export const tabsPages = [
     {
-        name:"New arrivals",
-        link:"/arrivals"
-    },
-    {
         name:"Deals",
         link:"/deals"
     }
@@ -47,10 +43,6 @@ export const tabsDefaultNoAuth = [
     {
         name:"Sign in",
         link:"/auth/login"
-    },
-    {
-        name:"New arrivals",
-        link:"/arrivals"
     },
     {
         name:"Deals",

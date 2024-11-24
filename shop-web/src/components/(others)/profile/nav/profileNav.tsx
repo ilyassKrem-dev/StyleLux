@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom"
 import { useSize } from "../../../../lib/utils/hooks/hooks"
 import { PiUserCircleFill,PiAddressBook,PiStarThin   } from "react-icons/pi";
 import { TbTruckDelivery } from "react-icons/tb";
+import { CiLogout } from "react-icons/ci";
+import { useSession } from "../../../../assets/shared/wrappers/SessionWrapper";
 
 const paths = [
     {
@@ -28,6 +30,7 @@ export default function profileNav() {
     const pathname = useLocation().pathname
     const {w} = useSize()
     const actualPath = pathname.split("/").splice(0,3).join("/")
+    const {signOut} = useSession()
     return (
         <>
             {w<=1024&&<div className="flex gap-10 items-center justify-center  h-[41px]">
@@ -43,6 +46,12 @@ export default function profileNav() {
                                 </Link>
                             )
                         })}
+                        <div className="p-2  relative cursor-pointer group " onClick={signOut}>        
+                            <div className={`font-semibold    cursor-pointer group-hover:text-black dark:group-hover:text-white transition-all duration-300 text-black/50 dark:text-white/50 w-fit text-nowrap `}>
+                                Logout
+                            </div>
+                           
+                        </div>    
                     </div>
                 </div>
             </div>}
@@ -62,6 +71,13 @@ export default function profileNav() {
                             </Link>
                         )
                     })}
+                    <div className={`flex gap-2 rounded-r-full p-[0.6rem] items-center font-semibold px-6  cursor-pointer`} onClick={signOut}>        
+                        <div className="text-3xl">
+                            <CiLogout />
+                        </div>
+                        <p className=" cursor-pointer">Logout</p>
+                    </div>
+                    
                 </div>
             </div>}
         </>

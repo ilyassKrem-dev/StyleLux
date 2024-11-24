@@ -8,7 +8,8 @@ import { removeSession } from "../../redux/session/sessionReducer";
 
 
 type ContextType = {
-    session:sessionType
+    session:sessionType,
+    signOut:() => void
 }
 
 const sessionContext = createContext<ContextType|null>(null)
@@ -48,8 +49,14 @@ export const SessionProvider = ({children}:{
         }
         setLoading(false)
     },[loading,pathname,session,dispatch,cookies])
+
+    const handleSignout = () => {
+        dispatch(removeSession())
+        router("/auth/login?to="+`${encodeURIComponent(pathname)}`)   
+
+    }
     return(
-        <sessionContext.Provider value={{session}}>
+        <sessionContext.Provider value={{session,signOut:handleSignout}}>
             {!loading&&children}
         </sessionContext.Provider>
     )

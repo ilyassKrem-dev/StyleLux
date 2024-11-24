@@ -7,6 +7,8 @@ import com.shop.api.products.media.Media;
 import com.shop.api.products.others.GenderEnum;
 import com.shop.api.products.size.misc.SizeEnum;
 import java.util.List;
+import java.util.Date;
+
 
 public record SingleProductDto(
     Integer id,
@@ -22,7 +24,8 @@ public record SingleProductDto(
     int numRatings,
     int sold,
     int discount,
-    boolean isFavorite
+    boolean isFavorite,
+    Date dealEndDate
 
 )
 {

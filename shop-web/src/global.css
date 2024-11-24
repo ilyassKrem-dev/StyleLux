@@ -7,6 +7,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "DigitalNumbers";
+  src: url("/fonts/digital/digital-7.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -110,5 +117,26 @@ input[data-autocompleted] {
     background-color: transparent !important;
 }
 
+
+
+
+.digit {
+  animation: flip 0.6s ease-in-out;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
 
 

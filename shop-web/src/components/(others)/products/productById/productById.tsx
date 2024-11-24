@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useSession } from "../../../../assets/shared/wrappers/SessionWrapper";
 import ProductFavorite from "./assets/favorites&stars/productFavorite";
 import { calculateDicount } from "../../../../lib/utils/random/random";
+import ProductDealTime from "./assets/productDealTime";
 
 export default function ProductById({product}:{
     product:SingleProductType
@@ -53,6 +54,7 @@ export default function ProductById({product}:{
                             </div>}
                         </div>
                     </div>
+                    <ProductDealTime dealEndDate={product.dealEndDate}/>
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-2">
                             <p className="text-sm text-[#666666] dark:text-light">

@@ -197,4 +197,14 @@ public class Product {
         }
         return currentDiscount;
     }
+    public Date getEndDateDeal() {
+        Date currentDate = new Date();
+        Date endDate = null;
+        for(Deal deal:deals) {
+            if(currentDate.after(deal.getStartDate()) && currentDate.before(deal.getEndDate())) {
+                endDate = deal.getEndDate();
+            }
+        }
+        return endDate;
+    }
  }

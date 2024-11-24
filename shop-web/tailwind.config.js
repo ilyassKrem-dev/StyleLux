@@ -49,7 +49,8 @@ export default {
       fontFamily: {
         'noto': ['Noto Color Emoji', 'sans-serif'],
         'volkhov': ['Volkhov', 'sans-serif'],
-        'poppins': ['Poppins', 'sans-serif']
+        'poppins': ['Poppins', 'sans-serif'],
+        'digital': ['DigitalNumbers', 'sans-serif']
       },
     },
   },
