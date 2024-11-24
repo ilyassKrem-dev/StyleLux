@@ -54,7 +54,8 @@ export default function ProductById({product}:{
                             </div>}
                         </div>
                     </div>
-                    <ProductDealTime dealEndDate={product.dealEndDate}/>
+                    {product.dealEndDate&&
+                    <ProductDealTime dealEndDate={product.dealEndDate}/>}
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-2">
                             <p className="text-sm text-[#666666] dark:text-light">

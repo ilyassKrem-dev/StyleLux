@@ -4,12 +4,13 @@ import { useEffect, useState } from "react"
 
 
 export default function DealTime({endDate}:{endDate:string}) {
-    const [dateLeft,setDateLeft] = useState<number>(0)
+    const date = new Date(endDate).getTime()
+    const currentTime = new Date().getTime()
+    const [dateLeft,setDateLeft] = useState<number>(date - currentTime)
     useEffect(() => {
-        const date = new Date(endDate).getTime()
         const id = setInterval(() => {
-            const currentDate = new Date().getTime()
-            setDateLeft(date - currentDate)
+            const currentTime = new Date().getTime()
+            setDateLeft(date - currentTime)
         },1000)
         return () => clearTimeout(id)
     },[endDate])

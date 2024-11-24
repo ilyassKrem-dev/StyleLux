@@ -5,10 +5,11 @@ import { useEffect, useState } from "react"
 
 export default function ProductDealTime({dealEndDate}:{
     dealEndDate:string
-}) {    
-    const [dealTime,setDealTime] = useState<number>(0)
+}) {
+    const currentDeal = new Date(dealEndDate).getTime()
+    const currentTime = new Date().getTime()
+    const [dealTime,setDealTime] = useState<number>(currentDeal - currentTime)
     useEffect(() => {
-        const currentDeal = new Date(dealEndDate).getTime()
         const id = setInterval(() => {
             const currentTime = new Date().getTime()
             setDealTime(currentDeal - currentTime)

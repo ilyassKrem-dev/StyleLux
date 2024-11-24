@@ -39,7 +39,7 @@ export const SessionProvider = ({children}:{
     const cookies = Cookies.get("authToken")
     useEffect(() => {
         if(!cookies) {
-            //@ts-ignore
+            
             dispatch(removeSession())
         }
         

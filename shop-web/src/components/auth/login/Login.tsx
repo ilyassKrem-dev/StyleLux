@@ -74,7 +74,7 @@ export default function Login() {
                 <p className="h-[10px] text-sm text-accent">{errors.password}</p>
             </div>
             <div className="flex flex-col gap-3 mt-5">
-                <button className="bg-black rounded-lg py-2 w-full text-white font-semibold text-sm active:scale-95 transition-all duration-300 hover:bg-black/70">Sign In</button>
+                <button className="bg-black rounded-lg py-2 w-full text-white font-semibold text-sm active:scale-95 transition-all duration-300 hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70">Sign In</button>
                 <Link to={"/auth/signup"}>
                     <button className="bg-white border-blue-400 text-blue-400 rounded-lg py-2 w-full border font-semibold text-sm hover:bg-blue-200/60 transition-all duration-300 active:scale-95">Register Now</button>
                 </Link>
