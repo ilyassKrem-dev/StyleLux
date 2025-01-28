@@ -1,4 +1,6 @@
-
+import tailwindAnimate from "tailwindcss-animate";
+import tailwindScrollbar from "tailwind-scrollbar";
+import tailwindTextStroke from "@designbycode/tailwindcss-text-stroke";
 
 export default {
   content: [
@@ -55,8 +57,8 @@ export default {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require('tailwind-scrollbar'),
-    require("@designbycode/tailwindcss-text-stroke")
+    tailwindAnimate,
+    tailwindScrollbar,
+    tailwindTextStroke
   ],
 };

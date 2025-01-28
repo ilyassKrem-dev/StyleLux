@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.shop.api.deals.misc.DealStatusEnum;
+
 public interface  DealRepository extends JpaRepository<Deal, Integer> {
         
 
@@ -20,4 +22,7 @@ public interface  DealRepository extends JpaRepository<Deal, Integer> {
         "cast(d.discount as string) like %:param% "
         )
     List<Deal> findByQuery(String param,Pageable pageable);
+
+    @Query("select d from Deal d where status = :status")
+    Page<Deal> findAllByStatus(Pageable pageable,DealStatusEnum status);
 }

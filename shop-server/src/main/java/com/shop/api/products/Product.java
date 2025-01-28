@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -17,7 +16,6 @@ import com.shop.api.payement.order_item.OrderItem;
 import com.shop.api.products.media.Media;
 import com.shop.api.products.others.GenderEnum;
 import com.shop.api.products.size.Size;
-import com.stripe.param.InvoiceCreatePreviewParams;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -190,6 +188,7 @@ public class Product {
     public int getCurrentDeal() {
         Date currentDate = new Date();
         int currentDiscount = 0;
+        if(deals == null) return 0;
         for(Deal deal:deals) {
             if(currentDate.after(deal.getStartDate()) && currentDate.before(deal.getEndDate())) {
                 currentDiscount = deal.getDiscount();
@@ -200,6 +199,7 @@ public class Product {
     public Date getEndDateDeal() {
         Date currentDate = new Date();
         Date endDate = null;
+        if(deals == null) return null;
         for(Deal deal:deals) {
             if(currentDate.after(deal.getStartDate()) && currentDate.before(deal.getEndDate())) {
                 endDate = deal.getEndDate();

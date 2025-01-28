@@ -41,7 +41,7 @@ export default function BottomHome() {
                 </div>
             </div>
             <p className="flex justify-center items-center capitalize text-sm text-black/80 dark:text-white/80">
-                    Copyright &copy; 2024. All Rights Reserved
+                    Copyright &copy; 2024. Ilyass kremcht
             </p>
         </footer>
     )

@@ -99,7 +99,7 @@ public class DealService {
     
     public List<GetDealInfoDto> getHomeDeals() {
         Pageable pageable = PageRequest.of(0,3);
-        Page<Deal> deals = dealRepository.findAll(pageable);
+        Page<Deal> deals = dealRepository.findAllByStatus(pageable,DealStatusEnum.ongoing);
         List<GetDealInfoDto> dealsChanged = new ArrayList<>();
         for(Deal deal : deals) {
             List<ProductDto> products = deal.getProducts().stream().map(productMapping::changeToProductDto).collect(Collectors.toList());
