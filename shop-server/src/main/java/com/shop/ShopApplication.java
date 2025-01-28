@@ -13,7 +13,6 @@ public class ShopApplication {
 
 	public static void main(String[] args) {
 		var app = new SpringApplication(ShopApplication.class);
-		app.setDefaultProperties(Collections.singletonMap("spring.profiles.active", "dev"));
 		app.run(args);
 
 
